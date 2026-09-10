@@ -194,6 +194,11 @@ def normalized(change):
     return {k: v for k, v in change.items() if k != "detail"}
 
 
+def finding_multiset(changes):
+    """Compare findings as data, independent of harmless emission ordering."""
+    return Counter(json.dumps(normalized(change), sort_keys=True) for change in changes)
+
+
 def run_historical_regression():
     old = diff_engine.load_spec(ROOT / "data" / "old_spec.json")
     new = diff_engine.load_spec(ROOT / "data" / "new_spec.json")
@@ -203,8 +208,8 @@ def run_historical_regression():
         request_reviewed = json.load(f)
     with (ROOT / "reports" / "response_diff_report.json").open() as f:
         response_reviewed = json.load(f)
-    request_match = [normalized(x) for x in request_actual] == [normalized(x) for x in request_reviewed]
-    response_match = [normalized(x) for x in response_actual] == [normalized(x) for x in response_reviewed]
+    request_match = finding_multiset(request_actual) == finding_multiset(request_reviewed)
+    response_match = finding_multiset(response_actual) == finding_multiset(response_reviewed)
     return {
         "dataset": "GitHub REST API v1.0.0 to v2.1.0",
         "request_findings": len(request_actual),
