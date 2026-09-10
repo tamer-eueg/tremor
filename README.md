@@ -18,12 +18,17 @@ Built and tested against two real, historical versions of a real public API's of
 |---|---|---|
 | Request-side diffing (`src/diff_engine.py`) | Done | 41 breaking changes found, 172 non-breaking |
 | Response-side diffing (`src/response_diff.py`) | Done | 62 breaking changes found (after catching and fixing a real bug — see below) |
-| Patch generation (automated) | Not started | One patch built by hand so far (`examples/example_patch.py`) |
+| Patch generation (automated, `src/patch_generator.py`) | Done for the first finding kind | Given a real source file, finds the affected function on its own and generates the patch — verified against a blind test, see `reports/PATCH_GENERATOR_RESULTS.md` |
 | Scheduler / hosting | Not started | Needs a domain + hosting account when we get there |
 | Billing | Not started | Needs a Stripe account when we get there |
 
 **103 distinct, verified breaking changes found across both layers**, between two real
 versions of one real, actively-maintained API. See `reports/` for full detail.
+
+The patch generator (`src/patch_generator.py`) then took one of those findings and, run
+blind against a source file it had never seen, found the affected function on its own,
+generated the exact same fix that was previously built by hand, and the result was verified
+by actually running it — see `reports/PATCH_GENERATOR_RESULTS.md`.
 
 ## How it works, right now
 
@@ -45,16 +50,19 @@ versions of one real, actively-maintained API. See `reports/` for full detail.
 
 ```
 tremor/
-├── src/                     # the diffing engines
+├── src/                     # the diffing engines + patch generator
 │   ├── diff_engine.py       # request-side: params, required fields, removed endpoints
-│   └── response_diff.py     # response-side: removed/changed response fields
+│   ├── response_diff.py     # response-side: removed/changed response fields
+│   └── patch_generator.py   # phase 3: finds affected functions in real source, patches them
 ├── examples/
-│   └── example_patch.py     # one hand-built before/after patch, worked example
+│   ├── example_patch.py         # one hand-built before/after patch, worked example (phase 1)
+│   └── sample_integration.py    # stand-in customer file used to test patch_generator.py blind
 ├── reports/
-│   ├── PROOF_OF_CONCEPT.md       # phase 1 write-up (request-side)
-│   ├── RESPONSE_DIFF_RESULTS.md  # phase 2 write-up (response-side, incl. the bug fix)
-│   ├── diff_report.json          # full phase 1 output (213 changes)
-│   └── response_diff_report.json # full phase 2 output (62 breaking changes)
+│   ├── PROOF_OF_CONCEPT.md          # phase 1 write-up (request-side)
+│   ├── RESPONSE_DIFF_RESULTS.md     # phase 2 write-up (response-side, incl. the bug fix)
+│   ├── PATCH_GENERATOR_RESULTS.md   # phase 3 write-up (automated patch generation)
+│   ├── diff_report.json             # full phase 1 output (213 changes)
+│   └── response_diff_report.json    # full phase 2 output (62 breaking changes)
 └── data/
     ├── old_spec.json        # GitHub REST API spec, tag v1.0.0
     └── new_spec.json        # GitHub REST API spec, tag v2.1.0
@@ -66,6 +74,7 @@ tremor/
 python3 src/diff_engine.py data/old_spec.json data/new_spec.json
 python3 src/response_diff.py data/old_spec.json data/new_spec.json
 python3 examples/example_patch.py
+python3 src/patch_generator.py examples/sample_integration.py --write
 ```
 
 ## A bug worth knowing about (and how it was caught)
@@ -83,9 +92,13 @@ against the raw spec to confirm the fix held. Full account in
 
 - Only the primary 2xx response is compared; 4xx/5xx error-response shapes aren't diffed.
 - Nested objects more than a few levels deep aren't fully walked.
-- Patch generation is not automated yet — `examples/example_patch.py` was written by hand
-  from one diff finding. **This is the current build focus** (see `src/patch_generator.py`
-  once it exists).
+- Patch generation is automated for one finding kind so far (a request-body field becoming
+  required — the most common breaking change in the phase 1 data). Other request-side kinds
+  (removed endpoints/params, newly-required params) are detected and flagged but not yet
+  auto-rewritten. Response-side findings are flagged with a precise comment, not
+  auto-rewritten, since the fix lives wherever the response is *read*, not at the call site
+  itself — see `reports/PATCH_GENERATOR_RESULTS.md`. **Widening the auto-patchable set is
+  the current build focus.**
 - Only one API has been tested against. A real product needs a scheduler that periodically
   re-fetches specs for every API a customer depends on, and somewhere to store/display
   findings over time.
