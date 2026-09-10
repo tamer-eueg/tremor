@@ -19,10 +19,10 @@ Built and tested against two real, historical versions of a real public API's of
 | Request-side diffing (`src/diff_engine.py`) | Done | 41 breaking changes found, 172 non-breaking |
 | Response-side diffing (`src/response_diff.py`) | Done | 62 breaking changes found (after catching and fixing a real bug — see below) |
 | Patch generation (automated, `src/patch_generator.py`) | Done for 2 of 6 request-side finding kinds | Given a real source file, finds the affected function on its own and generates the patch for required body fields and required query/header params — verified against blind tests, see `reports/PATCH_GENERATOR_RESULTS.md` |
-| Recurring monitoring (`src/monitor.py`) | Watch loop built, tested against live data | Fetches a tracked API's current spec, diffs against the last check, alerts on breaking changes — see `reports/MONITOR_RESULTS.md`. Still needs an actual schedule/cron and somewhere to run it. |
+| Recurring monitoring (`src/monitor.py`) | Watch loop built, tested against live data | Fetches a tracked API's current spec, diffs against the last check, alerts on breaking changes — see `reports/MONITOR_RESULTS.md`. |
 | Monitor → patch generator wiring | Done | A live check now calls the patch generator directly on any watched files, with no manual step in between — see `reports/PIPELINE_WIRING_RESULTS.md` |
 | Real, applyable patches | Done | Every auto-patch is also emitted as a standard `git apply`-compatible `.patch` file, verified with an actual `git apply` in an isolated worktree, not just asserted — see `reports/GIT_APPLY_RESULTS.md` |
-| Hosting / schedule | Not started | Needs a hosting account (or similar) to run the watch loop on a timer |
+| Schedule (`.github/workflows/monitor.yml`) | Built, at zero cost | Runs the watch loop daily on GitHub Actions' free tier and commits the updated state/findings back to the repo — see `reports/HOSTING_RESULTS.md`. Needs a real GitHub repo to push to before its first real run. |
 | Billing | Not started | Needs a Stripe account when we get there |
 
 **103 distinct, verified breaking changes found across both layers**, between two real
@@ -45,9 +45,15 @@ now; a check runs the patch generator directly against any watched files, in-mem
 manual hand-off. See `reports/PIPELINE_WIRING_RESULTS.md`.
 
 What came out the other end was still a full replacement file, not something applyable —
-fixed last: every auto-patch is now also a standard `git apply`-compatible `.patch` file,
+fixed next: every auto-patch is now also a standard `git apply`-compatible `.patch` file,
 proven not just asserted, by actually running `git apply` in an isolated worktree and
 recompiling the result. See `reports/GIT_APPLY_RESULTS.md`.
+
+Last: everything above only ran when someone ran it by hand. `.github/workflows/monitor.yml`
+runs the watch loop daily on GitHub Actions' free tier and commits the updated baseline back
+to the repo — zero cost, no hosting account needed, made sustainable by compressing the
+rolling state cache about 24x. It just needs a real GitHub repo to push this code to before
+its first real run. See `reports/HOSTING_RESULTS.md`.
 
 ## How it works, right now
 
@@ -69,11 +75,13 @@ recompiling the result. See `reports/GIT_APPLY_RESULTS.md`.
 
 ```
 tremor/
+├── .github/workflows/
+│   └── monitor.yml          # phase 7: runs the watch loop daily on GitHub Actions, free tier
 ├── src/                     # the diffing engines + patch generator + monitor
 │   ├── diff_engine.py       # request-side: params, required fields, removed endpoints
 │   ├── response_diff.py     # response-side: removed/changed response fields
-│   ├── patch_generator.py   # phase 3: finds affected functions in real source, patches them
-│   └── monitor.py           # phase 4: watch loop -- fetch, diff vs. last check, alert
+│   ├── patch_generator.py   # phase 3/6: finds affected functions, patches them, emits a real .patch
+│   └── monitor.py           # phase 4/5: watch loop -- fetch, diff vs. last check, alert, auto-patch
 ├── examples/
 │   ├── example_patch.py         # one hand-built before/after patch, worked example (phase 1)
 │   └── sample_integration.py    # stand-in customer file used to test patch_generator.py blind
@@ -84,6 +92,7 @@ tremor/
 │   ├── MONITOR_RESULTS.md           # phase 4 write-up (recurring monitoring, live data)
 │   ├── PIPELINE_WIRING_RESULTS.md   # phase 5 write-up (monitor -> patch generator, wired)
 │   ├── GIT_APPLY_RESULTS.md         # phase 6 write-up (real, git-apply-verified .patch files)
+│   ├── HOSTING_RESULTS.md           # phase 7 write-up (free, scheduled, zero-cost hosting)
 │   ├── monitor_runs/                # timestamped records from real monitor.py runs
 │   │   └── patches/                     # patches monitor.py generated automatically (.py copy + .patch)
 │   ├── diff_report.json             # full phase 1 output (213 changes)
@@ -92,7 +101,8 @@ tremor/
     ├── old_spec.json        # GitHub REST API spec, tag v1.0.0
     ├── new_spec.json        # GitHub REST API spec, tag v2.1.0
     ├── watchlist.json       # APIs monitor.py tracks, and where to fetch each one's spec
-    └── state/                # monitor.py's rolling "last seen" cache (gitignored)
+    └── state/                # monitor.py's rolling "last seen" cache, gzip-compressed (~24x smaller)
+                               # and committed on purpose -- the scheduled job's durable baseline
 ```
 
 ## Run it
@@ -131,18 +141,20 @@ against the raw spec to confirm the fix held. Full account in
   and flagged with a precise comment but not yet auto-rewritten. Response-side findings are
   always flagged, not auto-rewritten, since the fix lives wherever the response is *read*,
   not at the call site itself — see `reports/PATCH_GENERATOR_RESULTS.md`.
-- The watch loop (`src/monitor.py`) exists, is wired directly to the patch generator, and has
-  been run against live data, but there's no actual schedule/cron calling it yet, and nowhere
-  to host it running continuously — the latter is a hosting decision, not engineering.
+- The watch loop (`src/monitor.py`) exists, is wired directly to the patch generator, has been
+  run against live data, and now has a working, zero-cost daily schedule
+  (`.github/workflows/monitor.yml`) — but that schedule has never actually fired on GitHub's
+  infrastructure yet, because there's no GitHub repo to push this code to. That's the one
+  remaining identity step.
 - Only one API's spec (plus one sibling, for reconciling moved-not-removed endpoints) is on
   the watchlist right now, and the one watched file is a stand-in, since there's no real
   customer repo yet.
 - Generated patches land in `reports/monitor_runs/patches/`, not back into the watched file
   or a pull request — deciding how to deliver a patch to a real repo needs a real repo to
   design around.
-- No hosting, no domain, no billing yet — deliberately deferred until there's something
-  worth putting in front of a real user. These three are identity/payment steps under EUEG,
-  not engineering.
+- No domain, no billing yet — deliberately deferred until there's something worth putting in
+  front of a real user. Both are identity/payment steps under EUEG, not engineering; hosting
+  itself is no longer on that list, since the GitHub Actions free tier covers it.
 
 ## Who's building this
 

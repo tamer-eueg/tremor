@@ -29,13 +29,15 @@ before, against whatever files the watchlist names -- the same code path
 as examples/sample_integration.py's blind test, just triggered by a real
 check instead of a CLI invocation.
 
-Deliberately not attempted here: the actual cron/timer that calls this on a
-schedule, and the hosting to run it on. Both are the next step, and the
-second one needs a hosting account (an identity/payment step, not
-engineering). What's built here is everything that step would call.
+The schedule/hosting piece (phase 7): this module's state cache is gzip-
+compressed and lives under version control on purpose, so a scheduled
+GitHub Actions run can commit the updated baseline back to the repo after
+each check -- no database, no server, no cost. See
+.github/workflows/monitor.yml and reports/HOSTING_RESULTS.md.
 """
 import argparse
 import datetime
+import gzip
 import json
 import os
 import subprocess
@@ -65,20 +67,24 @@ def load_watchlist(path):
 
 
 def state_path(name):
-    return os.path.join(STATE_DIR, f"{name}.json")
+    # gzip-compressed: a raw spec JSON runs ~7-13MB; API specs compress very
+    # well (repeated keys, verbose schema boilerplate) -- typically 8-10x.
+    # That's what makes committing the state back to the repo on every
+    # scheduled run sustainable instead of bloating it by gigabytes a year.
+    return os.path.join(STATE_DIR, f"{name}.json.gz")
 
 
 def load_state(name):
     p = state_path(name)
     if not os.path.exists(p):
         return None
-    with open(p) as f:
+    with gzip.open(p, "rt", encoding="utf-8") as f:
         return json.load(f)
 
 
 def save_state(name, spec, checked_at):
     os.makedirs(STATE_DIR, exist_ok=True)
-    with open(state_path(name), "w") as f:
+    with gzip.open(state_path(name), "wt", encoding="utf-8") as f:
         json.dump({"checked_at": checked_at, "spec": spec}, f)
 
 

@@ -3,7 +3,7 @@ __pycache__/
 .venv/
 *.egg-info/
 
-# monitor.py's rolling state cache -- a full copy of the last-seen spec per
-# watched API, regenerated every check. Not something to version; the run
-# records under reports/monitor_runs/ are the durable evidence of what it found.
-data/state/
+# monitor.py's rolling state cache (gzip-compressed, ~460KB per API rather
+# than the ~7-13MB raw spec) IS committed on purpose as of phase 7 -- it's
+# the durable baseline the scheduled GitHub Actions job diffs the next
+# check against, with no database or hosting needed. Not excluded here.
