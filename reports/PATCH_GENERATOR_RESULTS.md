@@ -61,13 +61,46 @@ spec. Comparing shapes instead of literal text is what lets
 match the spec's own parameter names without the two ever needing to agree
 on naming.
 
+## Update — query/header parameters, done 2026-09-10
+
+Widened the same mechanism to cover `parameter_now_required` findings whose
+location is `query` or `header` — the same shape of fix as a required body
+field, just targeting the call's `params=`/`headers=` dict instead of `json=`.
+
+Added a third, independently-written function to `examples/sample_integration.py`:
+`upload_release_asset()`, covering the one real query-parameter finding in
+the dataset — `POST /repos/{owner}/{repo}/releases/{release_id}/assets`,
+where the `name` query parameter went from optional to required. The
+function was written with an empty `params={}` dict and no `name` argument,
+as an integration built against the old spec would have been.
+
+Result: the tool added `name` to the function signature and rewrote
+`params={}` into `params={"name": name}`, with no hints given. Verified the
+same way as before — `ast.parse`/`compile` succeeds, and calling the patched
+function with the old argument list raises `TypeError: upload_release_asset()
+missing 1 required positional argument: 'name'`.
+
+This also surfaced and fixed a real bug: the original insertion logic
+assumed a dict's closing brace was always alone on its own line (true for
+a hand-formatted multi-line payload, false for `params={}`) — inserting
+"new lines above the brace" into an empty single-line dict produced
+syntactically invalid output. Caught by running the patched file through
+`ast.parse`, not just eyeballing the diff — the same catch-it-before-trusting-it
+discipline as the `anyOf`/`oneOf` bug in phase 2. Fixed: the tool now checks
+whether the closing brace is alone on its line before choosing between a
+clean multi-line insert (with a comment) or an inline insert right before
+the brace (no comment, since a trailing comment would swallow the rest of
+that line's code).
+
 ## What's automated vs. what's still manual
 
 | Finding kind | Handling |
 |---|---|
-| `request_body_field_now_required` | **Fully automated** — signature + payload patched, verified above |
+| `request_body_field_now_required` | **Fully automated** — signature + JSON payload patched, verified above |
+| `parameter_now_required` (query or header) | **Fully automated** — signature + `params=`/`headers=` dict patched, verified above |
+| `parameter_now_required` (path or cookie), or no matching dict at the call site | Flagged, not guessed at |
 | `response_field_removed` / `response_field_type_changed` | Flagged with a precise comment; not rewritten (see below) |
-| `endpoint_removed`, `method_removed`, `parameter_removed`, `parameter_now_required`, `parameter_type_changed` | Detected and would be flagged the same way if a matching call site existed in the test file (none did, in this run) |
+| `endpoint_removed`, `method_removed`, `parameter_removed`, `parameter_type_changed` | Detected and flagged with a precise comment at any matching call site |
 
 Response-body changes aren't auto-rewritten because the fix isn't at the
 call site — it's at every place elsewhere in the codebase that reads the
@@ -76,10 +109,10 @@ precisely, rather than guessing at a rewrite, is the honest choice here.
 
 ## What's next
 
-- Widen the auto-patchable set: `parameter_now_required` (a query/path
-  param, not just a body field) is the same shape of fix as the one already
-  automated and should be next.
 - The scheduler/monitoring service — periodically re-fetch a tracked API's
   spec, run both diff engines, and run this patch generator against a real
   customer repo automatically.
 - Multi-file support: right now this runs against one file at a time.
+- Broaden beyond the `requests` library's call shape (`requests.post(url, ...)`)
+  to other common HTTP clients (`httpx`, `aiohttp`) if a real customer
+  codebase needs it.

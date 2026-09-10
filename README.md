@@ -18,7 +18,7 @@ Built and tested against two real, historical versions of a real public API's of
 |---|---|---|
 | Request-side diffing (`src/diff_engine.py`) | Done | 41 breaking changes found, 172 non-breaking |
 | Response-side diffing (`src/response_diff.py`) | Done | 62 breaking changes found (after catching and fixing a real bug — see below) |
-| Patch generation (automated, `src/patch_generator.py`) | Done for the first finding kind | Given a real source file, finds the affected function on its own and generates the patch — verified against a blind test, see `reports/PATCH_GENERATOR_RESULTS.md` |
+| Patch generation (automated, `src/patch_generator.py`) | Done for 2 of 6 request-side finding kinds | Given a real source file, finds the affected function on its own and generates the patch for required body fields and required query/header params — verified against blind tests, see `reports/PATCH_GENERATOR_RESULTS.md` |
 | Scheduler / hosting | Not started | Needs a domain + hosting account when we get there |
 | Billing | Not started | Needs a Stripe account when we get there |
 
@@ -92,13 +92,13 @@ against the raw spec to confirm the fix held. Full account in
 
 - Only the primary 2xx response is compared; 4xx/5xx error-response shapes aren't diffed.
 - Nested objects more than a few levels deep aren't fully walked.
-- Patch generation is automated for one finding kind so far (a request-body field becoming
-  required — the most common breaking change in the phase 1 data). Other request-side kinds
-  (removed endpoints/params, newly-required params) are detected and flagged but not yet
-  auto-rewritten. Response-side findings are flagged with a precise comment, not
-  auto-rewritten, since the fix lives wherever the response is *read*, not at the call site
-  itself — see `reports/PATCH_GENERATOR_RESULTS.md`. **Widening the auto-patchable set is
-  the current build focus.**
+- Patch generation is automated for two finding kinds so far: a request-body field becoming
+  required, and a query/header parameter becoming required — together the most common
+  breaking-change kinds in the phase 1 data. Other request-side kinds (removed
+  endpoints/params, newly-required *path*/cookie params, param type changes) are detected
+  and flagged with a precise comment but not yet auto-rewritten. Response-side findings are
+  always flagged, not auto-rewritten, since the fix lives wherever the response is *read*,
+  not at the call site itself — see `reports/PATCH_GENERATOR_RESULTS.md`.
 - Only one API has been tested against. A real product needs a scheduler that periodically
   re-fetches specs for every API a customer depends on, and somewhere to store/display
   findings over time.
