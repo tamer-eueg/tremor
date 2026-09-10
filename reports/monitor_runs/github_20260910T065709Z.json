@@ -1,6 +1,6 @@
 {
   "name": "github",
-  "checked_at": "2026-09-10T06:40:17Z",
+  "checked_at": "2026-09-10T06:57:09Z",
   "status": "checked",
   "compared_against": "2020-06-01T00:00:00Z",
   "total_changes": 511,
@@ -189,16 +189,16 @@
       "kind": "request_body_field_now_required",
       "path": "/orgs/{org}/actions/secrets/{secret_name}",
       "method": "PUT",
-      "field": "encrypted_value",
-      "detail": "Request body field 'encrypted_value' on PUT /orgs/{org}/actions/secrets/{secret_name} is now required."
+      "field": "key_id",
+      "detail": "Request body field 'key_id' on PUT /orgs/{org}/actions/secrets/{secret_name} is now required."
     },
     {
       "severity": "BREAKING",
       "kind": "request_body_field_now_required",
       "path": "/orgs/{org}/actions/secrets/{secret_name}",
       "method": "PUT",
-      "field": "key_id",
-      "detail": "Request body field 'key_id' on PUT /orgs/{org}/actions/secrets/{secret_name} is now required."
+      "field": "encrypted_value",
+      "detail": "Request body field 'encrypted_value' on PUT /orgs/{org}/actions/secrets/{secret_name} is now required."
     },
     {
       "severity": "NON-BREAKING",
@@ -489,16 +489,16 @@
       "kind": "request_body_field_now_required",
       "path": "/repos/{owner}/{repo}/actions/secrets/{secret_name}",
       "method": "PUT",
-      "field": "encrypted_value",
-      "detail": "Request body field 'encrypted_value' on PUT /repos/{owner}/{repo}/actions/secrets/{secret_name} is now required."
+      "field": "key_id",
+      "detail": "Request body field 'key_id' on PUT /repos/{owner}/{repo}/actions/secrets/{secret_name} is now required."
     },
     {
       "severity": "BREAKING",
       "kind": "request_body_field_now_required",
       "path": "/repos/{owner}/{repo}/actions/secrets/{secret_name}",
       "method": "PUT",
-      "field": "key_id",
-      "detail": "Request body field 'key_id' on PUT /repos/{owner}/{repo}/actions/secrets/{secret_name} is now required."
+      "field": "encrypted_value",
+      "detail": "Request body field 'encrypted_value' on PUT /repos/{owner}/{repo}/actions/secrets/{secret_name} is now required."
     },
     {
       "severity": "BREAKING",
