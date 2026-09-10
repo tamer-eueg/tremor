@@ -15,10 +15,19 @@ This module is the watch loop. For each API in a watchlist:
      rolling baseline, not the all-time-original one -- so a recurring run
      reports only what's new since the previous run, the way `git diff`
      between successive commits does, not a cumulative diff back to day one).
-  4. Write a timestamped run record, and print an alert if anything BREAKING
-     showed up.
-  5. Advance the baseline to the spec just fetched, so the next run's diff
+  4. If the watchlist entry names files to watch (real integration code that
+     calls this API), run phase 3's patch generator against each one with
+     this check's findings, and save whatever it can auto-patch.
+  5. Write a timestamped run record (findings + which files got patched),
+     and print an alert if anything BREAKING showed up.
+  6. Advance the baseline to the spec just fetched, so the next run's diff
      starts from here.
+
+This is what makes phase 3 more than a demo run by hand: the patch
+generator now fires from a live detection, on findings it has never seen
+before, against whatever files the watchlist names -- the same code path
+as examples/sample_integration.py's blind test, just triggered by a real
+check instead of a CLI invocation.
 
 Deliberately not attempted here: the actual cron/timer that calls this on a
 schedule, and the hosting to run it on. Both are the next step, and the
@@ -36,10 +45,13 @@ import requests
 sys.path.insert(0, os.path.dirname(__file__))
 import diff_engine
 import response_diff
+import patch_generator
 
-DEFAULT_WATCHLIST = os.path.join(os.path.dirname(__file__), "..", "data", "watchlist.json")
-STATE_DIR = os.path.join(os.path.dirname(__file__), "..", "data", "state")
-RUNS_DIR = os.path.join(os.path.dirname(__file__), "..", "reports", "monitor_runs")
+REPO_ROOT = os.path.join(os.path.dirname(__file__), "..")
+DEFAULT_WATCHLIST = os.path.join(REPO_ROOT, "data", "watchlist.json")
+STATE_DIR = os.path.join(REPO_ROOT, "data", "state")
+RUNS_DIR = os.path.join(REPO_ROOT, "reports", "monitor_runs")
+PATCHES_DIR = os.path.join(REPO_ROOT, "reports", "monitor_runs", "patches")
 
 
 def now_iso():
@@ -106,6 +118,60 @@ def reclassify_moved_endpoints(changes, sibling_specs):
                 break
 
 
+def patch_watched_files(entry, all_changes, checked_at, quiet=False):
+    """Run patch_generator.py against every file this watchlist entry names,
+    using this check's findings directly (no JSON round-trip -- they're
+    already the same Python dicts diff_engine.py/response_diff.py produced).
+    Writes any successful patch under reports/monitor_runs/patches/ and
+    returns a summary per file, for the run record."""
+    watched_files = entry.get("watched_files") or []
+    summaries = []
+    if not watched_files:
+        return summaries
+
+    os.makedirs(PATCHES_DIR, exist_ok=True)
+    ts = checked_at.replace(":", "").replace("-", "")
+
+    for rel_path in watched_files:
+        abs_path = os.path.join(REPO_ROOT, rel_path)
+        if not os.path.exists(abs_path):
+            summaries.append({"file": rel_path, "status": "not_found"})
+            if not quiet:
+                print(f"[{entry['name']}] watched file not found, skipping: {rel_path}")
+            continue
+
+        with open(abs_path) as f:
+            source = f.read()
+        result = patch_generator.generate_patch(rel_path, source, all_changes)
+
+        summary = {
+            "file": rel_path,
+            "sites_matched": result.sites_matched,
+            "sites_affected": result.sites_affected,
+        }
+        if result.has_changes:
+            basename = os.path.splitext(os.path.basename(rel_path))[0]
+            out_path = os.path.join(PATCHES_DIR, f"{entry['name']}_{basename}_{ts}_patched.py")
+            with open(out_path, "w") as f:
+                f.write(result.patched_source)
+            summary["status"] = "patched"
+            summary["patch_path"] = os.path.relpath(out_path, REPO_ROOT)
+            summary["changelog"] = result.changelog
+            if not quiet:
+                print(f"[{entry['name']}] auto-patched {rel_path} ({result.sites_affected} "
+                      f"call site(s) affected) -> {summary['patch_path']}")
+                for line in result.changelog:
+                    print(f"    - {line}")
+        else:
+            summary["status"] = "nothing_to_patch"
+            if not quiet and result.sites_matched:
+                print(f"[{entry['name']}] checked {rel_path}: {result.sites_matched} API call(s) "
+                      f"found, none affected by this check's findings.")
+        summaries.append(summary)
+
+    return summaries
+
+
 def check_one(entry, quiet=False):
     name = entry["name"]
     url = entry["spec_url"]
@@ -149,6 +215,8 @@ def check_one(entry, quiet=False):
 
     breaking = [c for c in all_changes if c["severity"] == "BREAKING"]
 
+    patch_summaries = patch_watched_files(entry, all_changes, checked_at, quiet=quiet)
+
     record = {
         "name": name,
         "checked_at": checked_at,
@@ -158,6 +226,7 @@ def check_one(entry, quiet=False):
         "breaking_count": len(breaking),
         "non_breaking_count": len(all_changes) - len(breaking),
         "changes": all_changes,
+        "patches": patch_summaries,
     }
     run_path = save_run_record(name, record)
 

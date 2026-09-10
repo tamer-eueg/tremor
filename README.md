@@ -20,6 +20,7 @@ Built and tested against two real, historical versions of a real public API's of
 | Response-side diffing (`src/response_diff.py`) | Done | 62 breaking changes found (after catching and fixing a real bug — see below) |
 | Patch generation (automated, `src/patch_generator.py`) | Done for 2 of 6 request-side finding kinds | Given a real source file, finds the affected function on its own and generates the patch for required body fields and required query/header params — verified against blind tests, see `reports/PATCH_GENERATOR_RESULTS.md` |
 | Recurring monitoring (`src/monitor.py`) | Watch loop built, tested against live data | Fetches a tracked API's current spec, diffs against the last check, alerts on breaking changes — see `reports/MONITOR_RESULTS.md`. Still needs an actual schedule/cron and somewhere to run it. |
+| Monitor → patch generator wiring | Done | A live check now calls the patch generator directly on any watched files, with no manual step in between — see `reports/PIPELINE_WIRING_RESULTS.md` |
 | Hosting / schedule | Not started | Needs a hosting account (or similar) to run the watch loop on a timer |
 | Billing | Not started | Needs a Stripe account when we get there |
 
@@ -31,11 +32,16 @@ blind against a source file it had never seen, found the affected function on it
 generated the exact same fix that was previously built by hand, and the result was verified
 by actually running it — see `reports/PATCH_GENERATOR_RESULTS.md`.
 
-The recurring monitor (`src/monitor.py`) closes the loop: pointed at GitHub's real, current
-API spec (fetched live, not a downloaded file), it found genuine drift since the v2.1.0
-baseline — and, while checking the result before trusting it, caught its own false positive
-(endpoints that had moved to a sibling spec file, not actually been removed) and got fixed to
-tell the two apart automatically. See `reports/MONITOR_RESULTS.md`.
+The recurring monitor (`src/monitor.py`) closes the detection loop: pointed at GitHub's real,
+current API spec (fetched live, not a downloaded file), it found genuine drift since the
+v2.1.0 baseline — and, while checking the result before trusting it, caught its own false
+positive (endpoints that had moved to a sibling spec file, not actually been removed) and got
+fixed to tell the two apart automatically. See `reports/MONITOR_RESULTS.md`.
+
+Then the last gap: the monitor and patch generator weren't actually connected — a live check
+still needed a person to run the patch generator by hand afterward. They're wired together
+now; a check runs the patch generator directly against any watched files, in-memory, no
+manual hand-off. See `reports/PIPELINE_WIRING_RESULTS.md`.
 
 ## How it works, right now
 
@@ -70,7 +76,9 @@ tremor/
 │   ├── RESPONSE_DIFF_RESULTS.md     # phase 2 write-up (response-side, incl. the bug fix)
 │   ├── PATCH_GENERATOR_RESULTS.md   # phase 3 write-up (automated patch generation)
 │   ├── MONITOR_RESULTS.md           # phase 4 write-up (recurring monitoring, live data)
+│   ├── PIPELINE_WIRING_RESULTS.md   # phase 5 write-up (monitor -> patch generator, wired)
 │   ├── monitor_runs/                # timestamped records from real monitor.py runs
+│   │   └── patches/                     # patches monitor.py generated automatically
 │   ├── diff_report.json             # full phase 1 output (213 changes)
 │   └── response_diff_report.json    # full phase 2 output (62 breaking changes)
 └── data/
@@ -88,7 +96,8 @@ python3 src/response_diff.py data/old_spec.json data/new_spec.json
 python3 examples/example_patch.py
 python3 src/patch_generator.py examples/sample_integration.py --write
 python3 src/monitor.py check                # first run: establishes a baseline per watchlist entry
-python3 src/monitor.py check                # any run after that: reports what's new since the last one
+python3 src/monitor.py check                # any run after that: reports what's new -- and auto-patches
+                                             # any watched_files the new findings affect
 ```
 
 ## A bug worth knowing about (and how it was caught)
@@ -113,11 +122,15 @@ against the raw spec to confirm the fix held. Full account in
   and flagged with a precise comment but not yet auto-rewritten. Response-side findings are
   always flagged, not auto-rewritten, since the fix lives wherever the response is *read*,
   not at the call site itself — see `reports/PATCH_GENERATOR_RESULTS.md`.
-- The watch loop (`src/monitor.py`) exists and has been run against live data, but there's no
-  actual schedule/cron calling it yet, and nowhere to host it running continuously — the
-  latter is a hosting decision, not engineering.
+- The watch loop (`src/monitor.py`) exists, is wired directly to the patch generator, and has
+  been run against live data, but there's no actual schedule/cron calling it yet, and nowhere
+  to host it running continuously — the latter is a hosting decision, not engineering.
 - Only one API's spec (plus one sibling, for reconciling moved-not-removed endpoints) is on
-  the watchlist right now.
+  the watchlist right now, and the one watched file is a stand-in, since there's no real
+  customer repo yet.
+- Generated patches land in `reports/monitor_runs/patches/`, not back into the watched file
+  or a pull request — deciding how to deliver a patch to a real repo needs a real repo to
+  design around.
 - No hosting, no domain, no billing yet — deliberately deferred until there's something
   worth putting in front of a real user. These three are identity/payment steps under EUEG,
   not engineering.

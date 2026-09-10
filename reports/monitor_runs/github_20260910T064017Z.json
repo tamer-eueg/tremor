@@ -1,6 +1,6 @@
 {
   "name": "github",
-  "checked_at": "2026-09-10T06:35:53Z",
+  "checked_at": "2026-09-10T06:40:17Z",
   "status": "checked",
   "compared_against": "2020-06-01T00:00:00Z",
   "total_changes": 511,
@@ -3723,6 +3723,14 @@
       "method": "GET",
       "field": "network_count",
       "detail": "GET /users/{username}/starred: Response field 'network_count' no longer appears in the response body."
+    }
+  ],
+  "patches": [
+    {
+      "file": "examples/sample_integration.py",
+      "sites_matched": 3,
+      "sites_affected": 0,
+      "status": "nothing_to_patch"
     }
   ]
 }

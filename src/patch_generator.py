@@ -334,21 +334,31 @@ def apply_patches(source, sites_with_findings):
 
 
 # ---------------------------------------------------------------------------
-# CLI
+# Core entry point -- importable, works on in-memory findings. This is what
+# monitor.py calls directly (its findings are already Python objects from a
+# live check; no need to round-trip them through a JSON file on disk first).
 # ---------------------------------------------------------------------------
 
-def run(source_path, diff_path, response_diff_path, write):
-    with open(source_path) as f:
-        source = f.read()
+class PatchResult:
+    def __init__(self, source_path, sites_matched, plan, patched_source, changelog):
+        self.source_path = source_path
+        self.sites_matched = sites_matched   # total requests.<method>() calls found in the file
+        self.sites_affected = len(plan)       # how many of those are touched by these findings
+        self.patched_source = patched_source  # None if nothing to patch
+        self.changelog = changelog
+
+    @property
+    def has_changes(self):
+        return self.patched_source is not None
+
+
+def generate_patch(source_path, source, findings):
+    """Core logic, no file I/O beyond reading `source` (already provided as text)
+    and no printing. Given a source file's text and a list of finding dicts
+    (whatever mix of diff_engine.py / response_diff.py output), returns a
+    PatchResult describing what would change."""
     tree = ast.parse(source, filename=source_path)
-
-    findings = load_findings(diff_path, response_diff_path)
     sites = find_call_sites(tree)
-
-    if not sites:
-        print("No requests.<method>(url, ...) calls with a statically-resolvable URL "
-              "were found in this file -- nothing to match against the diff report.")
-        return
 
     plan = []
     for site in sites:
@@ -366,22 +376,42 @@ def run(source_path, diff_path, response_diff_path, write):
             plan.append((site, dict(auto_by_kwarg), flagged))
 
     if not plan:
-        print(f"Matched {len(sites)} API call(s) in {source_path} against "
+        return PatchResult(source_path, len(sites), plan, None, [])
+
+    patched_source, changelog = apply_patches(source, plan)
+    return PatchResult(source_path, len(sites), plan, patched_source, changelog)
+
+
+# ---------------------------------------------------------------------------
+# CLI
+# ---------------------------------------------------------------------------
+
+def run(source_path, diff_path, response_diff_path, write):
+    with open(source_path) as f:
+        source = f.read()
+    findings = load_findings(diff_path, response_diff_path)
+    result = generate_patch(source_path, source, findings)
+
+    if result.sites_matched == 0:
+        print("No requests.<method>(url, ...) calls with a statically-resolvable URL "
+              "were found in this file -- nothing to match against the diff report.")
+        return
+
+    if not result.has_changes:
+        print(f"Matched {result.sites_matched} API call(s) in {source_path} against "
               f"{len(findings)} findings -- none of them affect this file. Nothing to patch.")
         return
 
-    patched_source, changelog = apply_patches(source, plan)
-
-    print(f"Matched {len(sites)} API call(s) in {source_path}; "
-          f"{len(plan)} of them are affected by the diff report.\n")
+    print(f"Matched {result.sites_matched} API call(s) in {source_path}; "
+          f"{result.sites_affected} of them are affected by the diff report.\n")
     print("Changelog:")
-    for line in changelog:
+    for line in result.changelog:
         print(f"  - {line}")
     print()
 
     diff = difflib.unified_diff(
         source.splitlines(keepends=True),
-        patched_source.splitlines(keepends=True),
+        result.patched_source.splitlines(keepends=True),
         fromfile=source_path,
         tofile=source_path.replace(".py", "_patched.py"),
     )
@@ -390,7 +420,7 @@ def run(source_path, diff_path, response_diff_path, write):
     if write:
         out_path = source_path.replace(".py", "_patched.py")
         with open(out_path, "w") as f:
-            f.write(patched_source)
+            f.write(result.patched_source)
         print(f"\nPatched file written to {out_path} (original left untouched).")
 
 
