@@ -1,0 +1,3728 @@
+{
+  "name": "github",
+  "checked_at": "2026-09-10T06:35:53Z",
+  "status": "checked",
+  "compared_against": "2020-06-01T00:00:00Z",
+  "total_changes": 511,
+  "breaking_count": 139,
+  "non_breaking_count": 372,
+  "changes": [
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_moved",
+      "path": "/enterprise-installation/{enterprise_or_org}/server-statistics",
+      "method": null,
+      "detail": "Endpoint /enterprise-installation/{enterprise_or_org}/server-statistics no longer appears in this spec, but is present in the 'https://raw.githubusercontent.com/github/rest-api-description/main/descriptions/ghec/ghec.json' sibling spec -- looks like it moved, not a real removal."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_moved",
+      "path": "/enterprises/{enterprise}/actions/cache/usage",
+      "method": null,
+      "detail": "Endpoint /enterprises/{enterprise}/actions/cache/usage no longer appears in this spec, but is present in the 'https://raw.githubusercontent.com/github/rest-api-description/main/descriptions/ghec/ghec.json' sibling spec -- looks like it moved, not a real removal."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_moved",
+      "path": "/enterprises/{enterprise}/actions/permissions",
+      "method": null,
+      "detail": "Endpoint /enterprises/{enterprise}/actions/permissions no longer appears in this spec, but is present in the 'https://raw.githubusercontent.com/github/rest-api-description/main/descriptions/ghec/ghec.json' sibling spec -- looks like it moved, not a real removal."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_moved",
+      "path": "/enterprises/{enterprise}/actions/permissions/organizations",
+      "method": null,
+      "detail": "Endpoint /enterprises/{enterprise}/actions/permissions/organizations no longer appears in this spec, but is present in the 'https://raw.githubusercontent.com/github/rest-api-description/main/descriptions/ghec/ghec.json' sibling spec -- looks like it moved, not a real removal."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_moved",
+      "path": "/enterprises/{enterprise}/actions/permissions/organizations/{org_id}",
+      "method": null,
+      "detail": "Endpoint /enterprises/{enterprise}/actions/permissions/organizations/{org_id} no longer appears in this spec, but is present in the 'https://raw.githubusercontent.com/github/rest-api-description/main/descriptions/ghec/ghec.json' sibling spec -- looks like it moved, not a real removal."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_moved",
+      "path": "/enterprises/{enterprise}/actions/permissions/selected-actions",
+      "method": null,
+      "detail": "Endpoint /enterprises/{enterprise}/actions/permissions/selected-actions no longer appears in this spec, but is present in the 'https://raw.githubusercontent.com/github/rest-api-description/main/descriptions/ghec/ghec.json' sibling spec -- looks like it moved, not a real removal."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_moved",
+      "path": "/enterprises/{enterprise}/actions/permissions/workflow",
+      "method": null,
+      "detail": "Endpoint /enterprises/{enterprise}/actions/permissions/workflow no longer appears in this spec, but is present in the 'https://raw.githubusercontent.com/github/rest-api-description/main/descriptions/ghec/ghec.json' sibling spec -- looks like it moved, not a real removal."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_moved",
+      "path": "/enterprises/{enterprise}/actions/runner-groups",
+      "method": null,
+      "detail": "Endpoint /enterprises/{enterprise}/actions/runner-groups no longer appears in this spec, but is present in the 'https://raw.githubusercontent.com/github/rest-api-description/main/descriptions/ghec/ghec.json' sibling spec -- looks like it moved, not a real removal."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_moved",
+      "path": "/enterprises/{enterprise}/actions/runner-groups/{runner_group_id}",
+      "method": null,
+      "detail": "Endpoint /enterprises/{enterprise}/actions/runner-groups/{runner_group_id} no longer appears in this spec, but is present in the 'https://raw.githubusercontent.com/github/rest-api-description/main/descriptions/ghec/ghec.json' sibling spec -- looks like it moved, not a real removal."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_moved",
+      "path": "/enterprises/{enterprise}/actions/runner-groups/{runner_group_id}/organizations",
+      "method": null,
+      "detail": "Endpoint /enterprises/{enterprise}/actions/runner-groups/{runner_group_id}/organizations no longer appears in this spec, but is present in the 'https://raw.githubusercontent.com/github/rest-api-description/main/descriptions/ghec/ghec.json' sibling spec -- looks like it moved, not a real removal."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_moved",
+      "path": "/enterprises/{enterprise}/actions/runner-groups/{runner_group_id}/organizations/{org_id}",
+      "method": null,
+      "detail": "Endpoint /enterprises/{enterprise}/actions/runner-groups/{runner_group_id}/organizations/{org_id} no longer appears in this spec, but is present in the 'https://raw.githubusercontent.com/github/rest-api-description/main/descriptions/ghec/ghec.json' sibling spec -- looks like it moved, not a real removal."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_moved",
+      "path": "/enterprises/{enterprise}/actions/runner-groups/{runner_group_id}/runners",
+      "method": null,
+      "detail": "Endpoint /enterprises/{enterprise}/actions/runner-groups/{runner_group_id}/runners no longer appears in this spec, but is present in the 'https://raw.githubusercontent.com/github/rest-api-description/main/descriptions/ghec/ghec.json' sibling spec -- looks like it moved, not a real removal."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_moved",
+      "path": "/enterprises/{enterprise}/actions/runner-groups/{runner_group_id}/runners/{runner_id}",
+      "method": null,
+      "detail": "Endpoint /enterprises/{enterprise}/actions/runner-groups/{runner_group_id}/runners/{runner_id} no longer appears in this spec, but is present in the 'https://raw.githubusercontent.com/github/rest-api-description/main/descriptions/ghec/ghec.json' sibling spec -- looks like it moved, not a real removal."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_moved",
+      "path": "/enterprises/{enterprise}/actions/runners",
+      "method": null,
+      "detail": "Endpoint /enterprises/{enterprise}/actions/runners no longer appears in this spec, but is present in the 'https://raw.githubusercontent.com/github/rest-api-description/main/descriptions/ghec/ghec.json' sibling spec -- looks like it moved, not a real removal."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_moved",
+      "path": "/enterprises/{enterprise}/actions/runners/downloads",
+      "method": null,
+      "detail": "Endpoint /enterprises/{enterprise}/actions/runners/downloads no longer appears in this spec, but is present in the 'https://raw.githubusercontent.com/github/rest-api-description/main/descriptions/ghec/ghec.json' sibling spec -- looks like it moved, not a real removal."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_moved",
+      "path": "/enterprises/{enterprise}/actions/runners/registration-token",
+      "method": null,
+      "detail": "Endpoint /enterprises/{enterprise}/actions/runners/registration-token no longer appears in this spec, but is present in the 'https://raw.githubusercontent.com/github/rest-api-description/main/descriptions/ghec/ghec.json' sibling spec -- looks like it moved, not a real removal."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_moved",
+      "path": "/enterprises/{enterprise}/actions/runners/remove-token",
+      "method": null,
+      "detail": "Endpoint /enterprises/{enterprise}/actions/runners/remove-token no longer appears in this spec, but is present in the 'https://raw.githubusercontent.com/github/rest-api-description/main/descriptions/ghec/ghec.json' sibling spec -- looks like it moved, not a real removal."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_moved",
+      "path": "/enterprises/{enterprise}/actions/runners/{runner_id}",
+      "method": null,
+      "detail": "Endpoint /enterprises/{enterprise}/actions/runners/{runner_id} no longer appears in this spec, but is present in the 'https://raw.githubusercontent.com/github/rest-api-description/main/descriptions/ghec/ghec.json' sibling spec -- looks like it moved, not a real removal."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_moved",
+      "path": "/enterprises/{enterprise}/actions/runners/{runner_id}/labels",
+      "method": null,
+      "detail": "Endpoint /enterprises/{enterprise}/actions/runners/{runner_id}/labels no longer appears in this spec, but is present in the 'https://raw.githubusercontent.com/github/rest-api-description/main/descriptions/ghec/ghec.json' sibling spec -- looks like it moved, not a real removal."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_moved",
+      "path": "/enterprises/{enterprise}/actions/runners/{runner_id}/labels/{name}",
+      "method": null,
+      "detail": "Endpoint /enterprises/{enterprise}/actions/runners/{runner_id}/labels/{name} no longer appears in this spec, but is present in the 'https://raw.githubusercontent.com/github/rest-api-description/main/descriptions/ghec/ghec.json' sibling spec -- looks like it moved, not a real removal."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_moved",
+      "path": "/enterprises/{enterprise}/code-scanning/alerts",
+      "method": null,
+      "detail": "Endpoint /enterprises/{enterprise}/code-scanning/alerts no longer appears in this spec, but is present in the 'https://raw.githubusercontent.com/github/rest-api-description/main/descriptions/ghec/ghec.json' sibling spec -- looks like it moved, not a real removal."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_moved",
+      "path": "/enterprises/{enterprise}/secret-scanning/alerts",
+      "method": null,
+      "detail": "Endpoint /enterprises/{enterprise}/secret-scanning/alerts no longer appears in this spec, but is present in the 'https://raw.githubusercontent.com/github/rest-api-description/main/descriptions/ghec/ghec.json' sibling spec -- looks like it moved, not a real removal."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_moved",
+      "path": "/enterprises/{enterprise}/settings/billing/advanced-security",
+      "method": null,
+      "detail": "Endpoint /enterprises/{enterprise}/settings/billing/advanced-security no longer appears in this spec, but is present in the 'https://raw.githubusercontent.com/github/rest-api-description/main/descriptions/ghec/ghec.json' sibling spec -- looks like it moved, not a real removal."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_moved",
+      "path": "/organizations/{organization_id}/custom_roles",
+      "method": null,
+      "detail": "Endpoint /organizations/{organization_id}/custom_roles no longer appears in this spec, but is present in the 'https://raw.githubusercontent.com/github/rest-api-description/main/descriptions/ghec/ghec.json' sibling spec -- looks like it moved, not a real removal."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "new_optional_parameter",
+      "path": "/orgs/{org}/actions/runners",
+      "method": "GET",
+      "param": "name",
+      "in": "query",
+      "detail": "New optional parameter 'name' (query) added to GET /orgs/{org}/actions/runners."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "request_body_field_now_required",
+      "path": "/orgs/{org}/actions/secrets/{secret_name}",
+      "method": "PUT",
+      "field": "encrypted_value",
+      "detail": "Request body field 'encrypted_value' on PUT /orgs/{org}/actions/secrets/{secret_name} is now required."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "request_body_field_now_required",
+      "path": "/orgs/{org}/actions/secrets/{secret_name}",
+      "method": "PUT",
+      "field": "key_id",
+      "detail": "Request body field 'key_id' on PUT /orgs/{org}/actions/secrets/{secret_name} is now required."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "new_optional_parameter",
+      "path": "/orgs/{org}/code-scanning/alerts",
+      "method": "GET",
+      "param": "severity",
+      "in": "query",
+      "detail": "New optional parameter 'severity' (query) added to GET /orgs/{org}/code-scanning/alerts."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "new_optional_parameter",
+      "path": "/orgs/{org}/code-scanning/alerts",
+      "method": "GET",
+      "param": "assignees",
+      "in": "query",
+      "detail": "New optional parameter 'assignees' (query) added to GET /orgs/{org}/code-scanning/alerts."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "endpoint_removed",
+      "path": "/orgs/{org}/codespaces/billing",
+      "method": null,
+      "detail": "Endpoint /orgs/{org}/codespaces/billing no longer exists in the new spec."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_moved",
+      "path": "/orgs/{org}/custom_roles",
+      "method": null,
+      "detail": "Endpoint /orgs/{org}/custom_roles no longer appears in this spec, but is present in the 'https://raw.githubusercontent.com/github/rest-api-description/main/descriptions/ghec/ghec.json' sibling spec -- looks like it moved, not a real removal."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_moved",
+      "path": "/orgs/{org}/custom_roles/{role_id}",
+      "method": null,
+      "detail": "Endpoint /orgs/{org}/custom_roles/{role_id} no longer appears in this spec, but is present in the 'https://raw.githubusercontent.com/github/rest-api-description/main/descriptions/ghec/ghec.json' sibling spec -- looks like it moved, not a real removal."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_moved",
+      "path": "/orgs/{org}/fine_grained_permissions",
+      "method": null,
+      "detail": "Endpoint /orgs/{org}/fine_grained_permissions no longer appears in this spec, but is present in the 'https://raw.githubusercontent.com/github/rest-api-description/main/descriptions/ghec/ghec.json' sibling spec -- looks like it moved, not a real removal."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "new_optional_parameter",
+      "path": "/orgs/{org}/invitations",
+      "method": "GET",
+      "param": "role",
+      "in": "query",
+      "detail": "New optional parameter 'role' (query) added to GET /orgs/{org}/invitations."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "new_optional_parameter",
+      "path": "/orgs/{org}/invitations",
+      "method": "GET",
+      "param": "invitation_source",
+      "in": "query",
+      "detail": "New optional parameter 'invitation_source' (query) added to GET /orgs/{org}/invitations."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "new_optional_parameter",
+      "path": "/orgs/{org}/issues",
+      "method": "GET",
+      "param": "type",
+      "in": "query",
+      "detail": "New optional parameter 'type' (query) added to GET /orgs/{org}/issues."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "new_optional_parameter",
+      "path": "/orgs/{org}/packages",
+      "method": "GET",
+      "param": "page",
+      "in": "query",
+      "detail": "New optional parameter 'page' (query) added to GET /orgs/{org}/packages."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "new_optional_parameter",
+      "path": "/orgs/{org}/packages",
+      "method": "GET",
+      "param": "per_page",
+      "in": "query",
+      "detail": "New optional parameter 'per_page' (query) added to GET /orgs/{org}/packages."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "endpoint_removed",
+      "path": "/orgs/{org}/projects",
+      "method": null,
+      "detail": "Endpoint /orgs/{org}/projects no longer exists in the new spec."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "endpoint_removed",
+      "path": "/orgs/{org}/settings/billing/actions",
+      "method": null,
+      "detail": "Endpoint /orgs/{org}/settings/billing/actions no longer exists in the new spec."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_moved",
+      "path": "/orgs/{org}/settings/billing/advanced-security",
+      "method": null,
+      "detail": "Endpoint /orgs/{org}/settings/billing/advanced-security no longer appears in this spec, but is present in the 'https://raw.githubusercontent.com/github/rest-api-description/main/descriptions/ghec/ghec.json' sibling spec -- looks like it moved, not a real removal."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "endpoint_removed",
+      "path": "/orgs/{org}/settings/billing/packages",
+      "method": null,
+      "detail": "Endpoint /orgs/{org}/settings/billing/packages no longer exists in the new spec."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "endpoint_removed",
+      "path": "/orgs/{org}/settings/billing/shared-storage",
+      "method": null,
+      "detail": "Endpoint /orgs/{org}/settings/billing/shared-storage no longer exists in the new spec."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "endpoint_removed",
+      "path": "/orgs/{org}/teams/{team_slug}/discussions",
+      "method": null,
+      "detail": "Endpoint /orgs/{org}/teams/{team_slug}/discussions no longer exists in the new spec."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "endpoint_removed",
+      "path": "/orgs/{org}/teams/{team_slug}/discussions/{discussion_number}",
+      "method": null,
+      "detail": "Endpoint /orgs/{org}/teams/{team_slug}/discussions/{discussion_number} no longer exists in the new spec."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "endpoint_removed",
+      "path": "/orgs/{org}/teams/{team_slug}/discussions/{discussion_number}/comments",
+      "method": null,
+      "detail": "Endpoint /orgs/{org}/teams/{team_slug}/discussions/{discussion_number}/comments no longer exists in the new spec."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "endpoint_removed",
+      "path": "/orgs/{org}/teams/{team_slug}/discussions/{discussion_number}/comments/{comment_number}",
+      "method": null,
+      "detail": "Endpoint /orgs/{org}/teams/{team_slug}/discussions/{discussion_number}/comments/{comment_number} no longer exists in the new spec."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "endpoint_removed",
+      "path": "/orgs/{org}/teams/{team_slug}/discussions/{discussion_number}/comments/{comment_number}/reactions",
+      "method": null,
+      "detail": "Endpoint /orgs/{org}/teams/{team_slug}/discussions/{discussion_number}/comments/{comment_number}/reactions no longer exists in the new spec."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "endpoint_removed",
+      "path": "/orgs/{org}/teams/{team_slug}/discussions/{discussion_number}/comments/{comment_number}/reactions/{reaction_id}",
+      "method": null,
+      "detail": "Endpoint /orgs/{org}/teams/{team_slug}/discussions/{discussion_number}/comments/{comment_number}/reactions/{reaction_id} no longer exists in the new spec."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "endpoint_removed",
+      "path": "/orgs/{org}/teams/{team_slug}/discussions/{discussion_number}/reactions",
+      "method": null,
+      "detail": "Endpoint /orgs/{org}/teams/{team_slug}/discussions/{discussion_number}/reactions no longer exists in the new spec."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "endpoint_removed",
+      "path": "/orgs/{org}/teams/{team_slug}/discussions/{discussion_number}/reactions/{reaction_id}",
+      "method": null,
+      "detail": "Endpoint /orgs/{org}/teams/{team_slug}/discussions/{discussion_number}/reactions/{reaction_id} no longer exists in the new spec."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "endpoint_removed",
+      "path": "/orgs/{org}/teams/{team_slug}/projects",
+      "method": null,
+      "detail": "Endpoint /orgs/{org}/teams/{team_slug}/projects no longer exists in the new spec."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "endpoint_removed",
+      "path": "/orgs/{org}/teams/{team_slug}/projects/{project_id}",
+      "method": null,
+      "detail": "Endpoint /orgs/{org}/teams/{team_slug}/projects/{project_id} no longer exists in the new spec."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "endpoint_removed",
+      "path": "/projects/columns/cards/{card_id}",
+      "method": null,
+      "detail": "Endpoint /projects/columns/cards/{card_id} no longer exists in the new spec."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "endpoint_removed",
+      "path": "/projects/columns/cards/{card_id}/moves",
+      "method": null,
+      "detail": "Endpoint /projects/columns/cards/{card_id}/moves no longer exists in the new spec."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "endpoint_removed",
+      "path": "/projects/columns/{column_id}",
+      "method": null,
+      "detail": "Endpoint /projects/columns/{column_id} no longer exists in the new spec."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "endpoint_removed",
+      "path": "/projects/columns/{column_id}/cards",
+      "method": null,
+      "detail": "Endpoint /projects/columns/{column_id}/cards no longer exists in the new spec."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "endpoint_removed",
+      "path": "/projects/columns/{column_id}/moves",
+      "method": null,
+      "detail": "Endpoint /projects/columns/{column_id}/moves no longer exists in the new spec."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "endpoint_removed",
+      "path": "/projects/{project_id}",
+      "method": null,
+      "detail": "Endpoint /projects/{project_id} no longer exists in the new spec."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "endpoint_removed",
+      "path": "/projects/{project_id}/collaborators",
+      "method": null,
+      "detail": "Endpoint /projects/{project_id}/collaborators no longer exists in the new spec."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "endpoint_removed",
+      "path": "/projects/{project_id}/collaborators/{username}",
+      "method": null,
+      "detail": "Endpoint /projects/{project_id}/collaborators/{username} no longer exists in the new spec."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "endpoint_removed",
+      "path": "/projects/{project_id}/collaborators/{username}/permission",
+      "method": null,
+      "detail": "Endpoint /projects/{project_id}/collaborators/{username}/permission no longer exists in the new spec."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "endpoint_removed",
+      "path": "/projects/{project_id}/columns",
+      "method": null,
+      "detail": "Endpoint /projects/{project_id}/columns no longer exists in the new spec."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "parameter_removed",
+      "path": "/repos/{owner}/{repo}/actions/artifacts",
+      "method": "GET",
+      "param": "name",
+      "in": "query",
+      "detail": "Parameter 'name' (query) was removed from GET /repos/{owner}/{repo}/actions/artifacts."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "new_optional_parameter",
+      "path": "/repos/{owner}/{repo}/actions/runners",
+      "method": "GET",
+      "param": "name",
+      "in": "query",
+      "detail": "New optional parameter 'name' (query) added to GET /repos/{owner}/{repo}/actions/runners."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "request_body_field_now_required",
+      "path": "/repos/{owner}/{repo}/actions/secrets/{secret_name}",
+      "method": "PUT",
+      "field": "encrypted_value",
+      "detail": "Request body field 'encrypted_value' on PUT /repos/{owner}/{repo}/actions/secrets/{secret_name} is now required."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "request_body_field_now_required",
+      "path": "/repos/{owner}/{repo}/actions/secrets/{secret_name}",
+      "method": "PUT",
+      "field": "key_id",
+      "detail": "Request body field 'key_id' on PUT /repos/{owner}/{repo}/actions/secrets/{secret_name} is now required."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "request_body_field_now_required",
+      "path": "/repos/{owner}/{repo}/branches/{branch}/protection/restrictions/apps",
+      "method": "POST",
+      "field": "apps",
+      "detail": "Request body field 'apps' on POST /repos/{owner}/{repo}/branches/{branch}/protection/restrictions/apps is now required."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "request_body_field_now_required",
+      "path": "/repos/{owner}/{repo}/branches/{branch}/protection/restrictions/apps",
+      "method": "PUT",
+      "field": "apps",
+      "detail": "Request body field 'apps' on PUT /repos/{owner}/{repo}/branches/{branch}/protection/restrictions/apps is now required."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "request_body_field_now_required",
+      "path": "/repos/{owner}/{repo}/branches/{branch}/protection/restrictions/apps",
+      "method": "DELETE",
+      "field": "apps",
+      "detail": "Request body field 'apps' on DELETE /repos/{owner}/{repo}/branches/{branch}/protection/restrictions/apps is now required."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "request_body_field_now_required",
+      "path": "/repos/{owner}/{repo}/branches/{branch}/protection/restrictions/users",
+      "method": "POST",
+      "field": "users",
+      "detail": "Request body field 'users' on POST /repos/{owner}/{repo}/branches/{branch}/protection/restrictions/users is now required."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "request_body_field_now_required",
+      "path": "/repos/{owner}/{repo}/branches/{branch}/protection/restrictions/users",
+      "method": "PUT",
+      "field": "users",
+      "detail": "Request body field 'users' on PUT /repos/{owner}/{repo}/branches/{branch}/protection/restrictions/users is now required."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "request_body_field_now_required",
+      "path": "/repos/{owner}/{repo}/branches/{branch}/protection/restrictions/users",
+      "method": "DELETE",
+      "field": "users",
+      "detail": "Request body field 'users' on DELETE /repos/{owner}/{repo}/branches/{branch}/protection/restrictions/users is now required."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "new_optional_parameter",
+      "path": "/repos/{owner}/{repo}/code-scanning/alerts",
+      "method": "GET",
+      "param": "severity",
+      "in": "query",
+      "detail": "New optional parameter 'severity' (query) added to GET /repos/{owner}/{repo}/code-scanning/alerts."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "new_optional_parameter",
+      "path": "/repos/{owner}/{repo}/code-scanning/alerts",
+      "method": "GET",
+      "param": "assignees",
+      "in": "query",
+      "detail": "New optional parameter 'assignees' (query) added to GET /repos/{owner}/{repo}/code-scanning/alerts."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "new_optional_parameter",
+      "path": "/repos/{owner}/{repo}/codespaces/machines",
+      "method": "GET",
+      "param": "ref",
+      "in": "query",
+      "detail": "New optional parameter 'ref' (query) added to GET /repos/{owner}/{repo}/codespaces/machines."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "new_optional_parameter",
+      "path": "/repos/{owner}/{repo}/commits",
+      "method": "GET",
+      "param": "committer",
+      "in": "query",
+      "detail": "New optional parameter 'committer' (query) added to GET /repos/{owner}/{repo}/commits."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "new_optional_parameter",
+      "path": "/repos/{owner}/{repo}/commits",
+      "method": "GET",
+      "param": "since",
+      "in": "query",
+      "detail": "New optional parameter 'since' (query) added to GET /repos/{owner}/{repo}/commits."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "parameter_removed",
+      "path": "/repos/{owner}/{repo}/commits/{ref}",
+      "method": "GET",
+      "param": "ref",
+      "in": "path",
+      "detail": "Parameter 'ref' (path) was removed from GET /repos/{owner}/{repo}/commits/{ref}."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "parameter_removed",
+      "path": "/repos/{owner}/{repo}/commits/{ref}/check-runs",
+      "method": "GET",
+      "param": "ref",
+      "in": "path",
+      "detail": "Parameter 'ref' (path) was removed from GET /repos/{owner}/{repo}/commits/{ref}/check-runs."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "parameter_removed",
+      "path": "/repos/{owner}/{repo}/commits/{ref}/check-suites",
+      "method": "GET",
+      "param": "ref",
+      "in": "path",
+      "detail": "Parameter 'ref' (path) was removed from GET /repos/{owner}/{repo}/commits/{ref}/check-suites."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "parameter_removed",
+      "path": "/repos/{owner}/{repo}/commits/{ref}/status",
+      "method": "GET",
+      "param": "ref",
+      "in": "path",
+      "detail": "Parameter 'ref' (path) was removed from GET /repos/{owner}/{repo}/commits/{ref}/status."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "parameter_removed",
+      "path": "/repos/{owner}/{repo}/commits/{ref}/statuses",
+      "method": "GET",
+      "param": "ref",
+      "in": "path",
+      "detail": "Parameter 'ref' (path) was removed from GET /repos/{owner}/{repo}/commits/{ref}/statuses."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "parameter_removed",
+      "path": "/repos/{owner}/{repo}/dependabot/alerts",
+      "method": "GET",
+      "param": "page",
+      "in": "query",
+      "detail": "Parameter 'page' (query) was removed from GET /repos/{owner}/{repo}/dependabot/alerts."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "parameter_removed",
+      "path": "/repos/{owner}/{repo}/dependabot/alerts",
+      "method": "GET",
+      "param": "per_page",
+      "in": "query",
+      "detail": "Parameter 'per_page' (query) was removed from GET /repos/{owner}/{repo}/dependabot/alerts."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "parameter_removed",
+      "path": "/repos/{owner}/{repo}/git/matching-refs/{ref}",
+      "method": "GET",
+      "param": "ref",
+      "in": "path",
+      "detail": "Parameter 'ref' (path) was removed from GET /repos/{owner}/{repo}/git/matching-refs/{ref}."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "parameter_removed",
+      "path": "/repos/{owner}/{repo}/git/ref/{ref}",
+      "method": "GET",
+      "param": "ref",
+      "in": "path",
+      "detail": "Parameter 'ref' (path) was removed from GET /repos/{owner}/{repo}/git/ref/{ref}."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "parameter_removed",
+      "path": "/repos/{owner}/{repo}/git/refs/{ref}",
+      "method": "PATCH",
+      "param": "ref",
+      "in": "path",
+      "detail": "Parameter 'ref' (path) was removed from PATCH /repos/{owner}/{repo}/git/refs/{ref}."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "parameter_removed",
+      "path": "/repos/{owner}/{repo}/git/refs/{ref}",
+      "method": "DELETE",
+      "param": "ref",
+      "in": "path",
+      "detail": "Parameter 'ref' (path) was removed from DELETE /repos/{owner}/{repo}/git/refs/{ref}."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "new_optional_parameter",
+      "path": "/repos/{owner}/{repo}/issues",
+      "method": "GET",
+      "param": "type",
+      "in": "query",
+      "detail": "New optional parameter 'type' (query) added to GET /repos/{owner}/{repo}/issues."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "new_optional_parameter",
+      "path": "/repos/{owner}/{repo}/issues",
+      "method": "GET",
+      "param": "issue_field_values",
+      "in": "query",
+      "detail": "New optional parameter 'issue_field_values' (query) added to GET /repos/{owner}/{repo}/issues."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_moved",
+      "path": "/repos/{owner}/{repo}/lfs",
+      "method": null,
+      "detail": "Endpoint /repos/{owner}/{repo}/lfs no longer appears in this spec, but is present in the 'https://raw.githubusercontent.com/github/rest-api-description/main/descriptions/ghec/ghec.json' sibling spec -- looks like it moved, not a real removal."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "endpoint_removed",
+      "path": "/repos/{owner}/{repo}/pages/deployment",
+      "method": null,
+      "detail": "Endpoint /repos/{owner}/{repo}/pages/deployment no longer exists in the new spec."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "endpoint_removed",
+      "path": "/repos/{owner}/{repo}/projects",
+      "method": null,
+      "detail": "Endpoint /repos/{owner}/{repo}/projects no longer exists in the new spec."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "endpoint_removed",
+      "path": "/repos/{owner}/{repo}/tags/protection",
+      "method": null,
+      "detail": "Endpoint /repos/{owner}/{repo}/tags/protection no longer exists in the new spec."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "endpoint_removed",
+      "path": "/repos/{owner}/{repo}/tags/protection/{tag_protection_id}",
+      "method": null,
+      "detail": "Endpoint /repos/{owner}/{repo}/tags/protection/{tag_protection_id} no longer exists in the new spec."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "endpoint_removed",
+      "path": "/repositories/{repository_id}/environments/{environment_name}/secrets",
+      "method": null,
+      "detail": "Endpoint /repositories/{repository_id}/environments/{environment_name}/secrets no longer exists in the new spec."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "endpoint_removed",
+      "path": "/repositories/{repository_id}/environments/{environment_name}/secrets/public-key",
+      "method": null,
+      "detail": "Endpoint /repositories/{repository_id}/environments/{environment_name}/secrets/public-key no longer exists in the new spec."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "endpoint_removed",
+      "path": "/repositories/{repository_id}/environments/{environment_name}/secrets/{secret_name}",
+      "method": null,
+      "detail": "Endpoint /repositories/{repository_id}/environments/{environment_name}/secrets/{secret_name} no longer exists in the new spec."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "new_optional_parameter",
+      "path": "/search/code",
+      "method": "GET",
+      "param": "order",
+      "in": "query",
+      "detail": "New optional parameter 'order' (query) added to GET /search/code."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "endpoint_removed",
+      "path": "/teams/{team_id}/discussions",
+      "method": null,
+      "detail": "Endpoint /teams/{team_id}/discussions no longer exists in the new spec."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "endpoint_removed",
+      "path": "/teams/{team_id}/discussions/{discussion_number}",
+      "method": null,
+      "detail": "Endpoint /teams/{team_id}/discussions/{discussion_number} no longer exists in the new spec."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "endpoint_removed",
+      "path": "/teams/{team_id}/discussions/{discussion_number}/comments",
+      "method": null,
+      "detail": "Endpoint /teams/{team_id}/discussions/{discussion_number}/comments no longer exists in the new spec."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "endpoint_removed",
+      "path": "/teams/{team_id}/discussions/{discussion_number}/comments/{comment_number}",
+      "method": null,
+      "detail": "Endpoint /teams/{team_id}/discussions/{discussion_number}/comments/{comment_number} no longer exists in the new spec."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "endpoint_removed",
+      "path": "/teams/{team_id}/discussions/{discussion_number}/comments/{comment_number}/reactions",
+      "method": null,
+      "detail": "Endpoint /teams/{team_id}/discussions/{discussion_number}/comments/{comment_number}/reactions no longer exists in the new spec."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "endpoint_removed",
+      "path": "/teams/{team_id}/discussions/{discussion_number}/reactions",
+      "method": null,
+      "detail": "Endpoint /teams/{team_id}/discussions/{discussion_number}/reactions no longer exists in the new spec."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "endpoint_removed",
+      "path": "/teams/{team_id}/projects",
+      "method": null,
+      "detail": "Endpoint /teams/{team_id}/projects no longer exists in the new spec."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "endpoint_removed",
+      "path": "/teams/{team_id}/projects/{project_id}",
+      "method": null,
+      "detail": "Endpoint /teams/{team_id}/projects/{project_id} no longer exists in the new spec."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "endpoint_removed",
+      "path": "/user/projects",
+      "method": null,
+      "detail": "Endpoint /user/projects no longer exists in the new spec."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "endpoint_removed",
+      "path": "/users/{username}/projects",
+      "method": null,
+      "detail": "Endpoint /users/{username}/projects no longer exists in the new spec."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "endpoint_removed",
+      "path": "/users/{username}/settings/billing/actions",
+      "method": null,
+      "detail": "Endpoint /users/{username}/settings/billing/actions no longer exists in the new spec."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "endpoint_removed",
+      "path": "/users/{username}/settings/billing/packages",
+      "method": null,
+      "detail": "Endpoint /users/{username}/settings/billing/packages no longer exists in the new spec."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "endpoint_removed",
+      "path": "/users/{username}/settings/billing/shared-storage",
+      "method": null,
+      "detail": "Endpoint /users/{username}/settings/billing/shared-storage no longer exists in the new spec."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/advisories",
+      "method": null,
+      "detail": "New endpoint /advisories was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/advisories/{ghsa_id}",
+      "method": null,
+      "detail": "New endpoint /advisories/{ghsa_id} was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/agents/repos/{owner}/{repo}/tasks",
+      "method": null,
+      "detail": "New endpoint /agents/repos/{owner}/{repo}/tasks was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/agents/repos/{owner}/{repo}/tasks/{task_id}",
+      "method": null,
+      "detail": "New endpoint /agents/repos/{owner}/{repo}/tasks/{task_id} was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/agents/tasks",
+      "method": null,
+      "detail": "New endpoint /agents/tasks was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/agents/tasks/{task_id}",
+      "method": null,
+      "detail": "New endpoint /agents/tasks/{task_id} was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/app/installation-requests",
+      "method": null,
+      "detail": "New endpoint /app/installation-requests was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/assignments/{assignment_id}",
+      "method": null,
+      "detail": "New endpoint /assignments/{assignment_id} was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/assignments/{assignment_id}/accepted_assignments",
+      "method": null,
+      "detail": "New endpoint /assignments/{assignment_id}/accepted_assignments was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/assignments/{assignment_id}/grades",
+      "method": null,
+      "detail": "New endpoint /assignments/{assignment_id}/grades was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/classrooms",
+      "method": null,
+      "detail": "New endpoint /classrooms was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/classrooms/{classroom_id}",
+      "method": null,
+      "detail": "New endpoint /classrooms/{classroom_id} was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/classrooms/{classroom_id}/assignments",
+      "method": null,
+      "detail": "New endpoint /classrooms/{classroom_id}/assignments was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/credentials/revoke",
+      "method": null,
+      "detail": "New endpoint /credentials/revoke was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/enterprises/{enterprise}/actions/cache/retention-limit",
+      "method": null,
+      "detail": "New endpoint /enterprises/{enterprise}/actions/cache/retention-limit was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/enterprises/{enterprise}/actions/cache/storage-limit",
+      "method": null,
+      "detail": "New endpoint /enterprises/{enterprise}/actions/cache/storage-limit was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/enterprises/{enterprise}/actions/oidc/customization/properties/repo",
+      "method": null,
+      "detail": "New endpoint /enterprises/{enterprise}/actions/oidc/customization/properties/repo was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/enterprises/{enterprise}/actions/oidc/customization/properties/repo/{custom_property_name}",
+      "method": null,
+      "detail": "New endpoint /enterprises/{enterprise}/actions/oidc/customization/properties/repo/{custom_property_name} was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/enterprises/{enterprise}/code-security/configurations",
+      "method": null,
+      "detail": "New endpoint /enterprises/{enterprise}/code-security/configurations was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/enterprises/{enterprise}/code-security/configurations/defaults",
+      "method": null,
+      "detail": "New endpoint /enterprises/{enterprise}/code-security/configurations/defaults was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/enterprises/{enterprise}/code-security/configurations/{configuration_id}",
+      "method": null,
+      "detail": "New endpoint /enterprises/{enterprise}/code-security/configurations/{configuration_id} was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/enterprises/{enterprise}/code-security/configurations/{configuration_id}/attach",
+      "method": null,
+      "detail": "New endpoint /enterprises/{enterprise}/code-security/configurations/{configuration_id}/attach was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/enterprises/{enterprise}/code-security/configurations/{configuration_id}/defaults",
+      "method": null,
+      "detail": "New endpoint /enterprises/{enterprise}/code-security/configurations/{configuration_id}/defaults was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/enterprises/{enterprise}/code-security/configurations/{configuration_id}/repositories",
+      "method": null,
+      "detail": "New endpoint /enterprises/{enterprise}/code-security/configurations/{configuration_id}/repositories was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/enterprises/{enterprise}/copilot/metrics/reports/enterprise-1-day",
+      "method": null,
+      "detail": "New endpoint /enterprises/{enterprise}/copilot/metrics/reports/enterprise-1-day was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/enterprises/{enterprise}/copilot/metrics/reports/enterprise-28-day/latest",
+      "method": null,
+      "detail": "New endpoint /enterprises/{enterprise}/copilot/metrics/reports/enterprise-28-day/latest was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/enterprises/{enterprise}/copilot/metrics/reports/repos-1-day",
+      "method": null,
+      "detail": "New endpoint /enterprises/{enterprise}/copilot/metrics/reports/repos-1-day was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/enterprises/{enterprise}/copilot/metrics/reports/user-teams-1-day",
+      "method": null,
+      "detail": "New endpoint /enterprises/{enterprise}/copilot/metrics/reports/user-teams-1-day was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/enterprises/{enterprise}/copilot/metrics/reports/users-1-day",
+      "method": null,
+      "detail": "New endpoint /enterprises/{enterprise}/copilot/metrics/reports/users-1-day was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/enterprises/{enterprise}/copilot/metrics/reports/users-28-day/latest",
+      "method": null,
+      "detail": "New endpoint /enterprises/{enterprise}/copilot/metrics/reports/users-28-day/latest was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/enterprises/{enterprise}/copilot/policies/coding_agent",
+      "method": null,
+      "detail": "New endpoint /enterprises/{enterprise}/copilot/policies/coding_agent was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/enterprises/{enterprise}/copilot/policies/coding_agent/organizations",
+      "method": null,
+      "detail": "New endpoint /enterprises/{enterprise}/copilot/policies/coding_agent/organizations was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/enterprises/{enterprise}/dependabot/alerts",
+      "method": null,
+      "detail": "New endpoint /enterprises/{enterprise}/dependabot/alerts was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/enterprises/{enterprise}/dependabot/repository-access",
+      "method": null,
+      "detail": "New endpoint /enterprises/{enterprise}/dependabot/repository-access was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/enterprises/{enterprise}/dependabot/repository-access/default-level",
+      "method": null,
+      "detail": "New endpoint /enterprises/{enterprise}/dependabot/repository-access/default-level was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/enterprises/{enterprise}/members/{username}/teams",
+      "method": null,
+      "detail": "New endpoint /enterprises/{enterprise}/members/{username}/teams was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/enterprises/{enterprise}/teams",
+      "method": null,
+      "detail": "New endpoint /enterprises/{enterprise}/teams was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/enterprises/{enterprise}/teams/{enterprise-team}/memberships",
+      "method": null,
+      "detail": "New endpoint /enterprises/{enterprise}/teams/{enterprise-team}/memberships was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/enterprises/{enterprise}/teams/{enterprise-team}/memberships/add",
+      "method": null,
+      "detail": "New endpoint /enterprises/{enterprise}/teams/{enterprise-team}/memberships/add was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/enterprises/{enterprise}/teams/{enterprise-team}/memberships/remove",
+      "method": null,
+      "detail": "New endpoint /enterprises/{enterprise}/teams/{enterprise-team}/memberships/remove was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/enterprises/{enterprise}/teams/{enterprise-team}/memberships/{username}",
+      "method": null,
+      "detail": "New endpoint /enterprises/{enterprise}/teams/{enterprise-team}/memberships/{username} was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/enterprises/{enterprise}/teams/{enterprise-team}/organizations",
+      "method": null,
+      "detail": "New endpoint /enterprises/{enterprise}/teams/{enterprise-team}/organizations was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/enterprises/{enterprise}/teams/{enterprise-team}/organizations/add",
+      "method": null,
+      "detail": "New endpoint /enterprises/{enterprise}/teams/{enterprise-team}/organizations/add was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/enterprises/{enterprise}/teams/{enterprise-team}/organizations/remove",
+      "method": null,
+      "detail": "New endpoint /enterprises/{enterprise}/teams/{enterprise-team}/organizations/remove was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/enterprises/{enterprise}/teams/{enterprise-team}/organizations/{org}",
+      "method": null,
+      "detail": "New endpoint /enterprises/{enterprise}/teams/{enterprise-team}/organizations/{org} was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/enterprises/{enterprise}/teams/{team_slug}",
+      "method": null,
+      "detail": "New endpoint /enterprises/{enterprise}/teams/{team_slug} was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/organizations/{org}/actions/cache/retention-limit",
+      "method": null,
+      "detail": "New endpoint /organizations/{org}/actions/cache/retention-limit was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/organizations/{org}/actions/cache/storage-limit",
+      "method": null,
+      "detail": "New endpoint /organizations/{org}/actions/cache/storage-limit was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/organizations/{org}/settings/billing/ai_credit/usage",
+      "method": null,
+      "detail": "New endpoint /organizations/{org}/settings/billing/ai_credit/usage was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/organizations/{org}/settings/billing/budgets",
+      "method": null,
+      "detail": "New endpoint /organizations/{org}/settings/billing/budgets was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/organizations/{org}/settings/billing/budgets/{budget_id}",
+      "method": null,
+      "detail": "New endpoint /organizations/{org}/settings/billing/budgets/{budget_id} was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/organizations/{org}/settings/billing/premium_request/usage",
+      "method": null,
+      "detail": "New endpoint /organizations/{org}/settings/billing/premium_request/usage was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/organizations/{org}/settings/billing/usage",
+      "method": null,
+      "detail": "New endpoint /organizations/{org}/settings/billing/usage was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/organizations/{org}/settings/billing/usage/summary",
+      "method": null,
+      "detail": "New endpoint /organizations/{org}/settings/billing/usage/summary was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/orgs/{org}/actions/hosted-runners",
+      "method": null,
+      "detail": "New endpoint /orgs/{org}/actions/hosted-runners was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/orgs/{org}/actions/hosted-runners/images/custom",
+      "method": null,
+      "detail": "New endpoint /orgs/{org}/actions/hosted-runners/images/custom was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/orgs/{org}/actions/hosted-runners/images/custom/{image_definition_id}",
+      "method": null,
+      "detail": "New endpoint /orgs/{org}/actions/hosted-runners/images/custom/{image_definition_id} was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/orgs/{org}/actions/hosted-runners/images/custom/{image_definition_id}/versions",
+      "method": null,
+      "detail": "New endpoint /orgs/{org}/actions/hosted-runners/images/custom/{image_definition_id}/versions was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/orgs/{org}/actions/hosted-runners/images/custom/{image_definition_id}/versions/{version}",
+      "method": null,
+      "detail": "New endpoint /orgs/{org}/actions/hosted-runners/images/custom/{image_definition_id}/versions/{version} was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/orgs/{org}/actions/hosted-runners/images/github-owned",
+      "method": null,
+      "detail": "New endpoint /orgs/{org}/actions/hosted-runners/images/github-owned was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/orgs/{org}/actions/hosted-runners/images/partner",
+      "method": null,
+      "detail": "New endpoint /orgs/{org}/actions/hosted-runners/images/partner was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/orgs/{org}/actions/hosted-runners/limits",
+      "method": null,
+      "detail": "New endpoint /orgs/{org}/actions/hosted-runners/limits was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/orgs/{org}/actions/hosted-runners/machine-sizes",
+      "method": null,
+      "detail": "New endpoint /orgs/{org}/actions/hosted-runners/machine-sizes was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/orgs/{org}/actions/hosted-runners/platforms",
+      "method": null,
+      "detail": "New endpoint /orgs/{org}/actions/hosted-runners/platforms was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/orgs/{org}/actions/hosted-runners/{hosted_runner_id}",
+      "method": null,
+      "detail": "New endpoint /orgs/{org}/actions/hosted-runners/{hosted_runner_id} was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/orgs/{org}/actions/oidc/customization/properties/repo",
+      "method": null,
+      "detail": "New endpoint /orgs/{org}/actions/oidc/customization/properties/repo was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/orgs/{org}/actions/oidc/customization/properties/repo/{custom_property_name}",
+      "method": null,
+      "detail": "New endpoint /orgs/{org}/actions/oidc/customization/properties/repo/{custom_property_name} was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/orgs/{org}/actions/oidc/customization/sub",
+      "method": null,
+      "detail": "New endpoint /orgs/{org}/actions/oidc/customization/sub was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/orgs/{org}/actions/permissions/artifact-and-log-retention",
+      "method": null,
+      "detail": "New endpoint /orgs/{org}/actions/permissions/artifact-and-log-retention was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/orgs/{org}/actions/permissions/fork-pr-contributor-approval",
+      "method": null,
+      "detail": "New endpoint /orgs/{org}/actions/permissions/fork-pr-contributor-approval was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/orgs/{org}/actions/permissions/fork-pr-workflows-private-repos",
+      "method": null,
+      "detail": "New endpoint /orgs/{org}/actions/permissions/fork-pr-workflows-private-repos was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/orgs/{org}/actions/permissions/self-hosted-runners",
+      "method": null,
+      "detail": "New endpoint /orgs/{org}/actions/permissions/self-hosted-runners was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/orgs/{org}/actions/permissions/self-hosted-runners/repositories",
+      "method": null,
+      "detail": "New endpoint /orgs/{org}/actions/permissions/self-hosted-runners/repositories was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/orgs/{org}/actions/permissions/self-hosted-runners/repositories/{repository_id}",
+      "method": null,
+      "detail": "New endpoint /orgs/{org}/actions/permissions/self-hosted-runners/repositories/{repository_id} was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/orgs/{org}/actions/runner-groups/{runner_group_id}/hosted-runners",
+      "method": null,
+      "detail": "New endpoint /orgs/{org}/actions/runner-groups/{runner_group_id}/hosted-runners was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/orgs/{org}/actions/runners/deprecations/{version}",
+      "method": null,
+      "detail": "New endpoint /orgs/{org}/actions/runners/deprecations/{version} was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/orgs/{org}/actions/runners/generate-jitconfig",
+      "method": null,
+      "detail": "New endpoint /orgs/{org}/actions/runners/generate-jitconfig was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/orgs/{org}/actions/variables",
+      "method": null,
+      "detail": "New endpoint /orgs/{org}/actions/variables was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/orgs/{org}/actions/variables/{name}",
+      "method": null,
+      "detail": "New endpoint /orgs/{org}/actions/variables/{name} was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/orgs/{org}/actions/variables/{name}/repositories",
+      "method": null,
+      "detail": "New endpoint /orgs/{org}/actions/variables/{name}/repositories was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/orgs/{org}/actions/variables/{name}/repositories/{repository_id}",
+      "method": null,
+      "detail": "New endpoint /orgs/{org}/actions/variables/{name}/repositories/{repository_id} was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/orgs/{org}/agents/secrets",
+      "method": null,
+      "detail": "New endpoint /orgs/{org}/agents/secrets was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/orgs/{org}/agents/secrets/public-key",
+      "method": null,
+      "detail": "New endpoint /orgs/{org}/agents/secrets/public-key was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/orgs/{org}/agents/secrets/{secret_name}",
+      "method": null,
+      "detail": "New endpoint /orgs/{org}/agents/secrets/{secret_name} was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/orgs/{org}/agents/secrets/{secret_name}/repositories",
+      "method": null,
+      "detail": "New endpoint /orgs/{org}/agents/secrets/{secret_name}/repositories was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/orgs/{org}/agents/secrets/{secret_name}/repositories/{repository_id}",
+      "method": null,
+      "detail": "New endpoint /orgs/{org}/agents/secrets/{secret_name}/repositories/{repository_id} was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/orgs/{org}/agents/variables",
+      "method": null,
+      "detail": "New endpoint /orgs/{org}/agents/variables was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/orgs/{org}/agents/variables/{name}",
+      "method": null,
+      "detail": "New endpoint /orgs/{org}/agents/variables/{name} was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/orgs/{org}/agents/variables/{name}/repositories",
+      "method": null,
+      "detail": "New endpoint /orgs/{org}/agents/variables/{name}/repositories was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/orgs/{org}/agents/variables/{name}/repositories/{repository_id}",
+      "method": null,
+      "detail": "New endpoint /orgs/{org}/agents/variables/{name}/repositories/{repository_id} was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/orgs/{org}/artifacts/metadata/deployment-record",
+      "method": null,
+      "detail": "New endpoint /orgs/{org}/artifacts/metadata/deployment-record was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}",
+      "method": null,
+      "detail": "New endpoint /orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster} was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/jobs",
+      "method": null,
+      "detail": "New endpoint /orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/jobs was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/jobs/{job_id}",
+      "method": null,
+      "detail": "New endpoint /orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/jobs/{job_id} was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/orgs/{org}/artifacts/metadata/storage-record",
+      "method": null,
+      "detail": "New endpoint /orgs/{org}/artifacts/metadata/storage-record was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/orgs/{org}/artifacts/{subject_digest}/metadata/deployment-records",
+      "method": null,
+      "detail": "New endpoint /orgs/{org}/artifacts/{subject_digest}/metadata/deployment-records was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/orgs/{org}/artifacts/{subject_digest}/metadata/storage-records",
+      "method": null,
+      "detail": "New endpoint /orgs/{org}/artifacts/{subject_digest}/metadata/storage-records was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/orgs/{org}/attestations/bulk-list",
+      "method": null,
+      "detail": "New endpoint /orgs/{org}/attestations/bulk-list was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/orgs/{org}/attestations/delete-request",
+      "method": null,
+      "detail": "New endpoint /orgs/{org}/attestations/delete-request was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/orgs/{org}/attestations/digest/{subject_digest}",
+      "method": null,
+      "detail": "New endpoint /orgs/{org}/attestations/digest/{subject_digest} was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/orgs/{org}/attestations/repositories",
+      "method": null,
+      "detail": "New endpoint /orgs/{org}/attestations/repositories was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/orgs/{org}/attestations/{attestation_id}",
+      "method": null,
+      "detail": "New endpoint /orgs/{org}/attestations/{attestation_id} was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/orgs/{org}/attestations/{subject_digest}",
+      "method": null,
+      "detail": "New endpoint /orgs/{org}/attestations/{subject_digest} was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/orgs/{org}/campaigns",
+      "method": null,
+      "detail": "New endpoint /orgs/{org}/campaigns was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/orgs/{org}/campaigns/{campaign_number}",
+      "method": null,
+      "detail": "New endpoint /orgs/{org}/campaigns/{campaign_number} was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/orgs/{org}/code-security/configurations",
+      "method": null,
+      "detail": "New endpoint /orgs/{org}/code-security/configurations was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/orgs/{org}/code-security/configurations/defaults",
+      "method": null,
+      "detail": "New endpoint /orgs/{org}/code-security/configurations/defaults was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/orgs/{org}/code-security/configurations/detach",
+      "method": null,
+      "detail": "New endpoint /orgs/{org}/code-security/configurations/detach was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/orgs/{org}/code-security/configurations/{configuration_id}",
+      "method": null,
+      "detail": "New endpoint /orgs/{org}/code-security/configurations/{configuration_id} was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/orgs/{org}/code-security/configurations/{configuration_id}/attach",
+      "method": null,
+      "detail": "New endpoint /orgs/{org}/code-security/configurations/{configuration_id}/attach was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/orgs/{org}/code-security/configurations/{configuration_id}/defaults",
+      "method": null,
+      "detail": "New endpoint /orgs/{org}/code-security/configurations/{configuration_id}/defaults was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/orgs/{org}/code-security/configurations/{configuration_id}/repositories",
+      "method": null,
+      "detail": "New endpoint /orgs/{org}/code-security/configurations/{configuration_id}/repositories was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/orgs/{org}/codespaces/access",
+      "method": null,
+      "detail": "New endpoint /orgs/{org}/codespaces/access was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/orgs/{org}/codespaces/access/selected_users",
+      "method": null,
+      "detail": "New endpoint /orgs/{org}/codespaces/access/selected_users was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/orgs/{org}/copilot-spaces",
+      "method": null,
+      "detail": "New endpoint /orgs/{org}/copilot-spaces was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/orgs/{org}/copilot-spaces/{space_number}",
+      "method": null,
+      "detail": "New endpoint /orgs/{org}/copilot-spaces/{space_number} was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/orgs/{org}/copilot-spaces/{space_number}/collaborators",
+      "method": null,
+      "detail": "New endpoint /orgs/{org}/copilot-spaces/{space_number}/collaborators was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/orgs/{org}/copilot-spaces/{space_number}/collaborators/{actor_type}/{actor_identifier}",
+      "method": null,
+      "detail": "New endpoint /orgs/{org}/copilot-spaces/{space_number}/collaborators/{actor_type}/{actor_identifier} was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/orgs/{org}/copilot-spaces/{space_number}/resources",
+      "method": null,
+      "detail": "New endpoint /orgs/{org}/copilot-spaces/{space_number}/resources was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/orgs/{org}/copilot-spaces/{space_number}/resources/{space_resource_id}",
+      "method": null,
+      "detail": "New endpoint /orgs/{org}/copilot-spaces/{space_number}/resources/{space_resource_id} was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/orgs/{org}/copilot/billing",
+      "method": null,
+      "detail": "New endpoint /orgs/{org}/copilot/billing was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/orgs/{org}/copilot/billing/seats",
+      "method": null,
+      "detail": "New endpoint /orgs/{org}/copilot/billing/seats was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/orgs/{org}/copilot/billing/selected_teams",
+      "method": null,
+      "detail": "New endpoint /orgs/{org}/copilot/billing/selected_teams was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/orgs/{org}/copilot/billing/selected_users",
+      "method": null,
+      "detail": "New endpoint /orgs/{org}/copilot/billing/selected_users was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/orgs/{org}/copilot/coding-agent/permissions",
+      "method": null,
+      "detail": "New endpoint /orgs/{org}/copilot/coding-agent/permissions was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/orgs/{org}/copilot/coding-agent/permissions/repositories",
+      "method": null,
+      "detail": "New endpoint /orgs/{org}/copilot/coding-agent/permissions/repositories was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/orgs/{org}/copilot/coding-agent/permissions/repositories/{repository_id}",
+      "method": null,
+      "detail": "New endpoint /orgs/{org}/copilot/coding-agent/permissions/repositories/{repository_id} was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/orgs/{org}/copilot/content_exclusion",
+      "method": null,
+      "detail": "New endpoint /orgs/{org}/copilot/content_exclusion was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/orgs/{org}/copilot/metrics/reports/organization-1-day",
+      "method": null,
+      "detail": "New endpoint /orgs/{org}/copilot/metrics/reports/organization-1-day was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/orgs/{org}/copilot/metrics/reports/organization-28-day/latest",
+      "method": null,
+      "detail": "New endpoint /orgs/{org}/copilot/metrics/reports/organization-28-day/latest was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/orgs/{org}/copilot/metrics/reports/repos-1-day",
+      "method": null,
+      "detail": "New endpoint /orgs/{org}/copilot/metrics/reports/repos-1-day was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/orgs/{org}/copilot/metrics/reports/user-teams-1-day",
+      "method": null,
+      "detail": "New endpoint /orgs/{org}/copilot/metrics/reports/user-teams-1-day was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/orgs/{org}/copilot/metrics/reports/users-1-day",
+      "method": null,
+      "detail": "New endpoint /orgs/{org}/copilot/metrics/reports/users-1-day was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/orgs/{org}/copilot/metrics/reports/users-28-day/latest",
+      "method": null,
+      "detail": "New endpoint /orgs/{org}/copilot/metrics/reports/users-28-day/latest was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/orgs/{org}/dependabot/repository-access",
+      "method": null,
+      "detail": "New endpoint /orgs/{org}/dependabot/repository-access was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/orgs/{org}/dependabot/repository-access/default-level",
+      "method": null,
+      "detail": "New endpoint /orgs/{org}/dependabot/repository-access/default-level was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/orgs/{org}/docker/conflicts",
+      "method": null,
+      "detail": "New endpoint /orgs/{org}/docker/conflicts was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/orgs/{org}/insights/api/route-stats/{actor_type}/{actor_id}",
+      "method": null,
+      "detail": "New endpoint /orgs/{org}/insights/api/route-stats/{actor_type}/{actor_id} was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/orgs/{org}/insights/api/subject-stats",
+      "method": null,
+      "detail": "New endpoint /orgs/{org}/insights/api/subject-stats was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/orgs/{org}/insights/api/summary-stats",
+      "method": null,
+      "detail": "New endpoint /orgs/{org}/insights/api/summary-stats was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/orgs/{org}/insights/api/summary-stats/users/{user_id}",
+      "method": null,
+      "detail": "New endpoint /orgs/{org}/insights/api/summary-stats/users/{user_id} was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/orgs/{org}/insights/api/summary-stats/{actor_type}/{actor_id}",
+      "method": null,
+      "detail": "New endpoint /orgs/{org}/insights/api/summary-stats/{actor_type}/{actor_id} was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/orgs/{org}/insights/api/time-stats",
+      "method": null,
+      "detail": "New endpoint /orgs/{org}/insights/api/time-stats was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/orgs/{org}/insights/api/time-stats/users/{user_id}",
+      "method": null,
+      "detail": "New endpoint /orgs/{org}/insights/api/time-stats/users/{user_id} was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/orgs/{org}/insights/api/time-stats/{actor_type}/{actor_id}",
+      "method": null,
+      "detail": "New endpoint /orgs/{org}/insights/api/time-stats/{actor_type}/{actor_id} was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/orgs/{org}/insights/api/user-stats/{user_id}",
+      "method": null,
+      "detail": "New endpoint /orgs/{org}/insights/api/user-stats/{user_id} was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/orgs/{org}/interaction-limits/pulls/creation-cap",
+      "method": null,
+      "detail": "New endpoint /orgs/{org}/interaction-limits/pulls/creation-cap was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/orgs/{org}/issue-fields",
+      "method": null,
+      "detail": "New endpoint /orgs/{org}/issue-fields was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/orgs/{org}/issue-fields/{issue_field_id}",
+      "method": null,
+      "detail": "New endpoint /orgs/{org}/issue-fields/{issue_field_id} was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/orgs/{org}/issue-types",
+      "method": null,
+      "detail": "New endpoint /orgs/{org}/issue-types was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/orgs/{org}/issue-types/{issue_type_id}",
+      "method": null,
+      "detail": "New endpoint /orgs/{org}/issue-types/{issue_type_id} was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/orgs/{org}/members/{username}/copilot",
+      "method": null,
+      "detail": "New endpoint /orgs/{org}/members/{username}/copilot was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/orgs/{org}/organization-roles",
+      "method": null,
+      "detail": "New endpoint /orgs/{org}/organization-roles was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/orgs/{org}/organization-roles/teams/{team_slug}",
+      "method": null,
+      "detail": "New endpoint /orgs/{org}/organization-roles/teams/{team_slug} was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/orgs/{org}/organization-roles/teams/{team_slug}/{role_id}",
+      "method": null,
+      "detail": "New endpoint /orgs/{org}/organization-roles/teams/{team_slug}/{role_id} was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/orgs/{org}/organization-roles/users/{username}",
+      "method": null,
+      "detail": "New endpoint /orgs/{org}/organization-roles/users/{username} was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/orgs/{org}/organization-roles/users/{username}/{role_id}",
+      "method": null,
+      "detail": "New endpoint /orgs/{org}/organization-roles/users/{username}/{role_id} was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/orgs/{org}/organization-roles/{role_id}",
+      "method": null,
+      "detail": "New endpoint /orgs/{org}/organization-roles/{role_id} was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/orgs/{org}/organization-roles/{role_id}/teams",
+      "method": null,
+      "detail": "New endpoint /orgs/{org}/organization-roles/{role_id}/teams was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/orgs/{org}/organization-roles/{role_id}/users",
+      "method": null,
+      "detail": "New endpoint /orgs/{org}/organization-roles/{role_id}/users was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/orgs/{org}/personal-access-token-requests",
+      "method": null,
+      "detail": "New endpoint /orgs/{org}/personal-access-token-requests was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/orgs/{org}/personal-access-token-requests/{pat_request_id}",
+      "method": null,
+      "detail": "New endpoint /orgs/{org}/personal-access-token-requests/{pat_request_id} was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/orgs/{org}/personal-access-token-requests/{pat_request_id}/repositories",
+      "method": null,
+      "detail": "New endpoint /orgs/{org}/personal-access-token-requests/{pat_request_id}/repositories was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/orgs/{org}/personal-access-tokens",
+      "method": null,
+      "detail": "New endpoint /orgs/{org}/personal-access-tokens was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/orgs/{org}/personal-access-tokens/{pat_id}",
+      "method": null,
+      "detail": "New endpoint /orgs/{org}/personal-access-tokens/{pat_id} was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/orgs/{org}/personal-access-tokens/{pat_id}/repositories",
+      "method": null,
+      "detail": "New endpoint /orgs/{org}/personal-access-tokens/{pat_id}/repositories was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/orgs/{org}/private-registries",
+      "method": null,
+      "detail": "New endpoint /orgs/{org}/private-registries was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/orgs/{org}/private-registries/public-key",
+      "method": null,
+      "detail": "New endpoint /orgs/{org}/private-registries/public-key was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/orgs/{org}/private-registries/{secret_name}",
+      "method": null,
+      "detail": "New endpoint /orgs/{org}/private-registries/{secret_name} was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/orgs/{org}/projectsV2",
+      "method": null,
+      "detail": "New endpoint /orgs/{org}/projectsV2 was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/orgs/{org}/projectsV2/{project_number}",
+      "method": null,
+      "detail": "New endpoint /orgs/{org}/projectsV2/{project_number} was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/orgs/{org}/projectsV2/{project_number}/drafts",
+      "method": null,
+      "detail": "New endpoint /orgs/{org}/projectsV2/{project_number}/drafts was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/orgs/{org}/projectsV2/{project_number}/fields",
+      "method": null,
+      "detail": "New endpoint /orgs/{org}/projectsV2/{project_number}/fields was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/orgs/{org}/projectsV2/{project_number}/fields/{field_id}",
+      "method": null,
+      "detail": "New endpoint /orgs/{org}/projectsV2/{project_number}/fields/{field_id} was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/orgs/{org}/projectsV2/{project_number}/items",
+      "method": null,
+      "detail": "New endpoint /orgs/{org}/projectsV2/{project_number}/items was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/orgs/{org}/projectsV2/{project_number}/items/{item_id}",
+      "method": null,
+      "detail": "New endpoint /orgs/{org}/projectsV2/{project_number}/items/{item_id} was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/orgs/{org}/projectsV2/{project_number}/views",
+      "method": null,
+      "detail": "New endpoint /orgs/{org}/projectsV2/{project_number}/views was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/orgs/{org}/projectsV2/{project_number}/views/{view_number}/items",
+      "method": null,
+      "detail": "New endpoint /orgs/{org}/projectsV2/{project_number}/views/{view_number}/items was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/orgs/{org}/properties/schema",
+      "method": null,
+      "detail": "New endpoint /orgs/{org}/properties/schema was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/orgs/{org}/properties/schema/{custom_property_name}",
+      "method": null,
+      "detail": "New endpoint /orgs/{org}/properties/schema/{custom_property_name} was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/orgs/{org}/properties/values",
+      "method": null,
+      "detail": "New endpoint /orgs/{org}/properties/values was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/orgs/{org}/rulesets",
+      "method": null,
+      "detail": "New endpoint /orgs/{org}/rulesets was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/orgs/{org}/rulesets/rule-suites",
+      "method": null,
+      "detail": "New endpoint /orgs/{org}/rulesets/rule-suites was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/orgs/{org}/rulesets/rule-suites/{rule_suite_id}",
+      "method": null,
+      "detail": "New endpoint /orgs/{org}/rulesets/rule-suites/{rule_suite_id} was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/orgs/{org}/rulesets/{ruleset_id}",
+      "method": null,
+      "detail": "New endpoint /orgs/{org}/rulesets/{ruleset_id} was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/orgs/{org}/rulesets/{ruleset_id}/history",
+      "method": null,
+      "detail": "New endpoint /orgs/{org}/rulesets/{ruleset_id}/history was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/orgs/{org}/rulesets/{ruleset_id}/history/{version_id}",
+      "method": null,
+      "detail": "New endpoint /orgs/{org}/rulesets/{ruleset_id}/history/{version_id} was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/orgs/{org}/secret-scanning/custom-patterns",
+      "method": null,
+      "detail": "New endpoint /orgs/{org}/secret-scanning/custom-patterns was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/orgs/{org}/secret-scanning/custom-patterns/{pattern_id}",
+      "method": null,
+      "detail": "New endpoint /orgs/{org}/secret-scanning/custom-patterns/{pattern_id} was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/orgs/{org}/secret-scanning/pattern-configurations",
+      "method": null,
+      "detail": "New endpoint /orgs/{org}/secret-scanning/pattern-configurations was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/orgs/{org}/security-advisories",
+      "method": null,
+      "detail": "New endpoint /orgs/{org}/security-advisories was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/orgs/{org}/settings/immutable-releases",
+      "method": null,
+      "detail": "New endpoint /orgs/{org}/settings/immutable-releases was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/orgs/{org}/settings/immutable-releases/repositories",
+      "method": null,
+      "detail": "New endpoint /orgs/{org}/settings/immutable-releases/repositories was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/orgs/{org}/settings/immutable-releases/repositories/{repository_id}",
+      "method": null,
+      "detail": "New endpoint /orgs/{org}/settings/immutable-releases/repositories/{repository_id} was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/orgs/{org}/settings/network-configurations",
+      "method": null,
+      "detail": "New endpoint /orgs/{org}/settings/network-configurations was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/orgs/{org}/settings/network-configurations/{network_configuration_id}",
+      "method": null,
+      "detail": "New endpoint /orgs/{org}/settings/network-configurations/{network_configuration_id} was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/orgs/{org}/settings/network-settings/{network_settings_id}",
+      "method": null,
+      "detail": "New endpoint /orgs/{org}/settings/network-settings/{network_settings_id} was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/repos/{owner}/{repo}/actions/cache/retention-limit",
+      "method": null,
+      "detail": "New endpoint /repos/{owner}/{repo}/actions/cache/retention-limit was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/repos/{owner}/{repo}/actions/cache/storage-limit",
+      "method": null,
+      "detail": "New endpoint /repos/{owner}/{repo}/actions/cache/storage-limit was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/repos/{owner}/{repo}/actions/concurrency_groups",
+      "method": null,
+      "detail": "New endpoint /repos/{owner}/{repo}/actions/concurrency_groups was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/repos/{owner}/{repo}/actions/concurrency_groups/{concurrency_group_name}",
+      "method": null,
+      "detail": "New endpoint /repos/{owner}/{repo}/actions/concurrency_groups/{concurrency_group_name} was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/repos/{owner}/{repo}/actions/oidc/customization/sub",
+      "method": null,
+      "detail": "New endpoint /repos/{owner}/{repo}/actions/oidc/customization/sub was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/repos/{owner}/{repo}/actions/organization-secrets",
+      "method": null,
+      "detail": "New endpoint /repos/{owner}/{repo}/actions/organization-secrets was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/repos/{owner}/{repo}/actions/organization-variables",
+      "method": null,
+      "detail": "New endpoint /repos/{owner}/{repo}/actions/organization-variables was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/repos/{owner}/{repo}/actions/permissions/artifact-and-log-retention",
+      "method": null,
+      "detail": "New endpoint /repos/{owner}/{repo}/actions/permissions/artifact-and-log-retention was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/repos/{owner}/{repo}/actions/permissions/fork-pr-contributor-approval",
+      "method": null,
+      "detail": "New endpoint /repos/{owner}/{repo}/actions/permissions/fork-pr-contributor-approval was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/repos/{owner}/{repo}/actions/permissions/fork-pr-workflows-private-repos",
+      "method": null,
+      "detail": "New endpoint /repos/{owner}/{repo}/actions/permissions/fork-pr-workflows-private-repos was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/repos/{owner}/{repo}/actions/runners/deprecations/{version}",
+      "method": null,
+      "detail": "New endpoint /repos/{owner}/{repo}/actions/runners/deprecations/{version} was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/repos/{owner}/{repo}/actions/runners/generate-jitconfig",
+      "method": null,
+      "detail": "New endpoint /repos/{owner}/{repo}/actions/runners/generate-jitconfig was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/repos/{owner}/{repo}/actions/runs/{run_id}/concurrency_groups",
+      "method": null,
+      "detail": "New endpoint /repos/{owner}/{repo}/actions/runs/{run_id}/concurrency_groups was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/repos/{owner}/{repo}/actions/runs/{run_id}/deployment_protection_rule",
+      "method": null,
+      "detail": "New endpoint /repos/{owner}/{repo}/actions/runs/{run_id}/deployment_protection_rule was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/repos/{owner}/{repo}/actions/runs/{run_id}/force-cancel",
+      "method": null,
+      "detail": "New endpoint /repos/{owner}/{repo}/actions/runs/{run_id}/force-cancel was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/repos/{owner}/{repo}/actions/variables",
+      "method": null,
+      "detail": "New endpoint /repos/{owner}/{repo}/actions/variables was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/repos/{owner}/{repo}/actions/variables/{name}",
+      "method": null,
+      "detail": "New endpoint /repos/{owner}/{repo}/actions/variables/{name} was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/repos/{owner}/{repo}/activity",
+      "method": null,
+      "detail": "New endpoint /repos/{owner}/{repo}/activity was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/repos/{owner}/{repo}/agents/organization-secrets",
+      "method": null,
+      "detail": "New endpoint /repos/{owner}/{repo}/agents/organization-secrets was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/repos/{owner}/{repo}/agents/organization-variables",
+      "method": null,
+      "detail": "New endpoint /repos/{owner}/{repo}/agents/organization-variables was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/repos/{owner}/{repo}/agents/secrets",
+      "method": null,
+      "detail": "New endpoint /repos/{owner}/{repo}/agents/secrets was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/repos/{owner}/{repo}/agents/secrets/public-key",
+      "method": null,
+      "detail": "New endpoint /repos/{owner}/{repo}/agents/secrets/public-key was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/repos/{owner}/{repo}/agents/secrets/{secret_name}",
+      "method": null,
+      "detail": "New endpoint /repos/{owner}/{repo}/agents/secrets/{secret_name} was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/repos/{owner}/{repo}/agents/variables",
+      "method": null,
+      "detail": "New endpoint /repos/{owner}/{repo}/agents/variables was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/repos/{owner}/{repo}/agents/variables/{name}",
+      "method": null,
+      "detail": "New endpoint /repos/{owner}/{repo}/agents/variables/{name} was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/repos/{owner}/{repo}/attestations",
+      "method": null,
+      "detail": "New endpoint /repos/{owner}/{repo}/attestations was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/repos/{owner}/{repo}/attestations/{subject_digest}",
+      "method": null,
+      "detail": "New endpoint /repos/{owner}/{repo}/attestations/{subject_digest} was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/repos/{owner}/{repo}/code-quality/findings",
+      "method": null,
+      "detail": "New endpoint /repos/{owner}/{repo}/code-quality/findings was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/repos/{owner}/{repo}/code-quality/findings/{finding_number}",
+      "method": null,
+      "detail": "New endpoint /repos/{owner}/{repo}/code-quality/findings/{finding_number} was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/repos/{owner}/{repo}/code-quality/setup",
+      "method": null,
+      "detail": "New endpoint /repos/{owner}/{repo}/code-quality/setup was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/repos/{owner}/{repo}/code-scanning/alerts/{alert_number}/autofix",
+      "method": null,
+      "detail": "New endpoint /repos/{owner}/{repo}/code-scanning/alerts/{alert_number}/autofix was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/repos/{owner}/{repo}/code-scanning/alerts/{alert_number}/autofix/commits",
+      "method": null,
+      "detail": "New endpoint /repos/{owner}/{repo}/code-scanning/alerts/{alert_number}/autofix/commits was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/repos/{owner}/{repo}/code-scanning/codeql/variant-analyses",
+      "method": null,
+      "detail": "New endpoint /repos/{owner}/{repo}/code-scanning/codeql/variant-analyses was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/repos/{owner}/{repo}/code-scanning/codeql/variant-analyses/{codeql_variant_analysis_id}",
+      "method": null,
+      "detail": "New endpoint /repos/{owner}/{repo}/code-scanning/codeql/variant-analyses/{codeql_variant_analysis_id} was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/repos/{owner}/{repo}/code-scanning/codeql/variant-analyses/{codeql_variant_analysis_id}/repos/{repo_owner}/{repo_name}",
+      "method": null,
+      "detail": "New endpoint /repos/{owner}/{repo}/code-scanning/codeql/variant-analyses/{codeql_variant_analysis_id}/repos/{repo_owner}/{repo_name} was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/repos/{owner}/{repo}/code-scanning/default-setup",
+      "method": null,
+      "detail": "New endpoint /repos/{owner}/{repo}/code-scanning/default-setup was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/repos/{owner}/{repo}/code-security-configuration",
+      "method": null,
+      "detail": "New endpoint /repos/{owner}/{repo}/code-security-configuration was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/repos/{owner}/{repo}/codespaces/permissions_check",
+      "method": null,
+      "detail": "New endpoint /repos/{owner}/{repo}/codespaces/permissions_check was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/repos/{owner}/{repo}/copilot/cloud-agent/configuration",
+      "method": null,
+      "detail": "New endpoint /repos/{owner}/{repo}/copilot/cloud-agent/configuration was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/repos/{owner}/{repo}/dependency-graph/sbom",
+      "method": null,
+      "detail": "New endpoint /repos/{owner}/{repo}/dependency-graph/sbom was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/repos/{owner}/{repo}/dependency-graph/sbom/fetch-report/{sbom_uuid}",
+      "method": null,
+      "detail": "New endpoint /repos/{owner}/{repo}/dependency-graph/sbom/fetch-report/{sbom_uuid} was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/repos/{owner}/{repo}/dependency-graph/sbom/generate-report",
+      "method": null,
+      "detail": "New endpoint /repos/{owner}/{repo}/dependency-graph/sbom/generate-report was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/repos/{owner}/{repo}/environments/{environment_name}/deployment_protection_rules",
+      "method": null,
+      "detail": "New endpoint /repos/{owner}/{repo}/environments/{environment_name}/deployment_protection_rules was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/repos/{owner}/{repo}/environments/{environment_name}/deployment_protection_rules/apps",
+      "method": null,
+      "detail": "New endpoint /repos/{owner}/{repo}/environments/{environment_name}/deployment_protection_rules/apps was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/repos/{owner}/{repo}/environments/{environment_name}/deployment_protection_rules/{protection_rule_id}",
+      "method": null,
+      "detail": "New endpoint /repos/{owner}/{repo}/environments/{environment_name}/deployment_protection_rules/{protection_rule_id} was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/repos/{owner}/{repo}/environments/{environment_name}/secrets",
+      "method": null,
+      "detail": "New endpoint /repos/{owner}/{repo}/environments/{environment_name}/secrets was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/repos/{owner}/{repo}/environments/{environment_name}/secrets/public-key",
+      "method": null,
+      "detail": "New endpoint /repos/{owner}/{repo}/environments/{environment_name}/secrets/public-key was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/repos/{owner}/{repo}/environments/{environment_name}/secrets/{secret_name}",
+      "method": null,
+      "detail": "New endpoint /repos/{owner}/{repo}/environments/{environment_name}/secrets/{secret_name} was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/repos/{owner}/{repo}/environments/{environment_name}/variables",
+      "method": null,
+      "detail": "New endpoint /repos/{owner}/{repo}/environments/{environment_name}/variables was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/repos/{owner}/{repo}/environments/{environment_name}/variables/{name}",
+      "method": null,
+      "detail": "New endpoint /repos/{owner}/{repo}/environments/{environment_name}/variables/{name} was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/repos/{owner}/{repo}/hash-algorithm",
+      "method": null,
+      "detail": "New endpoint /repos/{owner}/{repo}/hash-algorithm was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/repos/{owner}/{repo}/immutable-releases",
+      "method": null,
+      "detail": "New endpoint /repos/{owner}/{repo}/immutable-releases was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/repos/{owner}/{repo}/interaction-limits/pulls/bypass-list",
+      "method": null,
+      "detail": "New endpoint /repos/{owner}/{repo}/interaction-limits/pulls/bypass-list was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/repos/{owner}/{repo}/interaction-limits/pulls/creation-cap",
+      "method": null,
+      "detail": "New endpoint /repos/{owner}/{repo}/interaction-limits/pulls/creation-cap was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/repos/{owner}/{repo}/issue-types",
+      "method": null,
+      "detail": "New endpoint /repos/{owner}/{repo}/issue-types was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/repos/{owner}/{repo}/issues/comments/{comment_id}/pin",
+      "method": null,
+      "detail": "New endpoint /repos/{owner}/{repo}/issues/comments/{comment_id}/pin was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/repos/{owner}/{repo}/issues/{issue_number}/assignees/{assignee}",
+      "method": null,
+      "detail": "New endpoint /repos/{owner}/{repo}/issues/{issue_number}/assignees/{assignee} was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/repos/{owner}/{repo}/issues/{issue_number}/dependencies/blocked_by",
+      "method": null,
+      "detail": "New endpoint /repos/{owner}/{repo}/issues/{issue_number}/dependencies/blocked_by was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/repos/{owner}/{repo}/issues/{issue_number}/dependencies/blocked_by/{issue_id}",
+      "method": null,
+      "detail": "New endpoint /repos/{owner}/{repo}/issues/{issue_number}/dependencies/blocked_by/{issue_id} was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/repos/{owner}/{repo}/issues/{issue_number}/dependencies/blocking",
+      "method": null,
+      "detail": "New endpoint /repos/{owner}/{repo}/issues/{issue_number}/dependencies/blocking was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/repos/{owner}/{repo}/issues/{issue_number}/issue-field-values",
+      "method": null,
+      "detail": "New endpoint /repos/{owner}/{repo}/issues/{issue_number}/issue-field-values was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/repos/{owner}/{repo}/issues/{issue_number}/issue-field-values/{issue_field_id}",
+      "method": null,
+      "detail": "New endpoint /repos/{owner}/{repo}/issues/{issue_number}/issue-field-values/{issue_field_id} was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/repos/{owner}/{repo}/issues/{issue_number}/parent",
+      "method": null,
+      "detail": "New endpoint /repos/{owner}/{repo}/issues/{issue_number}/parent was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/repos/{owner}/{repo}/issues/{issue_number}/sub_issue",
+      "method": null,
+      "detail": "New endpoint /repos/{owner}/{repo}/issues/{issue_number}/sub_issue was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/repos/{owner}/{repo}/issues/{issue_number}/sub_issues",
+      "method": null,
+      "detail": "New endpoint /repos/{owner}/{repo}/issues/{issue_number}/sub_issues was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/repos/{owner}/{repo}/issues/{issue_number}/sub_issues/priority",
+      "method": null,
+      "detail": "New endpoint /repos/{owner}/{repo}/issues/{issue_number}/sub_issues/priority was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/repos/{owner}/{repo}/issues/{issue_number}/suggestions",
+      "method": null,
+      "detail": "New endpoint /repos/{owner}/{repo}/issues/{issue_number}/suggestions was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/repos/{owner}/{repo}/issues/{issue_number}/suggestions/{suggestion_id}/approve",
+      "method": null,
+      "detail": "New endpoint /repos/{owner}/{repo}/issues/{issue_number}/suggestions/{suggestion_id}/approve was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/repos/{owner}/{repo}/issues/{issue_number}/suggestions/{suggestion_id}/dismiss",
+      "method": null,
+      "detail": "New endpoint /repos/{owner}/{repo}/issues/{issue_number}/suggestions/{suggestion_id}/dismiss was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/repos/{owner}/{repo}/pages/deployments",
+      "method": null,
+      "detail": "New endpoint /repos/{owner}/{repo}/pages/deployments was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/repos/{owner}/{repo}/pages/deployments/{pages_deployment_id}",
+      "method": null,
+      "detail": "New endpoint /repos/{owner}/{repo}/pages/deployments/{pages_deployment_id} was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/repos/{owner}/{repo}/pages/deployments/{pages_deployment_id}/cancel",
+      "method": null,
+      "detail": "New endpoint /repos/{owner}/{repo}/pages/deployments/{pages_deployment_id}/cancel was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/repos/{owner}/{repo}/private-vulnerability-reporting",
+      "method": null,
+      "detail": "New endpoint /repos/{owner}/{repo}/private-vulnerability-reporting was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/repos/{owner}/{repo}/properties/values",
+      "method": null,
+      "detail": "New endpoint /repos/{owner}/{repo}/properties/values was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/repos/{owner}/{repo}/pulls/{pull_number}/merge-async",
+      "method": null,
+      "detail": "New endpoint /repos/{owner}/{repo}/pulls/{pull_number}/merge-async was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/repos/{owner}/{repo}/pulls/{pull_number}/merge-async/{uuid}",
+      "method": null,
+      "detail": "New endpoint /repos/{owner}/{repo}/pulls/{pull_number}/merge-async/{uuid} was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/repos/{owner}/{repo}/rules/branches/{branch}",
+      "method": null,
+      "detail": "New endpoint /repos/{owner}/{repo}/rules/branches/{branch} was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/repos/{owner}/{repo}/rulesets",
+      "method": null,
+      "detail": "New endpoint /repos/{owner}/{repo}/rulesets was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/repos/{owner}/{repo}/rulesets/rule-suites",
+      "method": null,
+      "detail": "New endpoint /repos/{owner}/{repo}/rulesets/rule-suites was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/repos/{owner}/{repo}/rulesets/rule-suites/{rule_suite_id}",
+      "method": null,
+      "detail": "New endpoint /repos/{owner}/{repo}/rulesets/rule-suites/{rule_suite_id} was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/repos/{owner}/{repo}/rulesets/{ruleset_id}",
+      "method": null,
+      "detail": "New endpoint /repos/{owner}/{repo}/rulesets/{ruleset_id} was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/repos/{owner}/{repo}/rulesets/{ruleset_id}/history",
+      "method": null,
+      "detail": "New endpoint /repos/{owner}/{repo}/rulesets/{ruleset_id}/history was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/repos/{owner}/{repo}/rulesets/{ruleset_id}/history/{version_id}",
+      "method": null,
+      "detail": "New endpoint /repos/{owner}/{repo}/rulesets/{ruleset_id}/history/{version_id} was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/repos/{owner}/{repo}/secret-scanning/custom-patterns",
+      "method": null,
+      "detail": "New endpoint /repos/{owner}/{repo}/secret-scanning/custom-patterns was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/repos/{owner}/{repo}/secret-scanning/custom-patterns/{pattern_id}",
+      "method": null,
+      "detail": "New endpoint /repos/{owner}/{repo}/secret-scanning/custom-patterns/{pattern_id} was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/repos/{owner}/{repo}/secret-scanning/push-protection-bypasses",
+      "method": null,
+      "detail": "New endpoint /repos/{owner}/{repo}/secret-scanning/push-protection-bypasses was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/repos/{owner}/{repo}/secret-scanning/scan-history",
+      "method": null,
+      "detail": "New endpoint /repos/{owner}/{repo}/secret-scanning/scan-history was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/repos/{owner}/{repo}/security-advisories",
+      "method": null,
+      "detail": "New endpoint /repos/{owner}/{repo}/security-advisories was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/repos/{owner}/{repo}/security-advisories/reports",
+      "method": null,
+      "detail": "New endpoint /repos/{owner}/{repo}/security-advisories/reports was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/repos/{owner}/{repo}/security-advisories/{ghsa_id}",
+      "method": null,
+      "detail": "New endpoint /repos/{owner}/{repo}/security-advisories/{ghsa_id} was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/repos/{owner}/{repo}/security-advisories/{ghsa_id}/cve",
+      "method": null,
+      "detail": "New endpoint /repos/{owner}/{repo}/security-advisories/{ghsa_id}/cve was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/repos/{owner}/{repo}/security-advisories/{ghsa_id}/forks",
+      "method": null,
+      "detail": "New endpoint /repos/{owner}/{repo}/security-advisories/{ghsa_id}/forks was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/repos/{owner}/{repo}/stacks",
+      "method": null,
+      "detail": "New endpoint /repos/{owner}/{repo}/stacks was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/repos/{owner}/{repo}/stacks/{stack_number}",
+      "method": null,
+      "detail": "New endpoint /repos/{owner}/{repo}/stacks/{stack_number} was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/repos/{owner}/{repo}/stacks/{stack_number}/add",
+      "method": null,
+      "detail": "New endpoint /repos/{owner}/{repo}/stacks/{stack_number}/add was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/repos/{owner}/{repo}/stacks/{stack_number}/unstack",
+      "method": null,
+      "detail": "New endpoint /repos/{owner}/{repo}/stacks/{stack_number}/unstack was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/repos/{owner}/{repo}/stargazers/count",
+      "method": null,
+      "detail": "New endpoint /repos/{owner}/{repo}/stargazers/count was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/repos/{owner}/{repo}/stargazers/history",
+      "method": null,
+      "detail": "New endpoint /repos/{owner}/{repo}/stargazers/history was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/user/codespaces/{codespace_name}/publish",
+      "method": null,
+      "detail": "New endpoint /user/codespaces/{codespace_name}/publish was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/user/docker/conflicts",
+      "method": null,
+      "detail": "New endpoint /user/docker/conflicts was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/user/social_accounts",
+      "method": null,
+      "detail": "New endpoint /user/social_accounts was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/user/{account_id}",
+      "method": null,
+      "detail": "New endpoint /user/{account_id} was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/user/{user_id}/projectsV2/{project_number}/drafts",
+      "method": null,
+      "detail": "New endpoint /user/{user_id}/projectsV2/{project_number}/drafts was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/users/{user_id}/projectsV2/{project_number}/views",
+      "method": null,
+      "detail": "New endpoint /users/{user_id}/projectsV2/{project_number}/views was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/users/{username}/attestations/bulk-list",
+      "method": null,
+      "detail": "New endpoint /users/{username}/attestations/bulk-list was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/users/{username}/attestations/delete-request",
+      "method": null,
+      "detail": "New endpoint /users/{username}/attestations/delete-request was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/users/{username}/attestations/digest/{subject_digest}",
+      "method": null,
+      "detail": "New endpoint /users/{username}/attestations/digest/{subject_digest} was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/users/{username}/attestations/{attestation_id}",
+      "method": null,
+      "detail": "New endpoint /users/{username}/attestations/{attestation_id} was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/users/{username}/attestations/{subject_digest}",
+      "method": null,
+      "detail": "New endpoint /users/{username}/attestations/{subject_digest} was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/users/{username}/copilot-spaces",
+      "method": null,
+      "detail": "New endpoint /users/{username}/copilot-spaces was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/users/{username}/copilot-spaces/{space_number}",
+      "method": null,
+      "detail": "New endpoint /users/{username}/copilot-spaces/{space_number} was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/users/{username}/copilot-spaces/{space_number}/collaborators",
+      "method": null,
+      "detail": "New endpoint /users/{username}/copilot-spaces/{space_number}/collaborators was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/users/{username}/copilot-spaces/{space_number}/collaborators/{actor_type}/{actor_identifier}",
+      "method": null,
+      "detail": "New endpoint /users/{username}/copilot-spaces/{space_number}/collaborators/{actor_type}/{actor_identifier} was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/users/{username}/copilot-spaces/{space_number}/resources",
+      "method": null,
+      "detail": "New endpoint /users/{username}/copilot-spaces/{space_number}/resources was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/users/{username}/copilot-spaces/{space_number}/resources/{space_resource_id}",
+      "method": null,
+      "detail": "New endpoint /users/{username}/copilot-spaces/{space_number}/resources/{space_resource_id} was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/users/{username}/docker/conflicts",
+      "method": null,
+      "detail": "New endpoint /users/{username}/docker/conflicts was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/users/{username}/projectsV2",
+      "method": null,
+      "detail": "New endpoint /users/{username}/projectsV2 was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/users/{username}/projectsV2/{project_number}",
+      "method": null,
+      "detail": "New endpoint /users/{username}/projectsV2/{project_number} was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/users/{username}/projectsV2/{project_number}/fields",
+      "method": null,
+      "detail": "New endpoint /users/{username}/projectsV2/{project_number}/fields was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/users/{username}/projectsV2/{project_number}/fields/{field_id}",
+      "method": null,
+      "detail": "New endpoint /users/{username}/projectsV2/{project_number}/fields/{field_id} was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/users/{username}/projectsV2/{project_number}/items",
+      "method": null,
+      "detail": "New endpoint /users/{username}/projectsV2/{project_number}/items was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/users/{username}/projectsV2/{project_number}/items/{item_id}",
+      "method": null,
+      "detail": "New endpoint /users/{username}/projectsV2/{project_number}/items/{item_id} was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/users/{username}/projectsV2/{project_number}/views/{view_number}/items",
+      "method": null,
+      "detail": "New endpoint /users/{username}/projectsV2/{project_number}/views/{view_number}/items was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/users/{username}/settings/billing/ai_credit/usage",
+      "method": null,
+      "detail": "New endpoint /users/{username}/settings/billing/ai_credit/usage was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/users/{username}/settings/billing/premium_request/usage",
+      "method": null,
+      "detail": "New endpoint /users/{username}/settings/billing/premium_request/usage was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/users/{username}/settings/billing/usage",
+      "method": null,
+      "detail": "New endpoint /users/{username}/settings/billing/usage was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/users/{username}/settings/billing/usage/summary",
+      "method": null,
+      "detail": "New endpoint /users/{username}/settings/billing/usage/summary was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/users/{username}/social_accounts",
+      "method": null,
+      "detail": "New endpoint /users/{username}/social_accounts was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/versions",
+      "method": null,
+      "detail": "New endpoint /versions was added."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "response_field_removed",
+      "path": "/app",
+      "method": "GET",
+      "field": "client_secret",
+      "detail": "GET /app: Response field 'client_secret' no longer appears in the response body."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "response_field_removed",
+      "path": "/app",
+      "method": "GET",
+      "field": "webhook_secret",
+      "detail": "GET /app: Response field 'webhook_secret' no longer appears in the response body."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "response_field_removed",
+      "path": "/app",
+      "method": "GET",
+      "field": "pem",
+      "detail": "GET /app: Response field 'pem' no longer appears in the response body."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "response_field_removed",
+      "path": "/apps/{app_slug}",
+      "method": "GET",
+      "field": "client_secret",
+      "detail": "GET /apps/{app_slug}: Response field 'client_secret' no longer appears in the response body."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "response_field_removed",
+      "path": "/apps/{app_slug}",
+      "method": "GET",
+      "field": "webhook_secret",
+      "detail": "GET /apps/{app_slug}: Response field 'webhook_secret' no longer appears in the response body."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "response_field_removed",
+      "path": "/apps/{app_slug}",
+      "method": "GET",
+      "field": "pem",
+      "detail": "GET /apps/{app_slug}: Response field 'pem' no longer appears in the response body."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "response_field_removed",
+      "path": "/orgs/{org}/repos",
+      "method": "POST",
+      "field": "starred_at",
+      "detail": "POST /orgs/{org}/repos: Response field 'starred_at' no longer appears in the response body."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "response_field_removed",
+      "path": "/orgs/{org}/teams/{team_slug}/repos/{owner}/{repo}",
+      "method": "GET",
+      "field": "template_repository",
+      "detail": "GET /orgs/{org}/teams/{team_slug}/repos/{owner}/{repo}: Response field 'template_repository' no longer appears in the response body."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "response_field_removed",
+      "path": "/repos/{owner}/{repo}/branches/{branch}/protection/restrictions/apps",
+      "method": "GET",
+      "field": "client_secret",
+      "detail": "GET /repos/{owner}/{repo}/branches/{branch}/protection/restrictions/apps: Response field 'client_secret' no longer appears in the response body."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "response_field_removed",
+      "path": "/repos/{owner}/{repo}/branches/{branch}/protection/restrictions/apps",
+      "method": "GET",
+      "field": "webhook_secret",
+      "detail": "GET /repos/{owner}/{repo}/branches/{branch}/protection/restrictions/apps: Response field 'webhook_secret' no longer appears in the response body."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "response_field_removed",
+      "path": "/repos/{owner}/{repo}/branches/{branch}/protection/restrictions/apps",
+      "method": "GET",
+      "field": "pem",
+      "detail": "GET /repos/{owner}/{repo}/branches/{branch}/protection/restrictions/apps: Response field 'pem' no longer appears in the response body."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "response_field_removed",
+      "path": "/repos/{owner}/{repo}/branches/{branch}/protection/restrictions/apps",
+      "method": "POST",
+      "field": "client_secret",
+      "detail": "POST /repos/{owner}/{repo}/branches/{branch}/protection/restrictions/apps: Response field 'client_secret' no longer appears in the response body."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "response_field_removed",
+      "path": "/repos/{owner}/{repo}/branches/{branch}/protection/restrictions/apps",
+      "method": "POST",
+      "field": "webhook_secret",
+      "detail": "POST /repos/{owner}/{repo}/branches/{branch}/protection/restrictions/apps: Response field 'webhook_secret' no longer appears in the response body."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "response_field_removed",
+      "path": "/repos/{owner}/{repo}/branches/{branch}/protection/restrictions/apps",
+      "method": "POST",
+      "field": "pem",
+      "detail": "POST /repos/{owner}/{repo}/branches/{branch}/protection/restrictions/apps: Response field 'pem' no longer appears in the response body."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "response_field_removed",
+      "path": "/repos/{owner}/{repo}/branches/{branch}/protection/restrictions/apps",
+      "method": "PUT",
+      "field": "client_secret",
+      "detail": "PUT /repos/{owner}/{repo}/branches/{branch}/protection/restrictions/apps: Response field 'client_secret' no longer appears in the response body."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "response_field_removed",
+      "path": "/repos/{owner}/{repo}/branches/{branch}/protection/restrictions/apps",
+      "method": "PUT",
+      "field": "webhook_secret",
+      "detail": "PUT /repos/{owner}/{repo}/branches/{branch}/protection/restrictions/apps: Response field 'webhook_secret' no longer appears in the response body."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "response_field_removed",
+      "path": "/repos/{owner}/{repo}/branches/{branch}/protection/restrictions/apps",
+      "method": "PUT",
+      "field": "pem",
+      "detail": "PUT /repos/{owner}/{repo}/branches/{branch}/protection/restrictions/apps: Response field 'pem' no longer appears in the response body."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "response_field_removed",
+      "path": "/repos/{owner}/{repo}/branches/{branch}/protection/restrictions/apps",
+      "method": "DELETE",
+      "field": "client_secret",
+      "detail": "DELETE /repos/{owner}/{repo}/branches/{branch}/protection/restrictions/apps: Response field 'client_secret' no longer appears in the response body."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "response_field_removed",
+      "path": "/repos/{owner}/{repo}/branches/{branch}/protection/restrictions/apps",
+      "method": "DELETE",
+      "field": "webhook_secret",
+      "detail": "DELETE /repos/{owner}/{repo}/branches/{branch}/protection/restrictions/apps: Response field 'webhook_secret' no longer appears in the response body."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "response_field_removed",
+      "path": "/repos/{owner}/{repo}/branches/{branch}/protection/restrictions/apps",
+      "method": "DELETE",
+      "field": "pem",
+      "detail": "DELETE /repos/{owner}/{repo}/branches/{branch}/protection/restrictions/apps: Response field 'pem' no longer appears in the response body."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "response_field_removed",
+      "path": "/repos/{owner}/{repo}/issues/{issue_number}",
+      "method": "PATCH",
+      "field": "id",
+      "detail": "PATCH /repos/{owner}/{repo}/issues/{issue_number}: Response field 'id' no longer appears in the response body."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "response_field_removed",
+      "path": "/repos/{owner}/{repo}/issues/{issue_number}",
+      "method": "PATCH",
+      "field": "node_id",
+      "detail": "PATCH /repos/{owner}/{repo}/issues/{issue_number}: Response field 'node_id' no longer appears in the response body."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "response_field_removed",
+      "path": "/repos/{owner}/{repo}/issues/{issue_number}",
+      "method": "PATCH",
+      "field": "url",
+      "detail": "PATCH /repos/{owner}/{repo}/issues/{issue_number}: Response field 'url' no longer appears in the response body."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "response_field_removed",
+      "path": "/repos/{owner}/{repo}/issues/{issue_number}",
+      "method": "PATCH",
+      "field": "repository_url",
+      "detail": "PATCH /repos/{owner}/{repo}/issues/{issue_number}: Response field 'repository_url' no longer appears in the response body."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "response_field_removed",
+      "path": "/repos/{owner}/{repo}/issues/{issue_number}",
+      "method": "PATCH",
+      "field": "labels_url",
+      "detail": "PATCH /repos/{owner}/{repo}/issues/{issue_number}: Response field 'labels_url' no longer appears in the response body."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "response_field_removed",
+      "path": "/repos/{owner}/{repo}/issues/{issue_number}",
+      "method": "PATCH",
+      "field": "comments_url",
+      "detail": "PATCH /repos/{owner}/{repo}/issues/{issue_number}: Response field 'comments_url' no longer appears in the response body."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "response_field_removed",
+      "path": "/repos/{owner}/{repo}/issues/{issue_number}",
+      "method": "PATCH",
+      "field": "events_url",
+      "detail": "PATCH /repos/{owner}/{repo}/issues/{issue_number}: Response field 'events_url' no longer appears in the response body."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "response_field_removed",
+      "path": "/repos/{owner}/{repo}/issues/{issue_number}",
+      "method": "PATCH",
+      "field": "html_url",
+      "detail": "PATCH /repos/{owner}/{repo}/issues/{issue_number}: Response field 'html_url' no longer appears in the response body."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "response_field_removed",
+      "path": "/repos/{owner}/{repo}/issues/{issue_number}",
+      "method": "PATCH",
+      "field": "number",
+      "detail": "PATCH /repos/{owner}/{repo}/issues/{issue_number}: Response field 'number' no longer appears in the response body."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "response_field_removed",
+      "path": "/repos/{owner}/{repo}/issues/{issue_number}",
+      "method": "PATCH",
+      "field": "state",
+      "detail": "PATCH /repos/{owner}/{repo}/issues/{issue_number}: Response field 'state' no longer appears in the response body."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "response_field_removed",
+      "path": "/repos/{owner}/{repo}/issues/{issue_number}",
+      "method": "PATCH",
+      "field": "state_reason",
+      "detail": "PATCH /repos/{owner}/{repo}/issues/{issue_number}: Response field 'state_reason' no longer appears in the response body."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "response_field_removed",
+      "path": "/repos/{owner}/{repo}/issues/{issue_number}",
+      "method": "PATCH",
+      "field": "title",
+      "detail": "PATCH /repos/{owner}/{repo}/issues/{issue_number}: Response field 'title' no longer appears in the response body."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "response_field_removed",
+      "path": "/repos/{owner}/{repo}/issues/{issue_number}",
+      "method": "PATCH",
+      "field": "body",
+      "detail": "PATCH /repos/{owner}/{repo}/issues/{issue_number}: Response field 'body' no longer appears in the response body."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "response_field_removed",
+      "path": "/repos/{owner}/{repo}/issues/{issue_number}",
+      "method": "PATCH",
+      "field": "user",
+      "detail": "PATCH /repos/{owner}/{repo}/issues/{issue_number}: Response field 'user' no longer appears in the response body."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "response_field_removed",
+      "path": "/repos/{owner}/{repo}/issues/{issue_number}",
+      "method": "PATCH",
+      "field": "labels",
+      "detail": "PATCH /repos/{owner}/{repo}/issues/{issue_number}: Response field 'labels' no longer appears in the response body."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "response_field_removed",
+      "path": "/repos/{owner}/{repo}/issues/{issue_number}",
+      "method": "PATCH",
+      "field": "assignee",
+      "detail": "PATCH /repos/{owner}/{repo}/issues/{issue_number}: Response field 'assignee' no longer appears in the response body."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "response_field_removed",
+      "path": "/repos/{owner}/{repo}/issues/{issue_number}",
+      "method": "PATCH",
+      "field": "assignees",
+      "detail": "PATCH /repos/{owner}/{repo}/issues/{issue_number}: Response field 'assignees' no longer appears in the response body."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "response_field_removed",
+      "path": "/repos/{owner}/{repo}/issues/{issue_number}",
+      "method": "PATCH",
+      "field": "milestone",
+      "detail": "PATCH /repos/{owner}/{repo}/issues/{issue_number}: Response field 'milestone' no longer appears in the response body."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "response_field_removed",
+      "path": "/repos/{owner}/{repo}/issues/{issue_number}",
+      "method": "PATCH",
+      "field": "locked",
+      "detail": "PATCH /repos/{owner}/{repo}/issues/{issue_number}: Response field 'locked' no longer appears in the response body."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "response_field_removed",
+      "path": "/repos/{owner}/{repo}/issues/{issue_number}",
+      "method": "PATCH",
+      "field": "active_lock_reason",
+      "detail": "PATCH /repos/{owner}/{repo}/issues/{issue_number}: Response field 'active_lock_reason' no longer appears in the response body."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "response_field_removed",
+      "path": "/repos/{owner}/{repo}/issues/{issue_number}",
+      "method": "PATCH",
+      "field": "comments",
+      "detail": "PATCH /repos/{owner}/{repo}/issues/{issue_number}: Response field 'comments' no longer appears in the response body."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "response_field_removed",
+      "path": "/repos/{owner}/{repo}/issues/{issue_number}",
+      "method": "PATCH",
+      "field": "pull_request",
+      "detail": "PATCH /repos/{owner}/{repo}/issues/{issue_number}: Response field 'pull_request' no longer appears in the response body."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "response_field_removed",
+      "path": "/repos/{owner}/{repo}/issues/{issue_number}",
+      "method": "PATCH",
+      "field": "closed_at",
+      "detail": "PATCH /repos/{owner}/{repo}/issues/{issue_number}: Response field 'closed_at' no longer appears in the response body."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "response_field_removed",
+      "path": "/repos/{owner}/{repo}/issues/{issue_number}",
+      "method": "PATCH",
+      "field": "created_at",
+      "detail": "PATCH /repos/{owner}/{repo}/issues/{issue_number}: Response field 'created_at' no longer appears in the response body."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "response_field_removed",
+      "path": "/repos/{owner}/{repo}/issues/{issue_number}",
+      "method": "PATCH",
+      "field": "updated_at",
+      "detail": "PATCH /repos/{owner}/{repo}/issues/{issue_number}: Response field 'updated_at' no longer appears in the response body."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "response_field_removed",
+      "path": "/repos/{owner}/{repo}/issues/{issue_number}",
+      "method": "PATCH",
+      "field": "draft",
+      "detail": "PATCH /repos/{owner}/{repo}/issues/{issue_number}: Response field 'draft' no longer appears in the response body."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "response_field_removed",
+      "path": "/repos/{owner}/{repo}/issues/{issue_number}",
+      "method": "PATCH",
+      "field": "closed_by",
+      "detail": "PATCH /repos/{owner}/{repo}/issues/{issue_number}: Response field 'closed_by' no longer appears in the response body."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "response_field_removed",
+      "path": "/repos/{owner}/{repo}/issues/{issue_number}",
+      "method": "PATCH",
+      "field": "body_html",
+      "detail": "PATCH /repos/{owner}/{repo}/issues/{issue_number}: Response field 'body_html' no longer appears in the response body."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "response_field_removed",
+      "path": "/repos/{owner}/{repo}/issues/{issue_number}",
+      "method": "PATCH",
+      "field": "body_text",
+      "detail": "PATCH /repos/{owner}/{repo}/issues/{issue_number}: Response field 'body_text' no longer appears in the response body."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "response_field_removed",
+      "path": "/repos/{owner}/{repo}/issues/{issue_number}",
+      "method": "PATCH",
+      "field": "timeline_url",
+      "detail": "PATCH /repos/{owner}/{repo}/issues/{issue_number}: Response field 'timeline_url' no longer appears in the response body."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "response_field_removed",
+      "path": "/repos/{owner}/{repo}/issues/{issue_number}",
+      "method": "PATCH",
+      "field": "repository",
+      "detail": "PATCH /repos/{owner}/{repo}/issues/{issue_number}: Response field 'repository' no longer appears in the response body."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "response_field_removed",
+      "path": "/repos/{owner}/{repo}/issues/{issue_number}",
+      "method": "PATCH",
+      "field": "performed_via_github_app",
+      "detail": "PATCH /repos/{owner}/{repo}/issues/{issue_number}: Response field 'performed_via_github_app' no longer appears in the response body."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "response_field_removed",
+      "path": "/repos/{owner}/{repo}/issues/{issue_number}",
+      "method": "PATCH",
+      "field": "author_association",
+      "detail": "PATCH /repos/{owner}/{repo}/issues/{issue_number}: Response field 'author_association' no longer appears in the response body."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "response_field_removed",
+      "path": "/repos/{owner}/{repo}/issues/{issue_number}",
+      "method": "PATCH",
+      "field": "reactions",
+      "detail": "PATCH /repos/{owner}/{repo}/issues/{issue_number}: Response field 'reactions' no longer appears in the response body."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "response_field_removed",
+      "path": "/repos/{template_owner}/{template_repo}/generate",
+      "method": "POST",
+      "field": "starred_at",
+      "detail": "POST /repos/{template_owner}/{template_repo}/generate: Response field 'starred_at' no longer appears in the response body."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "response_field_removed",
+      "path": "/teams/{team_id}/repos/{owner}/{repo}",
+      "method": "GET",
+      "field": "template_repository",
+      "detail": "GET /teams/{team_id}/repos/{owner}/{repo}: Response field 'template_repository' no longer appears in the response body."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "response_field_removed",
+      "path": "/user",
+      "method": "GET",
+      "field": "suspended_at",
+      "detail": "GET /user: Response field 'suspended_at' no longer appears in the response body."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "response_field_removed",
+      "path": "/user",
+      "method": "PATCH",
+      "field": "suspended_at",
+      "detail": "PATCH /user: Response field 'suspended_at' no longer appears in the response body."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "response_field_removed",
+      "path": "/user/repos",
+      "method": "GET",
+      "field": "organization",
+      "detail": "GET /user/repos: Response field 'organization' no longer appears in the response body."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "response_field_removed",
+      "path": "/user/repos",
+      "method": "GET",
+      "field": "template_repository",
+      "detail": "GET /user/repos: Response field 'template_repository' no longer appears in the response body."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "response_field_removed",
+      "path": "/user/repos",
+      "method": "GET",
+      "field": "subscribers_count",
+      "detail": "GET /user/repos: Response field 'subscribers_count' no longer appears in the response body."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "response_field_removed",
+      "path": "/user/repos",
+      "method": "GET",
+      "field": "network_count",
+      "detail": "GET /user/repos: Response field 'network_count' no longer appears in the response body."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "response_field_removed",
+      "path": "/user/repos",
+      "method": "POST",
+      "field": "starred_at",
+      "detail": "POST /user/repos: Response field 'starred_at' no longer appears in the response body."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "response_field_removed",
+      "path": "/user/starred",
+      "method": "GET",
+      "field": "organization",
+      "detail": "GET /user/starred: Response field 'organization' no longer appears in the response body."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "response_field_removed",
+      "path": "/user/starred",
+      "method": "GET",
+      "field": "template_repository",
+      "detail": "GET /user/starred: Response field 'template_repository' no longer appears in the response body."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "response_field_removed",
+      "path": "/user/starred",
+      "method": "GET",
+      "field": "subscribers_count",
+      "detail": "GET /user/starred: Response field 'subscribers_count' no longer appears in the response body."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "response_field_removed",
+      "path": "/user/starred",
+      "method": "GET",
+      "field": "network_count",
+      "detail": "GET /user/starred: Response field 'network_count' no longer appears in the response body."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "response_field_removed",
+      "path": "/users/{username}",
+      "method": "GET",
+      "field": "suspended_at",
+      "detail": "GET /users/{username}: Response field 'suspended_at' no longer appears in the response body."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "response_field_removed",
+      "path": "/users/{username}/starred",
+      "method": "GET",
+      "field": "organization",
+      "detail": "GET /users/{username}/starred: Response field 'organization' no longer appears in the response body."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "response_field_removed",
+      "path": "/users/{username}/starred",
+      "method": "GET",
+      "field": "template_repository",
+      "detail": "GET /users/{username}/starred: Response field 'template_repository' no longer appears in the response body."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "response_field_removed",
+      "path": "/users/{username}/starred",
+      "method": "GET",
+      "field": "subscribers_count",
+      "detail": "GET /users/{username}/starred: Response field 'subscribers_count' no longer appears in the response body."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "response_field_removed",
+      "path": "/users/{username}/starred",
+      "method": "GET",
+      "field": "network_count",
+      "detail": "GET /users/{username}/starred: Response field 'network_count' no longer appears in the response body."
+    }
+  ]
+}

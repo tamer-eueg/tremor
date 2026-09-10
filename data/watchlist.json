@@ -1,0 +1,10 @@
+[
+  {
+    "name": "github",
+    "spec_url": "https://raw.githubusercontent.com/github/rest-api-description/main/descriptions/api.github.com/api.github.com.json",
+    "sibling_spec_urls": [
+      "https://raw.githubusercontent.com/github/rest-api-description/main/descriptions/ghec/ghec.json"
+    ],
+    "sibling_note": "GitHub publishes github.com's public API and GitHub Enterprise Cloud's API as separate spec files in the same repo. An endpoint that moves from one to the other looks identical to a removal if only api.github.com.json is watched -- checking siblings tells the two apart. GHES version-specific spec files exist too (ghes-3.x) but aren't watched here yet."
+  }
+]

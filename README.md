@@ -19,7 +19,8 @@ Built and tested against two real, historical versions of a real public API's of
 | Request-side diffing (`src/diff_engine.py`) | Done | 41 breaking changes found, 172 non-breaking |
 | Response-side diffing (`src/response_diff.py`) | Done | 62 breaking changes found (after catching and fixing a real bug — see below) |
 | Patch generation (automated, `src/patch_generator.py`) | Done for 2 of 6 request-side finding kinds | Given a real source file, finds the affected function on its own and generates the patch for required body fields and required query/header params — verified against blind tests, see `reports/PATCH_GENERATOR_RESULTS.md` |
-| Scheduler / hosting | Not started | Needs a domain + hosting account when we get there |
+| Recurring monitoring (`src/monitor.py`) | Watch loop built, tested against live data | Fetches a tracked API's current spec, diffs against the last check, alerts on breaking changes — see `reports/MONITOR_RESULTS.md`. Still needs an actual schedule/cron and somewhere to run it. |
+| Hosting / schedule | Not started | Needs a hosting account (or similar) to run the watch loop on a timer |
 | Billing | Not started | Needs a Stripe account when we get there |
 
 **103 distinct, verified breaking changes found across both layers**, between two real
@@ -29,6 +30,12 @@ The patch generator (`src/patch_generator.py`) then took one of those findings a
 blind against a source file it had never seen, found the affected function on its own,
 generated the exact same fix that was previously built by hand, and the result was verified
 by actually running it — see `reports/PATCH_GENERATOR_RESULTS.md`.
+
+The recurring monitor (`src/monitor.py`) closes the loop: pointed at GitHub's real, current
+API spec (fetched live, not a downloaded file), it found genuine drift since the v2.1.0
+baseline — and, while checking the result before trusting it, caught its own false positive
+(endpoints that had moved to a sibling spec file, not actually been removed) and got fixed to
+tell the two apart automatically. See `reports/MONITOR_RESULTS.md`.
 
 ## How it works, right now
 
@@ -50,10 +57,11 @@ by actually running it — see `reports/PATCH_GENERATOR_RESULTS.md`.
 
 ```
 tremor/
-├── src/                     # the diffing engines + patch generator
+├── src/                     # the diffing engines + patch generator + monitor
 │   ├── diff_engine.py       # request-side: params, required fields, removed endpoints
 │   ├── response_diff.py     # response-side: removed/changed response fields
-│   └── patch_generator.py   # phase 3: finds affected functions in real source, patches them
+│   ├── patch_generator.py   # phase 3: finds affected functions in real source, patches them
+│   └── monitor.py           # phase 4: watch loop -- fetch, diff vs. last check, alert
 ├── examples/
 │   ├── example_patch.py         # one hand-built before/after patch, worked example (phase 1)
 │   └── sample_integration.py    # stand-in customer file used to test patch_generator.py blind
@@ -61,11 +69,15 @@ tremor/
 │   ├── PROOF_OF_CONCEPT.md          # phase 1 write-up (request-side)
 │   ├── RESPONSE_DIFF_RESULTS.md     # phase 2 write-up (response-side, incl. the bug fix)
 │   ├── PATCH_GENERATOR_RESULTS.md   # phase 3 write-up (automated patch generation)
+│   ├── MONITOR_RESULTS.md           # phase 4 write-up (recurring monitoring, live data)
+│   ├── monitor_runs/                # timestamped records from real monitor.py runs
 │   ├── diff_report.json             # full phase 1 output (213 changes)
 │   └── response_diff_report.json    # full phase 2 output (62 breaking changes)
 └── data/
     ├── old_spec.json        # GitHub REST API spec, tag v1.0.0
-    └── new_spec.json        # GitHub REST API spec, tag v2.1.0
+    ├── new_spec.json        # GitHub REST API spec, tag v2.1.0
+    ├── watchlist.json       # APIs monitor.py tracks, and where to fetch each one's spec
+    └── state/                # monitor.py's rolling "last seen" cache (gitignored)
 ```
 
 ## Run it
@@ -75,6 +87,8 @@ python3 src/diff_engine.py data/old_spec.json data/new_spec.json
 python3 src/response_diff.py data/old_spec.json data/new_spec.json
 python3 examples/example_patch.py
 python3 src/patch_generator.py examples/sample_integration.py --write
+python3 src/monitor.py check                # first run: establishes a baseline per watchlist entry
+python3 src/monitor.py check                # any run after that: reports what's new since the last one
 ```
 
 ## A bug worth knowing about (and how it was caught)
@@ -99,9 +113,11 @@ against the raw spec to confirm the fix held. Full account in
   and flagged with a precise comment but not yet auto-rewritten. Response-side findings are
   always flagged, not auto-rewritten, since the fix lives wherever the response is *read*,
   not at the call site itself — see `reports/PATCH_GENERATOR_RESULTS.md`.
-- Only one API has been tested against. A real product needs a scheduler that periodically
-  re-fetches specs for every API a customer depends on, and somewhere to store/display
-  findings over time.
+- The watch loop (`src/monitor.py`) exists and has been run against live data, but there's no
+  actual schedule/cron calling it yet, and nowhere to host it running continuously — the
+  latter is a hosting decision, not engineering.
+- Only one API's spec (plus one sibling, for reconciling moved-not-removed endpoints) is on
+  the watchlist right now.
 - No hosting, no domain, no billing yet — deliberately deferred until there's something
   worth putting in front of a real user. These three are identity/payment steps under EUEG,
   not engineering.
