@@ -1,0 +1,149 @@
+{
+  "labeled": {
+    "cases_total": 14,
+    "cases_passed": 14,
+    "precision": 1.0,
+    "recall": 1.0,
+    "totals": {
+      "tp": 11,
+      "fp": 0,
+      "fn": 0
+    },
+    "cases": [
+      {
+        "case": "unchanged contract",
+        "passed": true,
+        "true_positives": 0,
+        "false_positives": 0,
+        "misses": 0,
+        "unexpected": [],
+        "missing": []
+      },
+      {
+        "case": "endpoint removed",
+        "passed": true,
+        "true_positives": 1,
+        "false_positives": 0,
+        "misses": 0,
+        "unexpected": [],
+        "missing": []
+      },
+      {
+        "case": "method removed",
+        "passed": true,
+        "true_positives": 1,
+        "false_positives": 0,
+        "misses": 0,
+        "unexpected": [],
+        "missing": []
+      },
+      {
+        "case": "parameter removed",
+        "passed": true,
+        "true_positives": 1,
+        "false_positives": 0,
+        "misses": 0,
+        "unexpected": [],
+        "missing": []
+      },
+      {
+        "case": "parameter becomes required",
+        "passed": true,
+        "true_positives": 1,
+        "false_positives": 0,
+        "misses": 0,
+        "unexpected": [],
+        "missing": []
+      },
+      {
+        "case": "parameter type changes",
+        "passed": true,
+        "true_positives": 1,
+        "false_positives": 0,
+        "misses": 0,
+        "unexpected": [],
+        "missing": []
+      },
+      {
+        "case": "required parameter added",
+        "passed": true,
+        "true_positives": 1,
+        "false_positives": 0,
+        "misses": 0,
+        "unexpected": [],
+        "missing": []
+      },
+      {
+        "case": "optional parameter added safely",
+        "passed": true,
+        "true_positives": 1,
+        "false_positives": 0,
+        "misses": 0,
+        "unexpected": [],
+        "missing": []
+      },
+      {
+        "case": "required request field added",
+        "passed": true,
+        "true_positives": 1,
+        "false_positives": 0,
+        "misses": 0,
+        "unexpected": [],
+        "missing": []
+      },
+      {
+        "case": "response field removed",
+        "passed": true,
+        "true_positives": 1,
+        "false_positives": 0,
+        "misses": 0,
+        "unexpected": [],
+        "missing": []
+      },
+      {
+        "case": "response field type changes",
+        "passed": true,
+        "true_positives": 1,
+        "false_positives": 0,
+        "misses": 0,
+        "unexpected": [],
+        "missing": []
+      },
+      {
+        "case": "response field added safely",
+        "passed": true,
+        "true_positives": 0,
+        "false_positives": 0,
+        "misses": 0,
+        "unexpected": [],
+        "missing": []
+      },
+      {
+        "case": "endpoint added safely",
+        "passed": true,
+        "true_positives": 1,
+        "false_positives": 0,
+        "misses": 0,
+        "unexpected": [],
+        "missing": []
+      },
+      {
+        "case": "anyOf wrapper does not invent removals",
+        "passed": true,
+        "true_positives": 0,
+        "false_positives": 0,
+        "misses": 0,
+        "unexpected": [],
+        "missing": []
+      }
+    ]
+  },
+  "historical_regression": {
+    "dataset": "GitHub REST API v1.0.0 to v2.1.0",
+    "request_findings": 213,
+    "response_breaking_findings": 62,
+    "matches_reviewed_request_report": true,
+    "matches_reviewed_response_report": true,
+    "passed": true
+  }
+}

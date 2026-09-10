@@ -9,7 +9,7 @@ starts silently getting wrong data. Tremor watches an API's OpenAPI spec over ti
 exactly what changed and whether it's breaking, and generates the code patch to fix it —
 before a human has to read a changelog.
 
-## Status: proof of concept, both diffing engines validated against real data
+## Status: working proof of concept with a repeatable benchmark
 
 Built and tested against two real, historical versions of a real public API's official spec
 (GitHub's own REST API, tags `v1.0.0` → `v2.1.0` — 428 → 561 endpoints). No synthetic data.
@@ -22,7 +22,8 @@ Built and tested against two real, historical versions of a real public API's of
 | Recurring monitoring (`src/monitor.py`) | Watch loop built, tested against live data | Fetches a tracked API's current spec, diffs against the last check, alerts on breaking changes — see `reports/MONITOR_RESULTS.md`. |
 | Monitor → patch generator wiring | Done | A live check now calls the patch generator directly on any watched files, with no manual step in between — see `reports/PIPELINE_WIRING_RESULTS.md` |
 | Real, applyable patches | Done | Every auto-patch is also emitted as a standard `git apply`-compatible `.patch` file, verified with an actual `git apply` in an isolated worktree, not just asserted — see `reports/GIT_APPLY_RESULTS.md` |
-| Schedule (`.github/workflows/monitor.yml`) | Built, at zero cost | Runs the watch loop daily on GitHub Actions' free tier and commits the updated state/findings back to the repo — see `reports/HOSTING_RESULTS.md`. Needs a real GitHub repo to push to before its first real run. |
+| Detection benchmark (`benchmarks/run_benchmark.py`) | 14/14 labeled cases pass | 100% precision and recall within the explicitly modeled scope; historical GitHub output also matches the reviewed reports — see `reports/BENCHMARK_RESULTS.md` |
+| Schedule (`.github/workflows/monitor.yaml`) | Live on GitHub Actions | The first manual production run completed successfully and committed its updated state/findings back to the repo — see the repository's Actions tab. |
 | Billing | Not started | Needs a Stripe account when we get there |
 
 **103 distinct, verified breaking changes found across both layers**, between two real
@@ -49,11 +50,14 @@ fixed next: every auto-patch is now also a standard `git apply`-compatible `.pat
 proven not just asserted, by actually running `git apply` in an isolated worktree and
 recompiling the result. See `reports/GIT_APPLY_RESULTS.md`.
 
-Last: everything above only ran when someone ran it by hand. `.github/workflows/monitor.yml`
-runs the watch loop daily on GitHub Actions' free tier and commits the updated baseline back
-to the repo — zero cost, no hosting account needed, made sustainable by compressing the
-rolling state cache about 24x. It just needs a real GitHub repo to push this code to before
-its first real run. See `reports/HOSTING_RESULTS.md`.
+Last: `.github/workflows/monitor.yaml` runs the watch loop daily on GitHub Actions' free tier
+and commits the updated baseline back to the repo — zero cost, no hosting account needed,
+made sustainable by compressing the rolling state cache about 24x. Its first manual run on
+GitHub's infrastructure completed successfully.
+
+`benchmarks/run_benchmark.py` now provides the measurable quality gate: 14 isolated,
+labeled contract-change cases plus a regression against the historical GitHub API pair.
+The benchmark runs on every push and pull request through `.github/workflows/benchmark.yaml`.
 
 ## How it works, right now
 
@@ -76,7 +80,10 @@ its first real run. See `reports/HOSTING_RESULTS.md`.
 ```
 tremor/
 ├── .github/workflows/
-│   └── monitor.yml          # phase 7: runs the watch loop daily on GitHub Actions, free tier
+│   ├── monitor.yaml         # phase 7: runs the watch loop daily on GitHub Actions, free tier
+│   └── benchmark.yaml       # quality gate on every push and pull request
+├── benchmarks/
+│   └── run_benchmark.py     # labeled precision/recall + historical regression suite
 ├── src/                     # the diffing engines + patch generator + monitor
 │   ├── diff_engine.py       # request-side: params, required fields, removed endpoints
 │   ├── response_diff.py     # response-side: removed/changed response fields
@@ -93,6 +100,7 @@ tremor/
 │   ├── PIPELINE_WIRING_RESULTS.md   # phase 5 write-up (monitor -> patch generator, wired)
 │   ├── GIT_APPLY_RESULTS.md         # phase 6 write-up (real, git-apply-verified .patch files)
 │   ├── HOSTING_RESULTS.md           # phase 7 write-up (free, scheduled, zero-cost hosting)
+│   ├── BENCHMARK_RESULTS.md         # reproducible detection-quality evidence
 │   ├── monitor_runs/                # timestamped records from real monitor.py runs
 │   │   └── patches/                     # patches monitor.py generated automatically (.py copy + .patch)
 │   ├── diff_report.json             # full phase 1 output (213 changes)
@@ -117,6 +125,7 @@ python3 src/monitor.py check                # first run: establishes a baseline 
 python3 src/monitor.py check                # any run after that: reports what's new -- auto-patches
                                              # any watched_files the new findings affect, and writes
                                              # a verified, git-apply-able .patch alongside each one
+python3 benchmarks/run_benchmark.py         # labeled quality gate + historical regression
 ```
 
 ## A bug worth knowing about (and how it was caught)
@@ -141,11 +150,9 @@ against the raw spec to confirm the fix held. Full account in
   and flagged with a precise comment but not yet auto-rewritten. Response-side findings are
   always flagged, not auto-rewritten, since the fix lives wherever the response is *read*,
   not at the call site itself — see `reports/PATCH_GENERATOR_RESULTS.md`.
-- The watch loop (`src/monitor.py`) exists, is wired directly to the patch generator, has been
-  run against live data, and now has a working, zero-cost daily schedule
-  (`.github/workflows/monitor.yml`) — but that schedule has never actually fired on GitHub's
-  infrastructure yet, because there's no GitHub repo to push this code to. That's the one
-  remaining identity step.
+- The watch loop (`src/monitor.py`) is live on a working, zero-cost daily GitHub Actions
+  schedule. Its first manual run passed; scheduled operation still needs normal observation
+  over time rather than being treated as proven by one run.
 - Only one API's spec (plus one sibling, for reconciling moved-not-removed endpoints) is on
   the watchlist right now, and the one watched file is a stand-in, since there's no real
   customer repo yet.

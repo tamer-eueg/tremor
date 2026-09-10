@@ -1,0 +1,27 @@
+name: Tremor benchmark
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  benchmark:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Run labeled and historical benchmarks
+        run: python3 benchmarks/run_benchmark.py
+
+      - name: Confirm committed results are current
+        run: git diff --exit-code -- reports/BENCHMARK_RESULTS.md reports/benchmark_results.json
