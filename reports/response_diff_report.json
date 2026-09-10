@@ -1,0 +1,498 @@
+[
+  {
+    "severity": "BREAKING",
+    "kind": "response_field_removed",
+    "path": "/meta",
+    "method": "GET",
+    "field": "github_services_sha",
+    "detail": "GET /meta: Response field 'github_services_sha' no longer appears in the response body."
+  },
+  {
+    "severity": "BREAKING",
+    "kind": "response_field_removed",
+    "path": "/meta",
+    "method": "GET",
+    "field": "installed_version",
+    "detail": "GET /meta: Response field 'installed_version' no longer appears in the response body."
+  },
+  {
+    "severity": "BREAKING",
+    "kind": "response_field_removed",
+    "path": "/orgs/{org}/invitations",
+    "method": "GET",
+    "field": "invitation_team_url",
+    "detail": "GET /orgs/{org}/invitations: Response field 'invitation_team_url' no longer appears in the response body."
+  },
+  {
+    "severity": "BREAKING",
+    "kind": "response_field_removed",
+    "path": "/orgs/{org}/invitations",
+    "method": "POST",
+    "field": "invitation_team_url",
+    "detail": "POST /orgs/{org}/invitations: Response field 'invitation_team_url' no longer appears in the response body."
+  },
+  {
+    "severity": "BREAKING",
+    "kind": "response_field_removed",
+    "path": "/orgs/{org}/migrations/{migration_id}/repositories",
+    "method": "GET",
+    "field": "template_repository",
+    "detail": "GET /orgs/{org}/migrations/{migration_id}/repositories: Response field 'template_repository' no longer appears in the response body."
+  },
+  {
+    "severity": "BREAKING",
+    "kind": "response_field_removed",
+    "path": "/orgs/{org}/projects",
+    "method": "GET",
+    "field": "cards_url",
+    "detail": "GET /orgs/{org}/projects: Response field 'cards_url' no longer appears in the response body."
+  },
+  {
+    "severity": "BREAKING",
+    "kind": "response_field_removed",
+    "path": "/orgs/{org}/projects",
+    "method": "GET",
+    "field": "permissions",
+    "detail": "GET /orgs/{org}/projects: Response field 'permissions' no longer appears in the response body."
+  },
+  {
+    "severity": "BREAKING",
+    "kind": "response_field_removed",
+    "path": "/orgs/{org}/projects",
+    "method": "POST",
+    "field": "cards_url",
+    "detail": "POST /orgs/{org}/projects: Response field 'cards_url' no longer appears in the response body."
+  },
+  {
+    "severity": "BREAKING",
+    "kind": "response_field_removed",
+    "path": "/orgs/{org}/projects",
+    "method": "POST",
+    "field": "permissions",
+    "detail": "POST /orgs/{org}/projects: Response field 'permissions' no longer appears in the response body."
+  },
+  {
+    "severity": "BREAKING",
+    "kind": "response_field_removed",
+    "path": "/orgs/{org}/repos",
+    "method": "GET",
+    "field": "template_repository",
+    "detail": "GET /orgs/{org}/repos: Response field 'template_repository' no longer appears in the response body."
+  },
+  {
+    "severity": "BREAKING",
+    "kind": "response_field_removed",
+    "path": "/orgs/{org}/teams/{team_slug}/invitations",
+    "method": "GET",
+    "field": "invitation_team_url",
+    "detail": "GET /orgs/{org}/teams/{team_slug}/invitations: Response field 'invitation_team_url' no longer appears in the response body."
+  },
+  {
+    "severity": "BREAKING",
+    "kind": "response_field_removed",
+    "path": "/orgs/{org}/teams/{team_slug}/repos",
+    "method": "GET",
+    "field": "template_repository",
+    "detail": "GET /orgs/{org}/teams/{team_slug}/repos: Response field 'template_repository' no longer appears in the response body."
+  },
+  {
+    "severity": "BREAKING",
+    "kind": "response_field_removed",
+    "path": "/projects/{project_id}",
+    "method": "GET",
+    "field": "cards_url",
+    "detail": "GET /projects/{project_id}: Response field 'cards_url' no longer appears in the response body."
+  },
+  {
+    "severity": "BREAKING",
+    "kind": "response_field_removed",
+    "path": "/projects/{project_id}",
+    "method": "GET",
+    "field": "permissions",
+    "detail": "GET /projects/{project_id}: Response field 'permissions' no longer appears in the response body."
+  },
+  {
+    "severity": "BREAKING",
+    "kind": "response_field_removed",
+    "path": "/projects/{project_id}",
+    "method": "PATCH",
+    "field": "cards_url",
+    "detail": "PATCH /projects/{project_id}: Response field 'cards_url' no longer appears in the response body."
+  },
+  {
+    "severity": "BREAKING",
+    "kind": "response_field_removed",
+    "path": "/projects/{project_id}",
+    "method": "PATCH",
+    "field": "permissions",
+    "detail": "PATCH /projects/{project_id}: Response field 'permissions' no longer appears in the response body."
+  },
+  {
+    "severity": "BREAKING",
+    "kind": "response_field_removed",
+    "path": "/repos/{owner}/{repo}/code-scanning/alerts/{alert_number}",
+    "method": "GET",
+    "field": "instances",
+    "detail": "GET /repos/{owner}/{repo}/code-scanning/alerts/{alert_number}: Response field 'instances' no longer appears in the response body."
+  },
+  {
+    "severity": "BREAKING",
+    "kind": "response_field_removed",
+    "path": "/repos/{owner}/{repo}/code-scanning/alerts/{alert_number}",
+    "method": "PATCH",
+    "field": "instances",
+    "detail": "PATCH /repos/{owner}/{repo}/code-scanning/alerts/{alert_number}: Response field 'instances' no longer appears in the response body."
+  },
+  {
+    "severity": "BREAKING",
+    "kind": "response_field_removed",
+    "path": "/repos/{owner}/{repo}/code-scanning/analyses",
+    "method": "GET",
+    "field": "tool_name",
+    "detail": "GET /repos/{owner}/{repo}/code-scanning/analyses: Response field 'tool_name' no longer appears in the response body."
+  },
+  {
+    "severity": "BREAKING",
+    "kind": "response_field_removed",
+    "path": "/repos/{owner}/{repo}/commits",
+    "method": "GET",
+    "field": "id",
+    "detail": "GET /repos/{owner}/{repo}/commits: Response field 'id' no longer appears in the response body."
+  },
+  {
+    "severity": "BREAKING",
+    "kind": "response_field_removed",
+    "path": "/repos/{owner}/{repo}/commits",
+    "method": "GET",
+    "field": "tree_id",
+    "detail": "GET /repos/{owner}/{repo}/commits: Response field 'tree_id' no longer appears in the response body."
+  },
+  {
+    "severity": "BREAKING",
+    "kind": "response_field_removed",
+    "path": "/repos/{owner}/{repo}/commits",
+    "method": "GET",
+    "field": "message",
+    "detail": "GET /repos/{owner}/{repo}/commits: Response field 'message' no longer appears in the response body."
+  },
+  {
+    "severity": "BREAKING",
+    "kind": "response_field_removed",
+    "path": "/repos/{owner}/{repo}/commits",
+    "method": "GET",
+    "field": "timestamp",
+    "detail": "GET /repos/{owner}/{repo}/commits: Response field 'timestamp' no longer appears in the response body."
+  },
+  {
+    "severity": "BREAKING",
+    "kind": "response_field_removed",
+    "path": "/repos/{owner}/{repo}/forks",
+    "method": "GET",
+    "field": "template_repository",
+    "detail": "GET /repos/{owner}/{repo}/forks: Response field 'template_repository' no longer appears in the response body."
+  },
+  {
+    "severity": "BREAKING",
+    "kind": "response_field_type_changed",
+    "path": "/repos/{owner}/{repo}/import",
+    "method": "GET",
+    "field": "use_lfs",
+    "detail": "GET /repos/{owner}/{repo}/import: Response field 'use_lfs' changed type: string -> boolean."
+  },
+  {
+    "severity": "BREAKING",
+    "kind": "response_field_type_changed",
+    "path": "/repos/{owner}/{repo}/import",
+    "method": "PUT",
+    "field": "use_lfs",
+    "detail": "PUT /repos/{owner}/{repo}/import: Response field 'use_lfs' changed type: string -> boolean."
+  },
+  {
+    "severity": "BREAKING",
+    "kind": "response_field_type_changed",
+    "path": "/repos/{owner}/{repo}/import",
+    "method": "PATCH",
+    "field": "use_lfs",
+    "detail": "PATCH /repos/{owner}/{repo}/import: Response field 'use_lfs' changed type: string -> boolean."
+  },
+  {
+    "severity": "BREAKING",
+    "kind": "response_field_type_changed",
+    "path": "/repos/{owner}/{repo}/import/lfs",
+    "method": "PATCH",
+    "field": "use_lfs",
+    "detail": "PATCH /repos/{owner}/{repo}/import/lfs: Response field 'use_lfs' changed type: string -> boolean."
+  },
+  {
+    "severity": "BREAKING",
+    "kind": "response_field_removed",
+    "path": "/repos/{owner}/{repo}/issues/{issue_number}/events",
+    "method": "GET",
+    "field": "sha",
+    "detail": "GET /repos/{owner}/{repo}/issues/{issue_number}/events: Response field 'sha' no longer appears in the response body."
+  },
+  {
+    "severity": "BREAKING",
+    "kind": "response_field_removed",
+    "path": "/repos/{owner}/{repo}/issues/{issue_number}/events",
+    "method": "GET",
+    "field": "html_url",
+    "detail": "GET /repos/{owner}/{repo}/issues/{issue_number}/events: Response field 'html_url' no longer appears in the response body."
+  },
+  {
+    "severity": "BREAKING",
+    "kind": "response_field_removed",
+    "path": "/repos/{owner}/{repo}/issues/{issue_number}/events",
+    "method": "GET",
+    "field": "message",
+    "detail": "GET /repos/{owner}/{repo}/issues/{issue_number}/events: Response field 'message' no longer appears in the response body."
+  },
+  {
+    "severity": "BREAKING",
+    "kind": "response_field_removed",
+    "path": "/repos/{owner}/{repo}/issues/{issue_number}/events",
+    "method": "GET",
+    "field": "issue_url",
+    "detail": "GET /repos/{owner}/{repo}/issues/{issue_number}/events: Response field 'issue_url' no longer appears in the response body."
+  },
+  {
+    "severity": "BREAKING",
+    "kind": "response_field_removed",
+    "path": "/repos/{owner}/{repo}/issues/{issue_number}/events",
+    "method": "GET",
+    "field": "updated_at",
+    "detail": "GET /repos/{owner}/{repo}/issues/{issue_number}/events: Response field 'updated_at' no longer appears in the response body."
+  },
+  {
+    "severity": "BREAKING",
+    "kind": "response_field_removed",
+    "path": "/repos/{owner}/{repo}/issues/{issue_number}/events",
+    "method": "GET",
+    "field": "author_association",
+    "detail": "GET /repos/{owner}/{repo}/issues/{issue_number}/events: Response field 'author_association' no longer appears in the response body."
+  },
+  {
+    "severity": "BREAKING",
+    "kind": "response_field_removed",
+    "path": "/repos/{owner}/{repo}/issues/{issue_number}/events",
+    "method": "GET",
+    "field": "body",
+    "detail": "GET /repos/{owner}/{repo}/issues/{issue_number}/events: Response field 'body' no longer appears in the response body."
+  },
+  {
+    "severity": "BREAKING",
+    "kind": "response_field_removed",
+    "path": "/repos/{owner}/{repo}/issues/{issue_number}/events",
+    "method": "GET",
+    "field": "submitted_at",
+    "detail": "GET /repos/{owner}/{repo}/issues/{issue_number}/events: Response field 'submitted_at' no longer appears in the response body."
+  },
+  {
+    "severity": "BREAKING",
+    "kind": "response_field_removed",
+    "path": "/repos/{owner}/{repo}/issues/{issue_number}/events",
+    "method": "GET",
+    "field": "state",
+    "detail": "GET /repos/{owner}/{repo}/issues/{issue_number}/events: Response field 'state' no longer appears in the response body."
+  },
+  {
+    "severity": "BREAKING",
+    "kind": "response_field_removed",
+    "path": "/repos/{owner}/{repo}/issues/{issue_number}/events",
+    "method": "GET",
+    "field": "pull_request_url",
+    "detail": "GET /repos/{owner}/{repo}/issues/{issue_number}/events: Response field 'pull_request_url' no longer appears in the response body."
+  },
+  {
+    "severity": "BREAKING",
+    "kind": "response_field_removed",
+    "path": "/repos/{owner}/{repo}/issues/{issue_number}/events",
+    "method": "GET",
+    "field": "body_html",
+    "detail": "GET /repos/{owner}/{repo}/issues/{issue_number}/events: Response field 'body_html' no longer appears in the response body."
+  },
+  {
+    "severity": "BREAKING",
+    "kind": "response_field_removed",
+    "path": "/repos/{owner}/{repo}/issues/{issue_number}/events",
+    "method": "GET",
+    "field": "body_text",
+    "detail": "GET /repos/{owner}/{repo}/issues/{issue_number}/events: Response field 'body_text' no longer appears in the response body."
+  },
+  {
+    "severity": "BREAKING",
+    "kind": "response_field_removed",
+    "path": "/repos/{owner}/{repo}/projects",
+    "method": "GET",
+    "field": "cards_url",
+    "detail": "GET /repos/{owner}/{repo}/projects: Response field 'cards_url' no longer appears in the response body."
+  },
+  {
+    "severity": "BREAKING",
+    "kind": "response_field_removed",
+    "path": "/repos/{owner}/{repo}/projects",
+    "method": "GET",
+    "field": "permissions",
+    "detail": "GET /repos/{owner}/{repo}/projects: Response field 'permissions' no longer appears in the response body."
+  },
+  {
+    "severity": "BREAKING",
+    "kind": "response_field_removed",
+    "path": "/repos/{owner}/{repo}/projects",
+    "method": "POST",
+    "field": "cards_url",
+    "detail": "POST /repos/{owner}/{repo}/projects: Response field 'cards_url' no longer appears in the response body."
+  },
+  {
+    "severity": "BREAKING",
+    "kind": "response_field_removed",
+    "path": "/repos/{owner}/{repo}/projects",
+    "method": "POST",
+    "field": "permissions",
+    "detail": "POST /repos/{owner}/{repo}/projects: Response field 'permissions' no longer appears in the response body."
+  },
+  {
+    "severity": "BREAKING",
+    "kind": "response_field_removed",
+    "path": "/repos/{owner}/{repo}/pulls/{pull_number}/commits",
+    "method": "GET",
+    "field": "id",
+    "detail": "GET /repos/{owner}/{repo}/pulls/{pull_number}/commits: Response field 'id' no longer appears in the response body."
+  },
+  {
+    "severity": "BREAKING",
+    "kind": "response_field_removed",
+    "path": "/repos/{owner}/{repo}/pulls/{pull_number}/commits",
+    "method": "GET",
+    "field": "tree_id",
+    "detail": "GET /repos/{owner}/{repo}/pulls/{pull_number}/commits: Response field 'tree_id' no longer appears in the response body."
+  },
+  {
+    "severity": "BREAKING",
+    "kind": "response_field_removed",
+    "path": "/repos/{owner}/{repo}/pulls/{pull_number}/commits",
+    "method": "GET",
+    "field": "message",
+    "detail": "GET /repos/{owner}/{repo}/pulls/{pull_number}/commits: Response field 'message' no longer appears in the response body."
+  },
+  {
+    "severity": "BREAKING",
+    "kind": "response_field_removed",
+    "path": "/repos/{owner}/{repo}/pulls/{pull_number}/commits",
+    "method": "GET",
+    "field": "timestamp",
+    "detail": "GET /repos/{owner}/{repo}/pulls/{pull_number}/commits: Response field 'timestamp' no longer appears in the response body."
+  },
+  {
+    "severity": "BREAKING",
+    "kind": "response_field_removed",
+    "path": "/repositories",
+    "method": "GET",
+    "field": "template_repository",
+    "detail": "GET /repositories: Response field 'template_repository' no longer appears in the response body."
+  },
+  {
+    "severity": "BREAKING",
+    "kind": "response_field_removed",
+    "path": "/teams/{team_id}/invitations",
+    "method": "GET",
+    "field": "invitation_team_url",
+    "detail": "GET /teams/{team_id}/invitations: Response field 'invitation_team_url' no longer appears in the response body."
+  },
+  {
+    "severity": "BREAKING",
+    "kind": "response_field_removed",
+    "path": "/teams/{team_id}/repos",
+    "method": "GET",
+    "field": "template_repository",
+    "detail": "GET /teams/{team_id}/repos: Response field 'template_repository' no longer appears in the response body."
+  },
+  {
+    "severity": "BREAKING",
+    "kind": "response_field_removed",
+    "path": "/user/keys",
+    "method": "GET",
+    "field": "key_id",
+    "detail": "GET /user/keys: Response field 'key_id' no longer appears in the response body."
+  },
+  {
+    "severity": "BREAKING",
+    "kind": "response_field_removed",
+    "path": "/user/keys",
+    "method": "POST",
+    "field": "key_id",
+    "detail": "POST /user/keys: Response field 'key_id' no longer appears in the response body."
+  },
+  {
+    "severity": "BREAKING",
+    "kind": "response_field_removed",
+    "path": "/user/keys/{key_id}",
+    "method": "GET",
+    "field": "key_id",
+    "detail": "GET /user/keys/{key_id}: Response field 'key_id' no longer appears in the response body."
+  },
+  {
+    "severity": "BREAKING",
+    "kind": "response_field_removed",
+    "path": "/user/migrations/{migration_id}/repositories",
+    "method": "GET",
+    "field": "template_repository",
+    "detail": "GET /user/migrations/{migration_id}/repositories: Response field 'template_repository' no longer appears in the response body."
+  },
+  {
+    "severity": "BREAKING",
+    "kind": "response_field_removed",
+    "path": "/user/projects",
+    "method": "POST",
+    "field": "cards_url",
+    "detail": "POST /user/projects: Response field 'cards_url' no longer appears in the response body."
+  },
+  {
+    "severity": "BREAKING",
+    "kind": "response_field_removed",
+    "path": "/user/projects",
+    "method": "POST",
+    "field": "permissions",
+    "detail": "POST /user/projects: Response field 'permissions' no longer appears in the response body."
+  },
+  {
+    "severity": "BREAKING",
+    "kind": "response_field_removed",
+    "path": "/user/subscriptions",
+    "method": "GET",
+    "field": "template_repository",
+    "detail": "GET /user/subscriptions: Response field 'template_repository' no longer appears in the response body."
+  },
+  {
+    "severity": "BREAKING",
+    "kind": "response_field_removed",
+    "path": "/users/{username}/projects",
+    "method": "GET",
+    "field": "cards_url",
+    "detail": "GET /users/{username}/projects: Response field 'cards_url' no longer appears in the response body."
+  },
+  {
+    "severity": "BREAKING",
+    "kind": "response_field_removed",
+    "path": "/users/{username}/projects",
+    "method": "GET",
+    "field": "permissions",
+    "detail": "GET /users/{username}/projects: Response field 'permissions' no longer appears in the response body."
+  },
+  {
+    "severity": "BREAKING",
+    "kind": "response_field_removed",
+    "path": "/users/{username}/repos",
+    "method": "GET",
+    "field": "template_repository",
+    "detail": "GET /users/{username}/repos: Response field 'template_repository' no longer appears in the response body."
+  },
+  {
+    "severity": "BREAKING",
+    "kind": "response_field_removed",
+    "path": "/users/{username}/subscriptions",
+    "method": "GET",
+    "field": "template_repository",
+    "detail": "GET /users/{username}/subscriptions: Response field 'template_repository' no longer appears in the response body."
+  }
+]
