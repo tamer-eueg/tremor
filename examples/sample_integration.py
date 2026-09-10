@@ -27,3 +27,16 @@ def get_meta(token):
     resp = requests.get(url, headers={"Authorization": f"token {token}"})
     resp.raise_for_status()
     return resp.json()
+
+
+def upload_release_asset(owner, repo, release_id, data, token):
+    """Upload a binary asset to a GitHub release."""
+    url = f"https://uploads.github.com/repos/{owner}/{repo}/releases/{release_id}/assets"
+    resp = requests.post(
+        url,
+        params={},
+        data=data,
+        headers={"Authorization": f"token {token}", "Content-Type": "application/octet-stream"},
+    )
+    resp.raise_for_status()
+    return resp.json()

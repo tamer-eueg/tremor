@@ -87,6 +87,8 @@ def diff_specs(old, new):
                         "kind": "parameter_removed",
                         "path": path,
                         "method": method.upper(),
+                        "param": name,
+                        "in": loc,
                         "detail": f"Parameter '{name}' ({loc}) was removed from {method.upper()} {path}.",
                     })
                     continue
@@ -98,6 +100,8 @@ def diff_specs(old, new):
                         "kind": "parameter_now_required",
                         "path": path,
                         "method": method.upper(),
+                        "param": name,
+                        "in": loc,
                         "detail": f"Parameter '{name}' ({loc}) on {method.upper()} {path} was optional and is now required.",
                     })
                 old_type = (old_p.get("schema") or {}).get("type")
@@ -108,6 +112,8 @@ def diff_specs(old, new):
                         "kind": "parameter_type_changed",
                         "path": path,
                         "method": method.upper(),
+                        "param": name,
+                        "in": loc,
                         "detail": f"Parameter '{name}' ({loc}) on {method.upper()} {path} changed type: {old_type} -> {new_type}.",
                     })
 
@@ -121,6 +127,8 @@ def diff_specs(old, new):
                         "kind": kind,
                         "path": path,
                         "method": method.upper(),
+                        "param": name,
+                        "in": loc,
                         "detail": f"New {'required' if new_p.get('required') else 'optional'} parameter '{name}' ({loc}) added to {method.upper()} {path}.",
                     })
 
@@ -133,6 +141,7 @@ def diff_specs(old, new):
                     "kind": "request_body_field_now_required",
                     "path": path,
                     "method": method.upper(),
+                    "field": prop,
                     "detail": f"Request body field '{prop}' on {method.upper()} {path} is now required.",
                 })
 

@@ -18,6 +18,7 @@
     "kind": "request_body_field_now_required",
     "path": "/applications/{client_id}/grant",
     "method": "DELETE",
+    "field": "access_token",
     "detail": "Request body field 'access_token' on DELETE /applications/{client_id}/grant is now required."
   },
   {
@@ -32,6 +33,7 @@
     "kind": "request_body_field_now_required",
     "path": "/applications/{client_id}/token",
     "method": "DELETE",
+    "field": "access_token",
     "detail": "Request body field 'access_token' on DELETE /applications/{client_id}/token is now required."
   },
   {
@@ -102,6 +104,8 @@
     "kind": "new_optional_parameter",
     "path": "/notifications",
     "method": "GET",
+    "param": "per_page",
+    "in": "query",
     "detail": "New optional parameter 'per_page' (query) added to GET /notifications."
   },
   {
@@ -109,6 +113,7 @@
     "kind": "request_body_field_now_required",
     "path": "/orgs/{org}/actions/runner-groups/{runner_group_id}",
     "method": "PATCH",
+    "field": "name",
     "detail": "Request body field 'name' on PATCH /orgs/{org}/actions/runner-groups/{runner_group_id} is now required."
   },
   {
@@ -123,6 +128,7 @@
     "kind": "request_body_field_now_required",
     "path": "/orgs/{org}/actions/secrets/{secret_name}",
     "method": "PUT",
+    "field": "visibility",
     "detail": "Request body field 'visibility' on PUT /orgs/{org}/actions/secrets/{secret_name} is now required."
   },
   {
@@ -130,6 +136,7 @@
     "kind": "request_body_field_now_required",
     "path": "/orgs/{org}/actions/secrets/{secret_name}/repositories",
     "method": "PUT",
+    "field": "selected_repository_ids",
     "detail": "Request body field 'selected_repository_ids' on PUT /orgs/{org}/actions/secrets/{secret_name}/repositories is now required."
   },
   {
@@ -151,6 +158,8 @@
     "kind": "new_optional_parameter",
     "path": "/orgs/{org}/migrations",
     "method": "GET",
+    "param": "exclude",
+    "in": "query",
     "detail": "New optional parameter 'exclude' (query) added to GET /orgs/{org}/migrations."
   },
   {
@@ -158,6 +167,8 @@
     "kind": "new_optional_parameter",
     "path": "/orgs/{org}/migrations/{migration_id}",
     "method": "GET",
+    "param": "exclude",
+    "in": "query",
     "detail": "New optional parameter 'exclude' (query) added to GET /orgs/{org}/migrations/{migration_id}."
   },
   {
@@ -172,6 +183,8 @@
     "kind": "new_optional_parameter",
     "path": "/orgs/{org}/teams/{team_slug}/discussions",
     "method": "GET",
+    "param": "pinned",
+    "in": "query",
     "detail": "New optional parameter 'pinned' (query) added to GET /orgs/{org}/teams/{team_slug}/discussions."
   },
   {
@@ -193,6 +206,8 @@
     "kind": "new_optional_parameter",
     "path": "/repos/{owner}/{repo}/actions/artifacts",
     "method": "GET",
+    "param": "name",
+    "in": "query",
     "detail": "New optional parameter 'name' (query) added to GET /repos/{owner}/{repo}/actions/artifacts."
   },
   {
@@ -200,6 +215,8 @@
     "kind": "parameter_removed",
     "path": "/repos/{owner}/{repo}/code-scanning/alerts",
     "method": "GET",
+    "param": "ref",
+    "in": "query",
     "detail": "Parameter 'ref' (query) was removed from GET /repos/{owner}/{repo}/code-scanning/alerts."
   },
   {
@@ -207,6 +224,8 @@
     "kind": "new_optional_parameter",
     "path": "/repos/{owner}/{repo}/code-scanning/alerts",
     "method": "GET",
+    "param": "sort",
+    "in": "query",
     "detail": "New optional parameter 'sort' (query) added to GET /repos/{owner}/{repo}/code-scanning/alerts."
   },
   {
@@ -214,6 +233,8 @@
     "kind": "parameter_removed",
     "path": "/repos/{owner}/{repo}/code-scanning/alerts/{alert_number}",
     "method": "GET",
+    "param": "alert_number",
+    "in": "path",
     "detail": "Parameter 'alert_number' (path) was removed from GET /repos/{owner}/{repo}/code-scanning/alerts/{alert_number}."
   },
   {
@@ -221,6 +242,8 @@
     "kind": "parameter_removed",
     "path": "/repos/{owner}/{repo}/code-scanning/analyses",
     "method": "GET",
+    "param": "tool_name",
+    "in": "query",
     "detail": "Parameter 'tool_name' (query) was removed from GET /repos/{owner}/{repo}/code-scanning/analyses."
   },
   {
@@ -228,6 +251,8 @@
     "kind": "new_optional_parameter",
     "path": "/repos/{owner}/{repo}/code-scanning/analyses",
     "method": "GET",
+    "param": "sarif_id",
+    "in": "query",
     "detail": "New optional parameter 'sarif_id' (query) added to GET /repos/{owner}/{repo}/code-scanning/analyses."
   },
   {
@@ -235,6 +260,8 @@
     "kind": "new_optional_parameter",
     "path": "/repos/{owner}/{repo}/code-scanning/analyses",
     "method": "GET",
+    "param": "sort",
+    "in": "query",
     "detail": "New optional parameter 'sort' (query) added to GET /repos/{owner}/{repo}/code-scanning/analyses."
   },
   {
@@ -242,6 +269,8 @@
     "kind": "new_optional_parameter",
     "path": "/repos/{owner}/{repo}/collaborators",
     "method": "GET",
+    "param": "permission",
+    "in": "query",
     "detail": "New optional parameter 'permission' (query) added to GET /repos/{owner}/{repo}/collaborators."
   },
   {
@@ -249,6 +278,8 @@
     "kind": "new_optional_parameter",
     "path": "/repos/{owner}/{repo}/commits/{ref}/check-runs",
     "method": "GET",
+    "param": "app_id",
+    "in": "query",
     "detail": "New optional parameter 'app_id' (query) added to GET /repos/{owner}/{repo}/commits/{ref}/check-runs."
   },
   {
@@ -270,6 +301,8 @@
     "kind": "new_optional_parameter",
     "path": "/repos/{owner}/{repo}/pulls/comments",
     "method": "GET",
+    "param": "sort",
+    "in": "query",
     "detail": "New optional parameter 'sort' (query) added to GET /repos/{owner}/{repo}/pulls/comments."
   },
   {
@@ -277,6 +310,7 @@
     "kind": "request_body_field_now_required",
     "path": "/repos/{owner}/{repo}/pulls/{pull_number}/comments",
     "method": "POST",
+    "field": "line",
     "detail": "Request body field 'line' on POST /repos/{owner}/{repo}/pulls/{pull_number}/comments is now required."
   },
   {
@@ -284,6 +318,7 @@
     "kind": "request_body_field_now_required",
     "path": "/repos/{owner}/{repo}/pulls/{pull_number}/comments",
     "method": "POST",
+    "field": "commit_id",
     "detail": "Request body field 'commit_id' on POST /repos/{owner}/{repo}/pulls/{pull_number}/comments is now required."
   },
   {
@@ -291,6 +326,7 @@
     "kind": "request_body_field_now_required",
     "path": "/repos/{owner}/{repo}/pulls/{pull_number}/requested_reviewers",
     "method": "DELETE",
+    "field": "reviewers",
     "detail": "Request body field 'reviewers' on DELETE /repos/{owner}/{repo}/pulls/{pull_number}/requested_reviewers is now required."
   },
   {
@@ -298,6 +334,8 @@
     "kind": "parameter_now_required",
     "path": "/repos/{owner}/{repo}/releases/{release_id}/assets",
     "method": "POST",
+    "param": "name",
+    "in": "query",
     "detail": "Parameter 'name' (query) on POST /repos/{owner}/{repo}/releases/{release_id}/assets was optional and is now required."
   },
   {
@@ -305,6 +343,7 @@
     "kind": "request_body_field_now_required",
     "path": "/repos/{owner}/{repo}/transfer",
     "method": "POST",
+    "field": "new_owner",
     "detail": "Request body field 'new_owner' on POST /repos/{owner}/{repo}/transfer is now required."
   },
   {
@@ -312,6 +351,8 @@
     "kind": "parameter_removed",
     "path": "/repositories",
     "method": "GET",
+    "param": "visibility",
+    "in": "query",
     "detail": "Parameter 'visibility' (query) was removed from GET /repositories."
   },
   {
@@ -361,6 +402,8 @@
     "kind": "new_optional_parameter",
     "path": "/search/topics",
     "method": "GET",
+    "param": null,
+    "in": null,
     "detail": "New optional parameter 'None' (None) added to GET /search/topics."
   },
   {
@@ -375,6 +418,8 @@
     "kind": "new_optional_parameter",
     "path": "/user/blocks",
     "method": "GET",
+    "param": null,
+    "in": null,
     "detail": "New optional parameter 'None' (None) added to GET /user/blocks."
   },
   {

@@ -2,7 +2,7 @@
 """
 Automated patch generation (phase 3).
 
-Takes a diff finding (from diff_engine.py / response_diff.py's output) and a
+Takes diff findings (from diff_engine.py / response_diff.py's output) and a
 real Python source file that calls the affected API, and generates the code
 patch automatically -- the step that was done by hand in examples/example_patch.py.
 
@@ -17,20 +17,33 @@ How it finds the call to patch, without being told where it is:
      spec's.
   4. Method + path-shape match -> this function calls this endpoint.
 
-What it patches automatically (request-side, BREAKING, kind
-request_body_field_now_required): adds the newly-required field(s) to the
-function signature (no default -- a missing value should be a loud
-TypeError at the call site, not a silent bug) and to the outgoing JSON
-payload dict, exactly like the hand-built example in examples/example_patch.py.
+What it patches automatically:
+  - request_body_field_now_required -- a field in the JSON body went from
+    optional to required. Added to the function signature (no default -- a
+    missing value should be a loud TypeError at the call site, not a silent
+    422) and to the `json=` dict.
+  - parameter_now_required, when the parameter lives in the query string or
+    a header -- same treatment, targeting the `params=` or `headers=` dict.
+    (A "required" *path* parameter isn't something OpenAPI allows to be
+    optional in the first place, so that combination shouldn't occur; if it
+    somehow does, or the location is a cookie, it's flagged rather than
+    guessed at.)
+
+Either kind only gets auto-patched at a given call site if that call
+actually passes a literal dict for the relevant keyword (json=/params=/
+headers=) -- if the code builds it some other way (e.g. a query string
+concatenated by hand), the finding is flagged instead of guessed at.
 
 What it flags but does NOT try to rewrite (response-side findings, and
-request-side kinds it doesn't have a safe automatic rewrite for yet --
-endpoint_removed, method_removed, parameter_removed, parameter_type_changed):
-a comment block is inserted at the top of the function body citing the
-exact findings, so a human (or a later pass) knows exactly what to check.
-Rewriting arbitrary response-field-access call sites safely requires
-knowing every place the return value is read, which is outside what a
-single function's source can tell us -- honest scope, not attempted here.
+request-side kinds it doesn't have a safe automatic rewrite for --
+endpoint_removed, method_removed, parameter_removed, parameter_type_changed,
+plus any auto-patchable-in-principle finding whose call site doesn't have a
+matching dict to edit): a comment block is inserted at the top of the
+function body citing the exact findings, so a human (or a later pass) knows
+exactly what to check. Rewriting arbitrary response-field-access call sites
+safely requires knowing every place the return value is read, which is
+outside what a single function's source can tell us -- honest scope, not
+attempted here.
 
 Safety: never edits a file in place. Writes '<name>_patched.py' next to the
 original, or prints a unified diff to stdout if --write isn't passed.
@@ -40,14 +53,20 @@ import ast
 import difflib
 import json
 import re
-import sys
+from collections import defaultdict
 
 REQUEST_METHODS = {"get", "put", "post", "delete", "options", "head", "patch", "trace"}
+DICT_KWARGS = ("json", "params", "headers")
 
-AUTO_PATCHABLE_REQUEST_KINDS = {"request_body_field_now_required"}
-FLAGGED_REQUEST_KINDS = {
-    "endpoint_removed", "method_removed", "parameter_removed",
-    "parameter_now_required", "parameter_type_changed",
+AUTO_PATCHABLE_BODY_KIND = "request_body_field_now_required"
+AUTO_PATCHABLE_PARAM_KIND = "parameter_now_required"
+PARAM_LOC_TO_KWARG = {"query": "params", "header": "headers"}
+
+# Every kind this tool knows how to talk about at all -- auto-patched when
+# possible, otherwise surfaced as a flagged, cite-the-spec comment.
+TRACKED_REQUEST_KINDS = {
+    AUTO_PATCHABLE_BODY_KIND, AUTO_PATCHABLE_PARAM_KIND,
+    "endpoint_removed", "method_removed", "parameter_removed", "parameter_type_changed",
 }
 
 
@@ -89,12 +108,12 @@ def spec_path_to_shape(spec_path):
 # ---------------------------------------------------------------------------
 
 class CallSite:
-    def __init__(self, funcdef, call_node, method, path_shape, json_arg_node):
+    def __init__(self, funcdef, call_node, method, path_shape, kwarg_dicts):
         self.funcdef = funcdef
         self.call_node = call_node
         self.method = method
         self.path_shape = path_shape
-        self.json_arg_node = json_arg_node  # ast.Dict node for the JSON payload, or None
+        self.kwarg_dicts = kwarg_dicts  # {"json"/"params"/"headers": ast.Dict node or None}
 
 
 def find_call_sites(tree):
@@ -104,9 +123,9 @@ def find_call_sites(tree):
         if not isinstance(funcdef, ast.FunctionDef):
             continue
 
-        # Map local variable name -> the JoinedStr (f-string) AST node assigned to it,
-        # and separately -> a Dict node, so `url = f"..."` / `payload = {...}` can be
-        # resolved when referenced later by name in the requests.* call.
+        # Map local variable name -> the JoinedStr/string-constant AST node assigned to
+        # it, and separately -> a Dict node, so `url = f"..."` / `payload = {...}` can
+        # be resolved when referenced later by name in the requests.* call.
         str_vars = {}
         dict_vars = {}
         for node in ast.walk(funcdef):
@@ -125,7 +144,7 @@ def find_call_sites(tree):
             func = node.func
             if not (isinstance(func, ast.Attribute) and func.attr in REQUEST_METHODS):
                 continue
-            if not (isinstance(func.value, ast.Name)):
+            if not isinstance(func.value, ast.Name):
                 continue  # only handle `requests.post(...)` / `session.post(...)` style
 
             if not node.args:
@@ -142,15 +161,16 @@ def find_call_sites(tree):
 
             path_shape = url_shape_to_path_shape(joinedstr_shape(url_node))
 
-            json_node = None
+            kwarg_dicts = {k: None for k in DICT_KWARGS}
             for kw in node.keywords:
-                if kw.arg == "json":
-                    if isinstance(kw.value, ast.Dict):
-                        json_node = kw.value
-                    elif isinstance(kw.value, ast.Name) and kw.value.id in dict_vars:
-                        json_node = dict_vars[kw.value.id]
+                if kw.arg not in DICT_KWARGS:
+                    continue
+                if isinstance(kw.value, ast.Dict):
+                    kwarg_dicts[kw.arg] = kw.value
+                elif isinstance(kw.value, ast.Name) and kw.value.id in dict_vars:
+                    kwarg_dicts[kw.arg] = dict_vars[kw.value.id]
 
-            sites.append(CallSite(funcdef, node, func.attr.upper(), path_shape, json_node))
+            sites.append(CallSite(funcdef, node, func.attr.upper(), path_shape, kwarg_dicts))
     return sites
 
 
@@ -180,12 +200,39 @@ def findings_for_site(site, findings):
 
 
 def field_name(finding):
-    """diff_engine.py's request_body_field_now_required findings carry the field
-    name only inside the human-readable 'detail' string -- pull it back out."""
+    """request_body_field_now_required findings: prefer the explicit 'field' key
+    (added once this tool needed it); fall back to parsing the old detail string
+    for reports generated before that key existed."""
     if "field" in finding:
         return finding["field"]
     m = re.search(r"field '([^']+)'", finding.get("detail", ""))
     return m.group(1) if m else None
+
+
+def param_name_and_loc(finding):
+    """parameter_* findings: prefer the explicit 'param'/'in' keys; fall back to
+    parsing "Parameter 'name' (loc)" out of detail for older reports."""
+    if "param" in finding and "in" in finding:
+        return finding["param"], finding["in"]
+    m = re.search(r"Parameter '([^']+)' \(([^)]+)\)", finding.get("detail", ""))
+    return (m.group(1), m.group(2)) if m else (None, None)
+
+
+def classify_finding(finding, site):
+    """Returns (target_kwarg, field_name) if this finding can be auto-patched at
+    this call site, or (None, None) if it can't (wrong kind, no matching dict
+    argument to edit, or an unhandled parameter location)."""
+    kind = finding.get("kind")
+    if kind == AUTO_PATCHABLE_BODY_KIND:
+        name = field_name(finding)
+        if name and name.isidentifier() and site.kwarg_dicts.get("json") is not None:
+            return "json", name
+    elif kind == AUTO_PATCHABLE_PARAM_KIND:
+        name, loc = param_name_and_loc(finding)
+        kwarg = PARAM_LOC_TO_KWARG.get(loc)
+        if kwarg and name and name.isidentifier() and site.kwarg_dicts.get(kwarg) is not None:
+            return kwarg, name
+    return None, None
 
 
 # ---------------------------------------------------------------------------
@@ -197,8 +244,15 @@ def indent_of_line(line):
     return line[:len(line) - len(line.lstrip(" "))]
 
 
+def close_brace_alone_on_line(line):
+    """True if this line contains nothing but the dict's closing brace (and
+    maybe a trailing comma) -- i.e. it's safe to insert whole new lines above
+    it without disturbing anything else on that line."""
+    return line.strip() in ("}", "},")
+
+
 def apply_patches(source, sites_with_findings):
-    """sites_with_findings: list of (CallSite, auto_findings, flagged_findings).
+    """sites_with_findings: list of (CallSite, {kwarg: [new field names]}, flagged_findings).
     Returns (patched_source, changelog_lines)."""
     lines = source.splitlines(keepends=True)
     changelog = []
@@ -207,46 +261,53 @@ def apply_patches(source, sites_with_findings):
     # so earlier edits don't shift the offsets later edits depend on.
     insertions = []
 
-    for site, auto_findings, flagged_findings in sites_with_findings:
+    for site, auto_by_kwarg, flagged_findings in sites_with_findings:
         funcdef = site.funcdef
-        new_fields = []
-        for finding in auto_findings:
-            name = field_name(finding)
-            if name and name.isidentifier() and name not in new_fields:
-                new_fields.append(name)
-        new_fields.sort()  # deterministic output regardless of set-iteration order upstream
 
-        if new_fields and funcdef.args.args:
+        all_new_names = sorted({n for names in auto_by_kwarg.values() for n in names})
+        if all_new_names and funcdef.args.args:
             last_arg = funcdef.args.args[-1]
-            sig_text = "".join(f", {n}" for n in new_fields)
+            sig_text = "".join(f", {n}" for n in all_new_names)
             insertions.append((last_arg.end_lineno, last_arg.end_col_offset, sig_text))
             changelog.append(
-                f"{funcdef.name}(): added required parameter(s) {', '.join(new_fields)} "
+                f"{funcdef.name}(): added required parameter(s) {', '.join(all_new_names)} "
                 f"to signature (was optional, now required per spec)."
             )
 
-        if new_fields and site.json_arg_node is not None:
-            dict_node = site.json_arg_node
-            close_line = dict_node.end_lineno
-            existing_line = lines[close_line - 1]
-            base_indent = indent_of_line(existing_line)
-            # match the indent of an existing key if there is one, else fall back
-            if dict_node.keys:
+        for kwarg, names in auto_by_kwarg.items():
+            if not names:
+                continue
+            names_sorted = sorted(set(names))
+            dict_node = site.kwarg_dicts[kwarg]
+            close_line_no = dict_node.end_lineno
+            close_line_text = lines[close_line_no - 1]
+            dict_label = "JSON payload" if kwarg == "json" else f"'{kwarg}' dict"
+
+            if dict_node.keys and close_brace_alone_on_line(close_line_text):
+                # Multi-line dict, one key per line, closing brace alone on its own
+                # line -- insert clean new lines above it, matching the existing
+                # entries' indentation, each with an explanatory comment. This is
+                # the common, readable case (matches examples/example_patch.py's style).
                 first_key = dict_node.keys[0]
-                key_line = lines[first_key.lineno - 1]
-                entry_indent = indent_of_line(key_line)
+                entry_indent = indent_of_line(lines[first_key.lineno - 1])
+                entry_text = "".join(
+                    f'{entry_indent}"{n}": {n},  # auto-patched by Tremor: now required\n'
+                    for n in names_sorted
+                )
+                insertions.append((close_line_no, 0, entry_text))
             else:
-                entry_indent = base_indent + "    "
-            entry_text = "".join(
-                f'{entry_indent}"{n}": {n},  # auto-patched by Tremor: now required\n'
-                for n in new_fields
-            )
-            # Insert at column 0 of the closing-brace line, i.e. *before* that
-            # line's own indentation -- so the brace's original indent stays
-            # intact as a suffix rather than getting glued onto our new text.
-            insertions.append((close_line, 0, entry_text))
+                # Empty dict (`{}`) or a single-line dict sharing its line with other
+                # code (e.g. `params={}, data=data,`) -- inserting whole new lines
+                # here would land outside the dict's braces and break syntax. Insert
+                # inline, right before the closing brace, with no comment (a comment
+                # would swallow whatever follows on the same line).
+                close_col = dict_node.end_col_offset - 1  # column of the '}' itself
+                prefix = ", " if dict_node.keys else ""
+                entry_text = prefix + ", ".join(f'"{n}": {n}' for n in names_sorted)
+                insertions.append((close_line_no, close_col, entry_text))
+
             changelog.append(
-                f"{funcdef.name}(): added {', '.join(new_fields)} to the outgoing JSON payload."
+                f"{funcdef.name}(): added {', '.join(names_sorted)} to the outgoing {dict_label}."
             )
 
         if flagged_findings:
@@ -292,11 +353,17 @@ def run(source_path, diff_path, response_diff_path, write):
     plan = []
     for site in sites:
         matched = findings_for_site(site, findings)
-        auto = [f for f in matched if f["kind"] in AUTO_PATCHABLE_REQUEST_KINDS]
-        flagged = [f for f in matched if f["kind"] in FLAGGED_REQUEST_KINDS
-                   or f["kind"].startswith("response_field")]
-        if auto or flagged:
-            plan.append((site, auto, flagged))
+        auto_by_kwarg = defaultdict(list)
+        flagged = []
+        for f in matched:
+            kwarg, name = classify_finding(f, site)
+            if kwarg:
+                if name not in auto_by_kwarg[kwarg]:
+                    auto_by_kwarg[kwarg].append(name)
+            elif f.get("kind") in TRACKED_REQUEST_KINDS or f.get("kind", "").startswith("response_field"):
+                flagged.append(f)
+        if auto_by_kwarg or flagged:
+            plan.append((site, dict(auto_by_kwarg), flagged))
 
     if not plan:
         print(f"Matched {len(sites)} API call(s) in {source_path} against "
