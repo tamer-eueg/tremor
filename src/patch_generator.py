@@ -340,8 +340,9 @@ def apply_patches(source, sites_with_findings):
 # ---------------------------------------------------------------------------
 
 class PatchResult:
-    def __init__(self, source_path, sites_matched, plan, patched_source, changelog):
+    def __init__(self, source_path, original_source, sites_matched, plan, patched_source, changelog):
         self.source_path = source_path
+        self.original_source = original_source
         self.sites_matched = sites_matched   # total requests.<method>() calls found in the file
         self.sites_affected = len(plan)       # how many of those are touched by these findings
         self.patched_source = patched_source  # None if nothing to patch
@@ -350,6 +351,21 @@ class PatchResult:
     @property
     def has_changes(self):
         return self.patched_source is not None
+
+    def as_git_patch(self):
+        """The change as a standard unified diff with a/ b/ path prefixes --
+        applyable with `git apply` (or plain `patch -p1`) against a real repo,
+        not just a full replacement file to eyeball. None if there's nothing
+        to patch."""
+        if not self.has_changes:
+            return None
+        diff_lines = difflib.unified_diff(
+            self.original_source.splitlines(keepends=True),
+            self.patched_source.splitlines(keepends=True),
+            fromfile=f"a/{self.source_path}",
+            tofile=f"b/{self.source_path}",
+        )
+        return "".join(diff_lines)
 
 
 def generate_patch(source_path, source, findings):
@@ -376,17 +392,17 @@ def generate_patch(source_path, source, findings):
             plan.append((site, dict(auto_by_kwarg), flagged))
 
     if not plan:
-        return PatchResult(source_path, len(sites), plan, None, [])
+        return PatchResult(source_path, source, len(sites), plan, None, [])
 
     patched_source, changelog = apply_patches(source, plan)
-    return PatchResult(source_path, len(sites), plan, patched_source, changelog)
+    return PatchResult(source_path, source, len(sites), plan, patched_source, changelog)
 
 
 # ---------------------------------------------------------------------------
 # CLI
 # ---------------------------------------------------------------------------
 
-def run(source_path, diff_path, response_diff_path, write):
+def run(source_path, diff_path, response_diff_path, write, patch_file):
     with open(source_path) as f:
         source = f.read()
     findings = load_findings(diff_path, response_diff_path)
@@ -408,20 +424,19 @@ def run(source_path, diff_path, response_diff_path, write):
     for line in result.changelog:
         print(f"  - {line}")
     print()
-
-    diff = difflib.unified_diff(
-        source.splitlines(keepends=True),
-        result.patched_source.splitlines(keepends=True),
-        fromfile=source_path,
-        tofile=source_path.replace(".py", "_patched.py"),
-    )
-    print("".join(diff))
+    print(result.as_git_patch())
 
     if write:
         out_path = source_path.replace(".py", "_patched.py")
         with open(out_path, "w") as f:
             f.write(result.patched_source)
         print(f"\nPatched file written to {out_path} (original left untouched).")
+
+    if patch_file:
+        with open(patch_file, "w") as f:
+            f.write(result.as_git_patch())
+        print(f"\nStandalone patch written to {patch_file} -- apply against a real checkout "
+              f"with: git apply {patch_file}")
 
 
 if __name__ == "__main__":
@@ -433,5 +448,7 @@ if __name__ == "__main__":
                          help="response-side diff report (from response_diff.py)")
     parser.add_argument("--write", action="store_true",
                          help="write <source>_patched.py instead of just printing the diff")
+    parser.add_argument("--patch-file", default=None,
+                         help="also write a standalone, git-apply-able .patch file to this path")
     args = parser.parse_args()
-    run(args.source, args.diff, args.response_diff, args.write)
+    run(args.source, args.diff, args.response_diff, args.write, args.patch_file)

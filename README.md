@@ -21,6 +21,7 @@ Built and tested against two real, historical versions of a real public API's of
 | Patch generation (automated, `src/patch_generator.py`) | Done for 2 of 6 request-side finding kinds | Given a real source file, finds the affected function on its own and generates the patch for required body fields and required query/header params — verified against blind tests, see `reports/PATCH_GENERATOR_RESULTS.md` |
 | Recurring monitoring (`src/monitor.py`) | Watch loop built, tested against live data | Fetches a tracked API's current spec, diffs against the last check, alerts on breaking changes — see `reports/MONITOR_RESULTS.md`. Still needs an actual schedule/cron and somewhere to run it. |
 | Monitor → patch generator wiring | Done | A live check now calls the patch generator directly on any watched files, with no manual step in between — see `reports/PIPELINE_WIRING_RESULTS.md` |
+| Real, applyable patches | Done | Every auto-patch is also emitted as a standard `git apply`-compatible `.patch` file, verified with an actual `git apply` in an isolated worktree, not just asserted — see `reports/GIT_APPLY_RESULTS.md` |
 | Hosting / schedule | Not started | Needs a hosting account (or similar) to run the watch loop on a timer |
 | Billing | Not started | Needs a Stripe account when we get there |
 
@@ -42,6 +43,11 @@ Then the last gap: the monitor and patch generator weren't actually connected �
 still needed a person to run the patch generator by hand afterward. They're wired together
 now; a check runs the patch generator directly against any watched files, in-memory, no
 manual hand-off. See `reports/PIPELINE_WIRING_RESULTS.md`.
+
+What came out the other end was still a full replacement file, not something applyable —
+fixed last: every auto-patch is now also a standard `git apply`-compatible `.patch` file,
+proven not just asserted, by actually running `git apply` in an isolated worktree and
+recompiling the result. See `reports/GIT_APPLY_RESULTS.md`.
 
 ## How it works, right now
 
@@ -77,8 +83,9 @@ tremor/
 │   ├── PATCH_GENERATOR_RESULTS.md   # phase 3 write-up (automated patch generation)
 │   ├── MONITOR_RESULTS.md           # phase 4 write-up (recurring monitoring, live data)
 │   ├── PIPELINE_WIRING_RESULTS.md   # phase 5 write-up (monitor -> patch generator, wired)
+│   ├── GIT_APPLY_RESULTS.md         # phase 6 write-up (real, git-apply-verified .patch files)
 │   ├── monitor_runs/                # timestamped records from real monitor.py runs
-│   │   └── patches/                     # patches monitor.py generated automatically
+│   │   └── patches/                     # patches monitor.py generated automatically (.py copy + .patch)
 │   ├── diff_report.json             # full phase 1 output (213 changes)
 │   └── response_diff_report.json    # full phase 2 output (62 breaking changes)
 └── data/
@@ -95,9 +102,11 @@ python3 src/diff_engine.py data/old_spec.json data/new_spec.json
 python3 src/response_diff.py data/old_spec.json data/new_spec.json
 python3 examples/example_patch.py
 python3 src/patch_generator.py examples/sample_integration.py --write
+python3 src/patch_generator.py examples/sample_integration.py --patch-file /tmp/out.patch && git apply --check /tmp/out.patch
 python3 src/monitor.py check                # first run: establishes a baseline per watchlist entry
-python3 src/monitor.py check                # any run after that: reports what's new -- and auto-patches
-                                             # any watched_files the new findings affect
+python3 src/monitor.py check                # any run after that: reports what's new -- auto-patches
+                                             # any watched_files the new findings affect, and writes
+                                             # a verified, git-apply-able .patch alongside each one
 ```
 
 ## A bug worth knowing about (and how it was caught)

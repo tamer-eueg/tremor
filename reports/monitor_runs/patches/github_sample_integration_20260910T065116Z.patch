@@ -1,0 +1,34 @@
+--- a/examples/sample_integration.py
++++ b/examples/sample_integration.py
+@@ -8,13 +8,15 @@
+ import requests
+ 
+ 
+-def add_pr_review_comment(owner, repo, pull_number, body, path, position, token):
++def add_pr_review_comment(owner, repo, pull_number, body, path, position, token, commit_id, line):
+     """Add a review comment to a pull request."""
+     url = f"https://api.github.com/repos/{owner}/{repo}/pulls/{pull_number}/comments"
+     payload = {
+         "body": body,
+         "path": path,
+         "position": position,
++        "commit_id": commit_id,  # auto-patched by Tremor: now required
++        "line": line,  # auto-patched by Tremor: now required
+     }
+     resp = requests.post(url, json=payload, headers={"Authorization": f"token {token}"})
+     resp.raise_for_status()
+@@ -29,12 +31,12 @@
+     return resp.json()
+ 
+ 
+-def upload_release_asset(owner, repo, release_id, data, token):
++def upload_release_asset(owner, repo, release_id, data, token, name):
+     """Upload a binary asset to a GitHub release."""
+     url = f"https://uploads.github.com/repos/{owner}/{repo}/releases/{release_id}/assets"
+     resp = requests.post(
+         url,
+-        params={},
++        params={"name": name},
+         data=data,
+         headers={"Authorization": f"token {token}", "Content-Type": "application/octet-stream"},
+     )

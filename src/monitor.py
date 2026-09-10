@@ -38,6 +38,7 @@ import argparse
 import datetime
 import json
 import os
+import subprocess
 import sys
 
 import requests
@@ -154,14 +155,38 @@ def patch_watched_files(entry, all_changes, checked_at, quiet=False):
             out_path = os.path.join(PATCHES_DIR, f"{entry['name']}_{basename}_{ts}_patched.py")
             with open(out_path, "w") as f:
                 f.write(result.patched_source)
+
+            # Also emit a standalone, git-apply-able .patch file -- the form a real
+            # deployment would actually deliver (as a PR or a direct `git apply`),
+            # not just a full replacement file for a human to diff by eye.
+            patch_path = os.path.join(PATCHES_DIR, f"{entry['name']}_{basename}_{ts}.patch")
+            with open(patch_path, "w") as f:
+                f.write(result.as_git_patch())
+
+            # Prove it's actually applyable, don't just assert it: dry-run `git apply
+            # --check` against this repo's real, currently-tracked copy of the file.
+            check = subprocess.run(
+                ["git", "apply", "--check", os.path.relpath(patch_path, REPO_ROOT)],
+                cwd=REPO_ROOT, capture_output=True, text=True,
+            )
+            git_apply_ok = check.returncode == 0
+
             summary["status"] = "patched"
             summary["patch_path"] = os.path.relpath(out_path, REPO_ROOT)
+            summary["patch_file"] = os.path.relpath(patch_path, REPO_ROOT)
+            summary["git_apply_check"] = "ok" if git_apply_ok else "failed"
+            if not git_apply_ok:
+                summary["git_apply_error"] = check.stderr.strip()
             summary["changelog"] = result.changelog
             if not quiet:
                 print(f"[{entry['name']}] auto-patched {rel_path} ({result.sites_affected} "
-                      f"call site(s) affected) -> {summary['patch_path']}")
+                      f"call site(s) affected) -> {summary['patch_file']}")
                 for line in result.changelog:
                     print(f"    - {line}")
+                if git_apply_ok:
+                    print(f"    git apply --check: OK -- applies cleanly against the current repo")
+                else:
+                    print(f"    git apply --check: FAILED -- {check.stderr.strip()}")
         else:
             summary["status"] = "nothing_to_patch"
             if not quiet and result.sites_matched:
