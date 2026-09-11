@@ -69,13 +69,13 @@ def key(change):
     return (
         change.get("kind"), change.get("path"), change.get("method"),
         change.get("param"), change.get("in"), change.get("field"),
-        change.get("severity"),
+        change.get("severity"), change.get("status_code"),
     )
 
 
 def expected(kind, *, severity="BREAKING", path="/widgets", method="GET",
-             param=None, location=None, field=None):
-    return (kind, path, method, param, location, field, severity)
+             param=None, location=None, field=None, status_code=None):
+    return (kind, path, method, param, location, field, severity, status_code)
 
 
 def case(name, mutate, expected_findings, prepare=None):
@@ -255,6 +255,100 @@ def cases():
         [],
         prepare=alternative_body,
     ))
+
+    def nested_response(spec):
+        response = spec["paths"]["/widgets"]["get"]["responses"]["200"]
+        properties = response["content"]["application/json"]["schema"]["properties"]
+        properties["profile"] = {
+            "type": "object",
+            "properties": {
+                "email": {"type": "string"},
+                "score": {"type": "integer"},
+            },
+        }
+
+    result.append(case(
+        "nested response field removed",
+        lambda s: s["paths"]["/widgets"]["get"]["responses"]["200"]
+        ["content"]["application/json"]["schema"]["properties"]["profile"]
+        ["properties"].pop("email"),
+        [expected("response_field_removed", field="profile.email")],
+        prepare=nested_response,
+    ))
+    result.append(case(
+        "nested response field type changes",
+        lambda s: s["paths"]["/widgets"]["get"]["responses"]["200"]
+        ["content"]["application/json"]["schema"]["properties"]["profile"]
+        ["properties"]["score"].update(type="string"),
+        [expected("response_field_type_changed", field="profile.score")],
+        prepare=nested_response,
+    ))
+
+    def referenced_nested_response(spec):
+        nested_response(spec)
+        response = spec["paths"]["/widgets"]["get"]["responses"]["200"]
+        properties = response["content"]["application/json"]["schema"]["properties"]
+        profile = properties["profile"]
+        spec["components"] = {"schemas": {"Profile": profile}}
+        properties["profile"] = {"$ref": "#/components/schemas/Profile"}
+
+    result.append(case(
+        "nested response change through local reference",
+        lambda s: s["components"]["schemas"]["Profile"]["properties"].pop("email"),
+        [expected("response_field_removed", field="profile.email")],
+        prepare=referenced_nested_response,
+    ))
+
+    def error_response(spec):
+        spec["paths"]["/widgets"]["get"]["responses"]["422"] = {
+            "content": {
+                "application/json": {
+                    "schema": {
+                        "type": "object",
+                        "properties": {
+                            "code": {"type": "string"},
+                            "message": {"type": "string"},
+                        },
+                    }
+                }
+            }
+        }
+
+    result.append(case(
+        "error response field removed",
+        lambda s: s["paths"]["/widgets"]["get"]["responses"]["422"]
+        ["content"]["application/json"]["schema"]["properties"].pop("code"),
+        [expected("error_response_field_removed", field="code", status_code="422")],
+        prepare=error_response,
+    ))
+    result.append(case(
+        "error response field type changes",
+        lambda s: s["paths"]["/widgets"]["get"]["responses"]["422"]
+        ["content"]["application/json"]["schema"]["properties"]["code"].update(type="integer"),
+        [expected("error_response_field_type_changed", field="code", status_code="422")],
+        prepare=error_response,
+    ))
+    result.append(case(
+        "error response field added safely",
+        lambda s: s["paths"]["/widgets"]["get"]["responses"]["422"]
+        ["content"]["application/json"]["schema"]["properties"].update(
+            request_id={"type": "string"}),
+        [],
+        prepare=error_response,
+    ))
+
+    def new_error_response(spec):
+        spec["paths"]["/widgets"]["get"]["responses"]["429"] = {
+            "content": {"application/json": {"schema": {
+                "type": "object", "properties": {"retry": {"type": "integer"}}
+            }}}
+        }
+
+    result.append(case(
+        "new error status does not create speculative alert",
+        new_error_response,
+        [],
+    ))
     return result
 
 
@@ -299,14 +393,26 @@ def run_historical_regression():
         request_reviewed = json.load(f)
     with (ROOT / "reports" / "response_diff_report.json").open() as f:
         response_reviewed = json.load(f)
-    request_match = finding_multiset(request_actual) == finding_multiset(request_reviewed)
-    response_match = finding_multiset(response_actual) == finding_multiset(response_reviewed)
+    request_actual_set = finding_multiset(request_actual)
+    request_reviewed_set = finding_multiset(request_reviewed)
+    response_actual_set = finding_multiset(response_actual)
+    response_reviewed_set = finding_multiset(response_reviewed)
+    request_missing = sum((request_reviewed_set - request_actual_set).values())
+    response_missing = sum((response_reviewed_set - response_actual_set).values())
+    request_additional = sum((request_actual_set - request_reviewed_set).values())
+    response_additional = sum((response_actual_set - response_reviewed_set).values())
+    request_match = request_missing == 0
+    response_match = response_missing == 0
     return {
         "dataset": "GitHub REST API v1.0.0 to v2.1.0",
         "request_findings": len(request_actual),
         "response_breaking_findings": len(response_actual),
-        "matches_reviewed_request_report": request_match,
-        "matches_reviewed_response_report": response_match,
+        "reviewed_request_findings_missing": request_missing,
+        "reviewed_response_findings_missing": response_missing,
+        "additional_request_candidates": request_additional,
+        "additional_response_candidates": response_additional,
+        "retains_reviewed_request_report": request_match,
+        "retains_reviewed_response_report": response_match,
         "passed": request_match and response_match,
     }
 
@@ -320,7 +426,7 @@ def write_reports(result):
         "# Tremor benchmark results", "",
         "This benchmark separates two kinds of evidence:", "",
         "1. **Labeled contract mutations** measure detection precision and recall. Each case has an exact expected result.",
-        "2. **Historical regression** confirms current output still matches Tremor's reviewed GitHub API reports. It is a regression check, not independent ground truth.",
+        "2. **Historical regression** confirms current output retains every finding in Tremor's reviewed GitHub API reports. New detector capabilities may produce additional candidates; those are not presented as independently verified ground truth.",
         "", "## Result", "",
         f"- Labeled cases passed: **{result['labeled']['cases_passed']}/{result['labeled']['cases_total']}**",
         f"- Precision: **{result['labeled']['precision']:.1%}**",
@@ -328,6 +434,8 @@ def write_reports(result):
         f"- False positives: **{result['labeled']['totals']['fp']}**",
         f"- Missed expected findings: **{result['labeled']['totals']['fn']}**",
         f"- Historical regression: **{'PASS' if result['historical_regression']['passed'] else 'FAIL'}**",
+        f"- Reviewed historical findings lost: **{result['historical_regression']['reviewed_request_findings_missing'] + result['historical_regression']['reviewed_response_findings_missing']}**",
+        f"- Additional historical response candidates from nested traversal: **{result['historical_regression']['additional_response_candidates']}**",
         "", "## Labeled cases", "",
         "| Case | Result | False positives | Misses |", "|---|---:|---:|---:|",
     ]
@@ -335,8 +443,8 @@ def write_reports(result):
         lines.append(f"| {row['case']} | {'PASS' if row['passed'] else 'FAIL'} | {row['false_positives']} | {row['misses']} |")
     lines += [
         "", "## Interpretation", "",
-        "Passing this suite proves the engines behave correctly for these explicitly modeled top-level OpenAPI changes and retain their reviewed output on the bundled historical GitHub data. It does **not** prove correctness for every OpenAPI feature or every API provider.",
-        "", "Known limits remain: deep nested response traversal, error-response schemas, cross-file references, and automated patches for every finding kind are not covered yet.",
+        "Passing this suite proves the engines behave correctly for these explicitly modeled OpenAPI changes and retain every reviewed finding on the bundled historical GitHub data. It does **not** prove correctness for every OpenAPI feature or independently validate the additional historical candidates found by deeper traversal.",
+        "", "Known limits remain: wildcard/default error responses, status-code-set classification, cross-file references, and automated patches for every finding kind are not covered yet.",
         "", "## Reproduce", "", "```bash", "python3 benchmarks/run_benchmark.py", "```", "",
     ]
     (report_dir / "BENCHMARK_RESULTS.md").write_text("\n".join(lines))

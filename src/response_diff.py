@@ -8,10 +8,9 @@ catches the quieter, more dangerous kind: a successful response whose
 shape changed, so the call still succeeds but the code reading the
 response silently gets None, a KeyError, or the wrong type.
 
-Scope (stated honestly): compares the primary 2xx response schema for
-each operation, one level of $ref resolution, unwrapping a top-level
-array to its item schema. Deeply nested object diffing is not attempted
-here -- see PROOF_OF_CONCEPT_PART2.md for what's still out of scope.
+Scope: compares the primary 2xx response schema and matching documented
+4xx/5xx response schemas for each operation. Local refs, arrays, composed
+schemas, and nested object fields are traversed with a cycle/depth guard.
 """
 import json
 import sys
@@ -26,15 +25,22 @@ def load_spec(path):
         return json.load(f)
 
 
-def resolve_ref(spec, schema):
-    """Resolve a single $ref against this spec's own components. Non-ref schemas pass through."""
+def resolve_ref(spec, schema, seen=None):
+    """Resolve local refs against this spec, including escaped pointer tokens."""
     if isinstance(schema, dict) and "$ref" in schema:
         ref = schema["$ref"]
-        parts = ref.lstrip("#/").split("/")
+        if not ref.startswith("#/"):
+            return schema
+        seen = set() if seen is None else set(seen)
+        if ref in seen:
+            return {}
+        seen.add(ref)
+        parts = ref[2:].split("/")
         node = spec
-        for p in parts:
+        for raw_part in parts:
+            p = raw_part.replace("~1", "/").replace("~0", "~")
             node = node.get(p, {}) if isinstance(node, dict) else {}
-        return node
+        return resolve_ref(spec, node, seen)
     return schema if isinstance(schema, dict) else {}
 
 
@@ -50,7 +56,7 @@ def unwrap_schema(spec, schema, depth=0):
     if schema.get("type") == "array" and "items" in schema:
         return unwrap_schema(spec, schema["items"], depth + 1)
 
-    for combiner in ("anyOf", "oneOf"):
+    for combiner in ("allOf", "anyOf", "oneOf"):
         if combiner in schema:
             merged_props = {}
             for branch in schema[combiner]:
@@ -75,8 +81,25 @@ def get_success_schema(spec, operation):
     return None, None, None
 
 
-def diff_response_schemas(old_schema, new_schema):
-    """Compare top-level properties of two (already-unwrapped) object schemas."""
+def get_response_schema(spec, response):
+    """Return the first documented media schema for one response entry."""
+    response = resolve_ref(spec, response)
+    for media_type, media in (response.get("content", {}) or {}).items():
+        if not isinstance(media, dict):
+            continue
+        schema = media.get("schema")
+        if schema:
+            return media_type, unwrap_schema(spec, schema)
+    return None, None
+
+
+def diff_response_schemas(old_schema, new_schema, old_spec=None, new_spec=None,
+                          prefix="", depth=0):
+    """Compare response objects recursively while bounding cycles and noise."""
+    old_spec = old_spec or {}
+    new_spec = new_spec or {}
+    old_schema = unwrap_schema(old_spec, old_schema)
+    new_schema = unwrap_schema(new_spec, new_schema)
     old_props = old_schema.get("properties", {}) if isinstance(old_schema, dict) else {}
     new_props = new_schema.get("properties", {}) if isinstance(new_schema, dict) else {}
 
@@ -84,19 +107,37 @@ def diff_response_schemas(old_schema, new_schema):
     for name, old_p in old_props.items():
         if not isinstance(old_p, dict):
             continue
+        field_path = f"{prefix}.{name}" if prefix else name
         new_p = new_props.get(name)
         if new_p is None:
-            findings.append(("response_field_removed", name,
-                              f"Response field '{name}' no longer appears in the response body."))
+            findings.append(("response_field_removed", field_path,
+                              f"Response field '{field_path}' no longer appears in the response body."))
             continue
-        old_type = old_p.get("type")
-        new_type = new_p.get("type") if isinstance(new_p, dict) else None
+        old_resolved = unwrap_schema(old_spec, old_p)
+        new_resolved = unwrap_schema(new_spec, new_p)
+        old_type = old_resolved.get("type")
+        new_type = new_resolved.get("type") if isinstance(new_resolved, dict) else None
         if old_type and new_type and old_type != new_type:
-            findings.append(("response_field_type_changed", name,
-                              f"Response field '{name}' changed type: {old_type} -> {new_type}."))
+            findings.append(("response_field_type_changed", field_path,
+                              f"Response field '{field_path}' changed type: {old_type} -> {new_type}."))
+            continue
+        if depth < 8:
+            nested, _ = diff_response_schemas(
+                old_resolved, new_resolved, old_spec, new_spec,
+                prefix=field_path, depth=depth + 1,
+            )
+            findings.extend(nested)
 
     added = [n for n in new_props if n not in old_props]
     return findings, added
+
+
+def error_response_codes(operation):
+    """Explicit documented HTTP error codes; ranges/default are intentionally excluded."""
+    return {
+        str(code) for code in (operation.get("responses", {}) or {})
+        if str(code).isdigit() and 400 <= int(code) <= 599
+    }
 
 
 def diff_specs_responses(old, new):
@@ -121,7 +162,9 @@ def diff_specs_responses(old, new):
             if old_schema is None or new_schema is None:
                 continue  # nothing to compare (e.g. 204 No Content on both sides)
 
-            findings, added = diff_response_schemas(old_schema, new_schema)
+            findings, added = diff_response_schemas(
+                old_schema, new_schema, old, new,
+            )
             added_field_count += len(added)
             for kind, field, detail in findings:
                 changes.append({
@@ -132,6 +175,30 @@ def diff_specs_responses(old, new):
                     "field": field,
                     "detail": f"{method.upper()} {path}: {detail}",
                 })
+
+            # Error bodies are part of the integration contract too: clients often
+            # branch on a machine-readable error code or message. Compare only codes
+            # documented on both sides so adding/removing a possible status itself
+            # does not create a speculative field-shape alert.
+            common_errors = error_response_codes(old_op) & error_response_codes(new_op)
+            for status_code in sorted(common_errors, key=int):
+                _, old_error = get_response_schema(old, old_op["responses"][status_code])
+                _, new_error = get_response_schema(new, new_op["responses"][status_code])
+                if old_error is None or new_error is None:
+                    continue
+                error_findings, _ = diff_response_schemas(
+                    old_error, new_error, old, new,
+                )
+                for kind, field, detail in error_findings:
+                    changes.append({
+                        "severity": "BREAKING",
+                        "kind": kind.replace("response_", "error_response_", 1),
+                        "path": path,
+                        "method": method.upper(),
+                        "status_code": status_code,
+                        "field": field,
+                        "detail": f"{method.upper()} {path} HTTP {status_code}: {detail}",
+                    })
 
     return changes, added_field_count
 

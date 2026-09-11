@@ -1,11 +1,11 @@
 {
   "labeled": {
-    "cases_total": 20,
-    "cases_passed": 20,
+    "cases_total": 27,
+    "cases_passed": 27,
     "precision": 1.0,
     "recall": 1.0,
     "totals": {
-      "tp": 15,
+      "tp": 20,
       "fp": 0,
       "fn": 0
     },
@@ -189,15 +189,82 @@
         "misses": 0,
         "unexpected": [],
         "missing": []
+      },
+      {
+        "case": "nested response field removed",
+        "passed": true,
+        "true_positives": 1,
+        "false_positives": 0,
+        "misses": 0,
+        "unexpected": [],
+        "missing": []
+      },
+      {
+        "case": "nested response field type changes",
+        "passed": true,
+        "true_positives": 1,
+        "false_positives": 0,
+        "misses": 0,
+        "unexpected": [],
+        "missing": []
+      },
+      {
+        "case": "nested response change through local reference",
+        "passed": true,
+        "true_positives": 1,
+        "false_positives": 0,
+        "misses": 0,
+        "unexpected": [],
+        "missing": []
+      },
+      {
+        "case": "error response field removed",
+        "passed": true,
+        "true_positives": 1,
+        "false_positives": 0,
+        "misses": 0,
+        "unexpected": [],
+        "missing": []
+      },
+      {
+        "case": "error response field type changes",
+        "passed": true,
+        "true_positives": 1,
+        "false_positives": 0,
+        "misses": 0,
+        "unexpected": [],
+        "missing": []
+      },
+      {
+        "case": "error response field added safely",
+        "passed": true,
+        "true_positives": 0,
+        "false_positives": 0,
+        "misses": 0,
+        "unexpected": [],
+        "missing": []
+      },
+      {
+        "case": "new error status does not create speculative alert",
+        "passed": true,
+        "true_positives": 0,
+        "false_positives": 0,
+        "misses": 0,
+        "unexpected": [],
+        "missing": []
       }
     ]
   },
   "historical_regression": {
     "dataset": "GitHub REST API v1.0.0 to v2.1.0",
     "request_findings": 213,
-    "response_breaking_findings": 62,
-    "matches_reviewed_request_report": true,
-    "matches_reviewed_response_report": true,
+    "response_breaking_findings": 179,
+    "reviewed_request_findings_missing": 0,
+    "reviewed_response_findings_missing": 0,
+    "additional_request_candidates": 0,
+    "additional_response_candidates": 117,
+    "retains_reviewed_request_report": true,
+    "retains_reviewed_response_report": true,
     "passed": true
   }
 }
