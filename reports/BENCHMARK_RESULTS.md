@@ -7,7 +7,7 @@ This benchmark separates two kinds of evidence:
 
 ## Result
 
-- Labeled cases passed: **14/14**
+- Labeled cases passed: **20/20**
 - Precision: **100.0%**
 - Recall: **100.0%**
 - False positives: **0**
@@ -32,6 +32,12 @@ This benchmark separates two kinds of evidence:
 | response field added safely | PASS | 0 | 0 |
 | endpoint added safely | PASS | 0 | 0 |
 | anyOf wrapper does not invent removals | PASS | 0 | 0 |
+| path-level parameter becomes required | PASS | 0 | 0 |
+| operation parameter safely overrides path parameter | PASS | 0 | 0 |
+| required field added through schema reference | PASS | 0 | 0 |
+| required field added through requestBody reference | PASS | 0 | 0 |
+| required field added through allOf | PASS | 0 | 0 |
+| branch-only anyOf requirement does not create false alert | PASS | 0 | 0 |
 
 ## Interpretation
 

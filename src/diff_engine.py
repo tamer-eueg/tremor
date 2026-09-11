@@ -32,16 +32,72 @@ def params_by_key(params):
     return out
 
 
-def required_body_props(operation):
-    """Best-effort: pull required property names out of a JSON requestBody schema."""
-    try:
-        content = operation.get("requestBody", {}).get("content", {})
-        for media in content.values():
-            schema = media.get("schema", {})
-            return set(schema.get("required", []) or [])
-    except AttributeError:
-        pass
+def resolve_local_ref(spec, node, seen=None):
+    """Resolve a local JSON Pointer while refusing cycles and remote refs."""
+    if not isinstance(node, dict) or "$ref" not in node:
+        return node if isinstance(node, dict) else {}
+    ref = node["$ref"]
+    if not ref.startswith("#/"):
+        return node
+    seen = set() if seen is None else set(seen)
+    if ref in seen:
+        return {}
+    seen.add(ref)
+    target = spec
+    for raw_part in ref[2:].split("/"):
+        part = raw_part.replace("~1", "/").replace("~0", "~")
+        if not isinstance(target, dict) or part not in target:
+            return {}
+        target = target[part]
+    return resolve_local_ref(spec, target, seen)
+
+
+def required_schema_props(spec, schema, seen=None):
+    """Collect fields required by a schema, including safe composition rules.
+
+    allOf requires the union of its branches.  For anyOf/oneOf, a field is
+    globally required only when every alternative requires it.
+    """
+    if not isinstance(schema, dict):
+        return set()
+    seen = set() if seen is None else set(seen)
+    if "$ref" in schema:
+        ref = schema["$ref"]
+        if ref in seen:
+            return set()
+        seen.add(ref)
+        return required_schema_props(spec, resolve_local_ref(spec, schema), seen)
+
+    required = set(schema.get("required", []) or [])
+    for branch in schema.get("allOf", []) or []:
+        required |= required_schema_props(spec, branch, seen)
+    for combiner in ("anyOf", "oneOf"):
+        branches = schema.get(combiner, []) or []
+        if branches:
+            branch_sets = [required_schema_props(spec, branch, seen) for branch in branches]
+            required |= set.intersection(*branch_sets) if branch_sets else set()
+    return required
+
+
+def required_body_props(spec, operation):
+    """Pull required property names from an inline or locally referenced body."""
+    request_body = resolve_local_ref(spec, operation.get("requestBody", {}))
+    content = request_body.get("content", {}) if isinstance(request_body, dict) else {}
+    for media in content.values():
+        if isinstance(media, dict):
+            return required_schema_props(spec, media.get("schema", {}))
     return set()
+
+
+def operation_params(path_item, operation):
+    """Merge OpenAPI path-level and operation-level parameters.
+
+    OpenAPI lets an operation override a same-name path parameter, so the
+    operation list is applied second.
+    """
+    merged = params_by_key(path_item.get("parameters"))
+    merged.update(params_by_key(operation.get("parameters")))
+    return merged
 
 
 def diff_specs(old, new):
@@ -75,8 +131,8 @@ def diff_specs(old, new):
                 })
                 continue
 
-            old_params = params_by_key(old_op.get("parameters"))
-            new_params = params_by_key(new_op.get("parameters"))
+            old_params = operation_params(old_ops, old_op)
+            new_params = operation_params(new_ops, new_op)
 
             for key, old_p in old_params.items():
                 name, loc = key
@@ -132,8 +188,8 @@ def diff_specs(old, new):
                         "detail": f"New {'required' if new_p.get('required') else 'optional'} parameter '{name}' ({loc}) added to {method.upper()} {path}.",
                     })
 
-            old_req_body = required_body_props(old_op)
-            new_req_body = required_body_props(new_op)
+            old_req_body = required_body_props(old, old_op)
+            new_req_body = required_body_props(new, new_op)
             newly_required = new_req_body - old_req_body
             for prop in newly_required:
                 changes.append({

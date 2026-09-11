@@ -1,11 +1,11 @@
 {
   "labeled": {
-    "cases_total": 14,
-    "cases_passed": 14,
+    "cases_total": 20,
+    "cases_passed": 20,
     "precision": 1.0,
     "recall": 1.0,
     "totals": {
-      "tp": 11,
+      "tp": 15,
       "fp": 0,
       "fn": 0
     },
@@ -129,6 +129,60 @@
       },
       {
         "case": "anyOf wrapper does not invent removals",
+        "passed": true,
+        "true_positives": 0,
+        "false_positives": 0,
+        "misses": 0,
+        "unexpected": [],
+        "missing": []
+      },
+      {
+        "case": "path-level parameter becomes required",
+        "passed": true,
+        "true_positives": 1,
+        "false_positives": 0,
+        "misses": 0,
+        "unexpected": [],
+        "missing": []
+      },
+      {
+        "case": "operation parameter safely overrides path parameter",
+        "passed": true,
+        "true_positives": 0,
+        "false_positives": 0,
+        "misses": 0,
+        "unexpected": [],
+        "missing": []
+      },
+      {
+        "case": "required field added through schema reference",
+        "passed": true,
+        "true_positives": 1,
+        "false_positives": 0,
+        "misses": 0,
+        "unexpected": [],
+        "missing": []
+      },
+      {
+        "case": "required field added through requestBody reference",
+        "passed": true,
+        "true_positives": 1,
+        "false_positives": 0,
+        "misses": 0,
+        "unexpected": [],
+        "missing": []
+      },
+      {
+        "case": "required field added through allOf",
+        "passed": true,
+        "true_positives": 1,
+        "false_positives": 0,
+        "misses": 0,
+        "unexpected": [],
+        "missing": []
+      },
+      {
+        "case": "branch-only anyOf requirement does not create false alert",
         "passed": true,
         "true_positives": 0,
         "false_positives": 0,

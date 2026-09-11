@@ -78,8 +78,10 @@ def expected(kind, *, severity="BREAKING", path="/widgets", method="GET",
     return (kind, path, method, param, location, field, severity)
 
 
-def case(name, mutate, expected_findings):
+def case(name, mutate, expected_findings, prepare=None):
     old = base_spec()
+    if prepare:
+        prepare(old)
     new = copy.deepcopy(old)
     mutate(new)
     return {"name": name, "old": old, "new": new,
@@ -164,6 +166,95 @@ def cases():
         media["schema"] = {"anyOf": [media["schema"], {"type": "object", "properties": {}}]}
 
     result.append(case("anyOf wrapper does not invent removals", wrap_response_in_any_of, []))
+
+    def path_parameter(spec):
+        spec["paths"]["/widgets"]["parameters"] = [
+            {"name": "tenant", "in": "header", "required": False,
+             "schema": {"type": "string"}}
+        ]
+
+    result.append(case(
+        "path-level parameter becomes required",
+        lambda s: s["paths"]["/widgets"]["parameters"][0].update(required=True),
+        [expected("parameter_now_required", param="tenant", location="header")],
+        prepare=path_parameter,
+    ))
+
+    def overridden_path_parameter(spec):
+        path_parameter(spec)
+        spec["paths"]["/widgets"]["get"]["parameters"].append(
+            {"name": "tenant", "in": "header", "required": True,
+             "schema": {"type": "string"}}
+        )
+
+    result.append(case(
+        "operation parameter safely overrides path parameter",
+        lambda s: None,
+        [],
+        prepare=overridden_path_parameter,
+    ))
+
+    def referenced_schema(spec):
+        content = spec["paths"]["/widgets"]["get"]["requestBody"]["content"]
+        schema = content["application/json"]["schema"]
+        spec["components"] = {"schemas": {"WidgetInput": schema}}
+        content["application/json"]["schema"] = {"$ref": "#/components/schemas/WidgetInput"}
+
+    result.append(case(
+        "required field added through schema reference",
+        lambda s: s["components"]["schemas"]["WidgetInput"]["required"].append("note"),
+        [expected("request_body_field_now_required", field="note")],
+        prepare=referenced_schema,
+    ))
+
+    def referenced_request_body(spec):
+        body = spec["paths"]["/widgets"]["get"].pop("requestBody")
+        spec["components"] = {"requestBodies": {"WidgetBody": body}}
+        spec["paths"]["/widgets"]["get"]["requestBody"] = {
+            "$ref": "#/components/requestBodies/WidgetBody"
+        }
+
+    result.append(case(
+        "required field added through requestBody reference",
+        lambda s: s["components"]["requestBodies"]["WidgetBody"]["content"]
+        ["application/json"]["schema"]["required"].append("note"),
+        [expected("request_body_field_now_required", field="note")],
+        prepare=referenced_request_body,
+    ))
+
+    def composed_body(spec):
+        media = spec["paths"]["/widgets"]["get"]["requestBody"]["content"]["application/json"]
+        media["schema"] = {
+            "allOf": [
+                {"type": "object", "required": ["name"]},
+                {"type": "object", "required": []},
+            ]
+        }
+
+    result.append(case(
+        "required field added through allOf",
+        lambda s: s["paths"]["/widgets"]["get"]["requestBody"]["content"]
+        ["application/json"]["schema"]["allOf"][1]["required"].append("note"),
+        [expected("request_body_field_now_required", field="note")],
+        prepare=composed_body,
+    ))
+
+    def alternative_body(spec):
+        media = spec["paths"]["/widgets"]["get"]["requestBody"]["content"]["application/json"]
+        media["schema"] = {
+            "anyOf": [
+                {"type": "object", "required": ["name"]},
+                {"type": "object", "required": ["name"]},
+            ]
+        }
+
+    result.append(case(
+        "branch-only anyOf requirement does not create false alert",
+        lambda s: s["paths"]["/widgets"]["get"]["requestBody"]["content"]
+        ["application/json"]["schema"]["anyOf"][0]["required"].append("note"),
+        [],
+        prepare=alternative_body,
+    ))
     return result
 
 

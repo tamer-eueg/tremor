@@ -22,7 +22,7 @@ Built and tested against two real, historical versions of a real public API's of
 | Recurring monitoring (`src/monitor.py`) | Watch loop built, tested against live data | Fetches a tracked API's current spec, diffs against the last check, alerts on breaking changes — see `reports/MONITOR_RESULTS.md`. |
 | Monitor → patch generator wiring | Done | A live check now calls the patch generator directly on any watched files, with no manual step in between — see `reports/PIPELINE_WIRING_RESULTS.md` |
 | Real, applyable patches | Done | Every auto-patch is also emitted as a standard `git apply`-compatible `.patch` file, verified with an actual `git apply` in an isolated worktree, not just asserted — see `reports/GIT_APPLY_RESULTS.md` |
-| Detection benchmark (`benchmarks/run_benchmark.py`) | 14/14 labeled cases pass | 100% precision and recall within the explicitly modeled scope; historical GitHub output also matches the reviewed reports — see `reports/BENCHMARK_RESULTS.md` |
+| Detection benchmark (`benchmarks/run_benchmark.py`) | 20/20 labeled cases pass | 100% precision and recall within the explicitly modeled scope; historical GitHub output also matches the reviewed reports — see `reports/BENCHMARK_RESULTS.md` |
 | Schedule (`.github/workflows/monitor.yaml`) | Live on GitHub Actions | The first manual production run completed successfully and committed its updated state/findings back to the repo — see the repository's Actions tab. |
 | Billing | Not started | Needs a Stripe account when we get there |
 
@@ -55,7 +55,7 @@ and commits the updated baseline back to the repo — zero cost, no hosting acco
 made sustainable by compressing the rolling state cache about 24x. Its first manual run on
 GitHub's infrastructure completed successfully.
 
-`benchmarks/run_benchmark.py` now provides the measurable quality gate: 14 isolated,
+`benchmarks/run_benchmark.py` now provides the measurable quality gate: 20 isolated,
 labeled contract-change cases plus a regression against the historical GitHub API pair.
 The benchmark runs on every push and pull request through `.github/workflows/benchmark.yaml`.
 
@@ -63,7 +63,9 @@ The benchmark runs on every push and pull request through `.github/workflows/ben
 
 1. Feed it two versions of an API's OpenAPI spec (old, new).
 2. `src/diff_engine.py` diffs the request side: removed endpoints, removed parameters,
-   parameters that became required, request-body fields that became required.
+   parameters that became required, request-body fields that became required. It supports
+   path-level parameters, local `$ref` pointers, and safe `allOf`/`anyOf`/`oneOf` required-field
+   semantics.
 3. `src/response_diff.py` diffs the response side: fields that quietly disappeared from a
    successful response, fields that changed type. This is the more dangerous class of
    change — the call still succeeds, so nothing errors, the calling code just silently gets
