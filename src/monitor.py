@@ -364,6 +364,15 @@ def run(watchlist_path, only_name=None, quiet=False):
     return results
 
 
+def result_exit_code(results):
+    """Stable automation contract: clean=0, drift=1, operational failure=2."""
+    if any(r.get("status") == "fetch_failed" for r in results):
+        return 2
+    if any(r.get("breaking_count", 0) > 0 for r in results):
+        return 1
+    return 0
+
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("command", choices=["check"], help="'check' runs the watchlist once")
@@ -372,6 +381,12 @@ if __name__ == "__main__":
     parser.add_argument("--quiet", action="store_true")
     args = parser.parse_args()
 
-    results = run(args.watchlist, only_name=args.name, quiet=args.quiet)
-    any_breaking = any(r.get("breaking_count", 0) > 0 for r in results)
-    sys.exit(1 if any_breaking else 0)
+    try:
+        results = run(args.watchlist, only_name=args.name, quiet=args.quiet)
+    except (OSError, ValueError, json.JSONDecodeError) as exc:
+        print(f"Tremor configuration failed: {exc}", file=sys.stderr)
+        sys.exit(2)
+    # Stable exit contract for automation: 0 clean, 1 breaking drift, 2 an
+    # operational/configuration failure. This lets the Action optionally turn
+    # drift into a review PR without hiding real failures.
+    sys.exit(result_exit_code(results))

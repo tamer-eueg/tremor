@@ -94,6 +94,11 @@ class MonitorConfigurationTests(unittest.TestCase):
         self.assertTrue((self.root / ".tremor" / "state" / "provider.json.gz").exists())
         self.assertEqual(len(list((self.root / ".tremor" / "runs").glob("provider_*.json"))), 1)
 
+    def test_operational_failure_has_distinct_exit_code(self):
+        self.assertEqual(monitor.result_exit_code([{"status": "checked", "breaking_count": 0}]), 0)
+        self.assertEqual(monitor.result_exit_code([{"status": "checked", "breaking_count": 1}]), 1)
+        self.assertEqual(monitor.result_exit_code([{"status": "fetch_failed"}]), 2)
+
 
 class DistributionTests(unittest.TestCase):
     def test_composite_action_has_safe_customer_defaults(self):
@@ -102,7 +107,17 @@ class DistributionTests(unittest.TestCase):
         self.assertIn("TREMOR_REPO_ROOT: ${{ github.workspace }}", action)
         self.assertIn("default: .tremor/state", action)
         self.assertIn("default: .tremor/runs", action)
+        self.assertIn("fail-on-breaking", action)
+        self.assertIn("patches-applied", action)
         self.assertNotIn("pull-requests: write", action)
+        self.assertNotIn("merge", action.lower())
+
+    def test_review_workflow_opens_but_cannot_merge(self):
+        workflow = (ROOT / "examples" / "tremor-review-pr.workflow.yml").read_text()
+        self.assertIn("pull-requests: write", workflow)
+        self.assertIn("gh pr create", workflow)
+        self.assertIn("cancel-in-progress: false", workflow)
+        self.assertNotIn("gh pr merge", workflow)
 
 
 if __name__ == "__main__":

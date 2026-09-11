@@ -19,6 +19,22 @@ inputs:
     description: Repository-relative directory for findings and generated patches.
     required: false
     default: .tremor/runs
+  apply-patches:
+    description: Apply newly generated patches to the checked-out working tree for review/PR creation.
+    required: false
+    default: "false"
+  fail-on-breaking:
+    description: Fail the Action when breaking drift is detected. Set false only when a later step creates a review PR.
+    required: false
+    default: "true"
+
+outputs:
+  breaking-detected:
+    description: "true when Tremor detected breaking API drift"
+    value: ${{ steps.monitor.outputs.breaking-detected }}
+  patches-applied:
+    description: Number of generated patches applied to the working tree
+    value: ${{ steps.apply.outputs.patches-applied }}
 
 runs:
   using: composite
@@ -33,6 +49,7 @@ runs:
       run: python3 -m pip install --disable-pip-version-check -r "$GITHUB_ACTION_PATH/requirements.txt"
 
     - name: Check API contracts
+      id: monitor
       shell: bash
       env:
         TREMOR_REPO_ROOT: ${{ github.workspace }}
@@ -40,4 +57,29 @@ runs:
         TREMOR_RUNS_DIR: ${{ github.workspace }}/${{ inputs.reports-directory }}
         TREMOR_PATCHES_DIR: ${{ github.workspace }}/${{ inputs.reports-directory }}/patches
         TREMOR_WATCHLIST_INPUT: ${{ inputs.watchlist }}
-      run: python3 "$GITHUB_ACTION_PATH/src/monitor.py" check --watchlist "$TREMOR_WATCHLIST_INPUT"
+        TREMOR_FAIL_ON_BREAKING: ${{ inputs.fail-on-breaking }}
+      run: |
+        set +e
+        python3 "$GITHUB_ACTION_PATH/src/monitor.py" check --watchlist "$TREMOR_WATCHLIST_INPUT"
+        status=$?
+        set -e
+        if [ "$status" -eq 1 ]; then
+          echo "breaking-detected=true" >> "$GITHUB_OUTPUT"
+          if [ "$TREMOR_FAIL_ON_BREAKING" = "true" ]; then
+            exit 1
+          fi
+          exit 0
+        fi
+        echo "breaking-detected=false" >> "$GITHUB_OUTPUT"
+        exit "$status"
+
+    - name: Apply generated patches for review
+      id: apply
+      if: inputs.apply-patches == 'true' && steps.monitor.outputs.breaking-detected == 'true'
+      shell: bash
+      env:
+        TREMOR_REPO_ROOT: ${{ github.workspace }}
+        TREMOR_PATCHES_DIR: ${{ github.workspace }}/${{ inputs.reports-directory }}/patches
+      run: |
+        count=$(python3 "$GITHUB_ACTION_PATH/src/apply_generated_patches.py")
+        echo "patches-applied=$count" >> "$GITHUB_OUTPUT"

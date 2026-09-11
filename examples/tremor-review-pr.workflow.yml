@@ -1,0 +1,56 @@
+name: Tremor review PR
+
+on:
+  schedule:
+    - cron: "0 6 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: tremor-${{ github.repository }}
+  cancel-in-progress: false
+
+jobs:
+  tremor:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # Tremor applies candidate patches only inside this temporary runner.
+      # Pin this to a release tag or commit SHA for production use.
+      - name: Detect drift and prepare review changes
+        id: tremor
+        uses: tamer-eueg/tremor@master
+        with:
+          watchlist: tremor-watchlist.json
+          apply-patches: "true"
+          fail-on-breaking: "false"
+
+      - name: Save the new baseline and evidence
+        if: always() && steps.tremor.outcome != 'cancelled'
+        run: |
+          git config user.name "tremor-bot"
+          git config user.email "tremor-bot@users.noreply.github.com"
+          git add .tremor
+          git diff --cached --quiet || git commit -m "Tremor: update API baseline"
+          git push origin HEAD:"$GITHUB_REF_NAME"
+
+      - name: Open a review-only pull request
+        if: steps.tremor.outputs.patches-applied != '0' && steps.tremor.outputs.patches-applied != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PATCH_COUNT: ${{ steps.tremor.outputs.patches-applied }}
+        run: |
+          branch="tremor/api-drift-${GITHUB_RUN_ID}"
+          git switch -c "$branch"
+          git add -u
+          git commit -m "Tremor: propose API drift fixes"
+          git push origin "$branch"
+          gh pr create \
+            --base "$GITHUB_REF_NAME" \
+            --head "$branch" \
+            --title "Tremor: review API contract fixes" \
+            --body "Tremor detected breaking API drift and prepared ${PATCH_COUNT} candidate patch(es). Review the diff and let normal repository CI run before merging. Tremor never merges this PR automatically."

@@ -52,3 +52,27 @@ On later runs:
   applying them.
 
 Tremor never auto-merges generated changes.
+
+## Optional: open review pull requests
+
+After the basic installation is stable, replace the workflow with
+`examples/tremor-review-pr.workflow.yml`. This mode:
+
+1. Detects drift and generates patches.
+2. Applies only newly generated `.patch` files inside the temporary Actions runner.
+3. Verifies each patch with Git before applying it; if a later patch fails, earlier
+   applications are rolled back.
+4. Commits the baseline/evidence to the default branch.
+5. Pushes source changes to a unique `tremor/api-drift-*` branch and opens a pull request.
+
+The workflow uses only GitHub's checkout/setup actions and the preinstalled GitHub CLI.
+It grants `pull-requests: write` solely to open the review PR. It contains no approval or
+merge command, and Tremor's Action cannot merge a PR.
+
+In **Settings → Actions → General → Workflow permissions**, the repository owner must also
+enable GitHub Actions to create pull requests. Keep required reviews and branch protection
+enabled: Tremor's PR should pass the repository's normal tests and human review.
+
+If Tremor detects breaking drift but cannot make a safe patch, it stores the report and
+opens no empty PR. Operational failures still fail the workflow; `fail-on-breaking: false`
+only converts confirmed drift into the review-PR path.
