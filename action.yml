@@ -1,0 +1,43 @@
+name: Tremor API contract watch
+description: Detect breaking OpenAPI changes and generate safe integration patches.
+author: EUEG OÜ
+
+branding:
+  icon: activity
+  color: orange
+
+inputs:
+  watchlist:
+    description: Repository-relative path to the Tremor watchlist JSON file.
+    required: false
+    default: tremor-watchlist.json
+  state-directory:
+    description: Repository-relative directory for rolling API baselines.
+    required: false
+    default: .tremor/state
+  reports-directory:
+    description: Repository-relative directory for findings and generated patches.
+    required: false
+    default: .tremor/runs
+
+runs:
+  using: composite
+  steps:
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: "3.12"
+
+    - name: Install Tremor dependency
+      shell: bash
+      run: python3 -m pip install --disable-pip-version-check -r "$GITHUB_ACTION_PATH/requirements.txt"
+
+    - name: Check API contracts
+      shell: bash
+      env:
+        TREMOR_REPO_ROOT: ${{ github.workspace }}
+        TREMOR_STATE_DIR: ${{ github.workspace }}/${{ inputs.state-directory }}
+        TREMOR_RUNS_DIR: ${{ github.workspace }}/${{ inputs.reports-directory }}
+        TREMOR_PATCHES_DIR: ${{ github.workspace }}/${{ inputs.reports-directory }}/patches
+        TREMOR_WATCHLIST_INPUT: ${{ inputs.watchlist }}
+      run: python3 "$GITHUB_ACTION_PATH/src/monitor.py" check --watchlist "$TREMOR_WATCHLIST_INPUT"

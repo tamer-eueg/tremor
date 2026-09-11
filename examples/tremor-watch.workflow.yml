@@ -1,0 +1,30 @@
+name: Tremor watch
+
+on:
+  schedule:
+    - cron: "0 6 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  tremor:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # Pin this to a released version or commit SHA for production use.
+      - name: Check third-party API contracts
+        uses: tamer-eueg/tremor@master
+        with:
+          watchlist: tremor-watchlist.json
+
+      - name: Save Tremor's new baseline and reports
+        if: always()
+        run: |
+          git config user.name "tremor-bot"
+          git config user.email "tremor-bot@users.noreply.github.com"
+          git add .tremor
+          git diff --cached --quiet || git commit -m "Tremor: update API baseline"
+          git push

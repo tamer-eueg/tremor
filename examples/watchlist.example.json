@@ -1,0 +1,9 @@
+[
+  {
+    "name": "provider-name",
+    "spec_url": "https://api.example.com/openapi.json",
+    "watched_files": [
+      "src/provider_integration.py"
+    ]
+  }
+]

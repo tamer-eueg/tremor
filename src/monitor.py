@@ -40,21 +40,31 @@ import datetime
 import gzip
 import json
 import os
+import re
 import subprocess
 import sys
-
-import requests
+from urllib.parse import urlparse
 
 sys.path.insert(0, os.path.dirname(__file__))
 import diff_engine
 import response_diff
 import patch_generator
 
-REPO_ROOT = os.path.join(os.path.dirname(__file__), "..")
-DEFAULT_WATCHLIST = os.path.join(REPO_ROOT, "data", "watchlist.json")
-STATE_DIR = os.path.join(REPO_ROOT, "data", "state")
-RUNS_DIR = os.path.join(REPO_ROOT, "reports", "monitor_runs")
-PATCHES_DIR = os.path.join(REPO_ROOT, "reports", "monitor_runs", "patches")
+PACKAGE_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+REPO_ROOT = os.path.abspath(os.environ.get("TREMOR_REPO_ROOT", PACKAGE_ROOT))
+DEFAULT_WATCHLIST = os.environ.get(
+    "TREMOR_WATCHLIST", os.path.join(REPO_ROOT, "data", "watchlist.json")
+)
+STATE_DIR = os.path.abspath(os.environ.get(
+    "TREMOR_STATE_DIR", os.path.join(REPO_ROOT, "data", "state")
+))
+RUNS_DIR = os.path.abspath(os.environ.get(
+    "TREMOR_RUNS_DIR", os.path.join(REPO_ROOT, "reports", "monitor_runs")
+))
+PATCHES_DIR = os.path.abspath(os.environ.get(
+    "TREMOR_PATCHES_DIR", os.path.join(RUNS_DIR, "patches")
+))
+SAFE_NAME = re.compile(r"^[A-Za-z0-9][A-Za-z0-9._-]{0,79}$")
 
 
 def now_iso():
@@ -63,7 +73,68 @@ def now_iso():
 
 def load_watchlist(path):
     with open(path) as f:
-        return json.load(f)
+        watchlist = json.load(f)
+    validate_watchlist(watchlist)
+    return watchlist
+
+
+def validate_watchlist(watchlist):
+    """Fail early with actionable errors before fetching or writing anything."""
+    if not isinstance(watchlist, list) or not watchlist:
+        raise ValueError("watchlist must be a non-empty JSON array")
+    names = set()
+    for index, entry in enumerate(watchlist):
+        if not isinstance(entry, dict):
+            raise ValueError(f"watchlist entry {index} must be an object")
+        name = entry.get("name")
+        if not isinstance(name, str) or not SAFE_NAME.fullmatch(name):
+            raise ValueError(
+                f"watchlist entry {index} has an invalid name; use 1-80 letters, "
+                "numbers, dots, underscores, or hyphens"
+            )
+        if name in names:
+            raise ValueError(f"watchlist contains duplicate name '{name}'")
+        names.add(name)
+        urls = [("spec_url", entry.get("spec_url"))]
+        urls.extend(("sibling_spec_urls", url) for url in entry.get("sibling_spec_urls", []) or [])
+        for field, url in urls:
+            parsed = urlparse(url) if isinstance(url, str) else None
+            if not parsed or parsed.scheme != "https" or not parsed.netloc:
+                raise ValueError(f"watchlist entry '{name}' {field} must contain HTTPS URL(s)")
+        watched_files = entry.get("watched_files", []) or []
+        if not isinstance(watched_files, list) or not all(isinstance(p, str) for p in watched_files):
+            raise ValueError(f"watchlist entry '{name}' watched_files must be a list of paths")
+        for rel_path in watched_files:
+            safe_repo_path(rel_path)
+
+
+def safe_repo_path(rel_path):
+    """Resolve a customer path and prevent absolute/parent-directory escapes."""
+    if os.path.isabs(rel_path):
+        raise ValueError(f"watched file must be relative to the repository: {rel_path}")
+    resolved = os.path.abspath(os.path.join(REPO_ROOT, rel_path))
+    try:
+        inside = os.path.commonpath([REPO_ROOT, resolved]) == REPO_ROOT
+    except ValueError:
+        inside = False
+    if not inside:
+        raise ValueError(f"watched file escapes the repository: {rel_path}")
+    return resolved
+
+
+def validate_runtime_paths():
+    """Keep all state, reports, and patches inside the customer repository."""
+    for label, path in (
+        ("state directory", STATE_DIR),
+        ("reports directory", RUNS_DIR),
+        ("patches directory", PATCHES_DIR),
+    ):
+        try:
+            inside = os.path.commonpath([REPO_ROOT, os.path.abspath(path)]) == REPO_ROOT
+        except ValueError:
+            inside = False
+        if not inside:
+            raise ValueError(f"Tremor {label} must stay inside the repository: {path}")
 
 
 def state_path(name):
@@ -89,6 +160,8 @@ def save_state(name, spec, checked_at):
 
 
 def fetch_spec(url, timeout=60):
+    import requests
+
     resp = requests.get(url, timeout=timeout)
     resp.raise_for_status()
     return resp.json()
@@ -140,7 +213,7 @@ def patch_watched_files(entry, all_changes, checked_at, quiet=False):
     ts = checked_at.replace(":", "").replace("-", "")
 
     for rel_path in watched_files:
-        abs_path = os.path.join(REPO_ROOT, rel_path)
+        abs_path = safe_repo_path(rel_path)
         if not os.path.exists(abs_path):
             summaries.append({"file": rel_path, "status": "not_found"})
             if not quiet:
@@ -281,6 +354,7 @@ def check_one(entry, quiet=False):
 
 
 def run(watchlist_path, only_name=None, quiet=False):
+    validate_runtime_paths()
     watchlist = load_watchlist(watchlist_path)
     results = []
     for entry in watchlist:

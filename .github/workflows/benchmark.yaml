@@ -20,6 +20,12 @@ jobs:
         with:
           python-version: "3.12"
 
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run unit tests
+        run: python3 -m unittest discover -s tests -v
+
       - name: Run labeled and historical benchmarks
         run: python3 benchmarks/run_benchmark.py
 

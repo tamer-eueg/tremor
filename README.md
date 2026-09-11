@@ -24,6 +24,7 @@ Built and tested against two real, historical versions of a real public API's of
 | Real, applyable patches | Done | Every auto-patch is also emitted as a standard `git apply`-compatible `.patch` file, verified with an actual `git apply` in an isolated worktree, not just asserted — see `reports/GIT_APPLY_RESULTS.md` |
 | Detection benchmark (`benchmarks/run_benchmark.py`) | 27/27 labeled cases pass | 100% precision and recall within the explicitly modeled scope; every reviewed historical GitHub finding is retained — see `reports/BENCHMARK_RESULTS.md` |
 | Schedule (`.github/workflows/monitor.yaml`) | Live on GitHub Actions | The first manual production run completed successfully and committed its updated state/findings back to the repo — see the repository's Actions tab. |
+| Self-service installation (`action.yml`) | Working GitHub Action | A repository can install Tremor with one watchlist and one workflow; configuration is validated before network or file operations — see `INSTALLATION.md`. |
 | Billing | Not started | Needs a Stripe account when we get there |
 
 **103 distinct, verified breaking changes found across both layers**, between two real
@@ -58,6 +59,13 @@ GitHub's infrastructure completed successfully.
 `benchmarks/run_benchmark.py` now provides the measurable quality gate: 27 isolated,
 labeled contract-change cases plus a regression against the historical GitHub API pair.
 The benchmark runs on every push and pull request through `.github/workflows/benchmark.yaml`.
+
+## Install in another repository
+
+Tremor can now run directly inside a repository as a reusable GitHub Action. Follow
+[`INSTALLATION.md`](INSTALLATION.md) to add a watchlist and scheduled workflow. It requires
+no Tremor account, server, database, or API key. It stores candidate patches for review and
+never auto-merges them.
 
 ## How it works, right now
 
