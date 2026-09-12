@@ -1,0 +1,38 @@
+name: Tremor release
+
+on:
+  push:
+    tags:
+      - "v*.*.*"
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the tagged revision
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Verify release tag
+        run: test "$GITHUB_REF_NAME" = "v$(cat VERSION)"
+
+      - name: Run unit and security tests
+        run: python3 -m unittest discover -s tests -v
+
+      - name: Run detection benchmark
+        run: python3 benchmarks/run_benchmark.py
+
+      - name: Check release engineering gates
+        run: python3 scripts/check_release_readiness.py
+
+      - name: Publish GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release create "$GITHUB_REF_NAME" --verify-tag --title "Tremor $GITHUB_REF_NAME" --notes-file CHANGELOG.md

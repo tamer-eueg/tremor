@@ -44,6 +44,7 @@ import re
 import subprocess
 import sys
 from urllib.parse import urlparse
+from urllib.request import Request, urlopen
 
 sys.path.insert(0, os.path.dirname(__file__))
 import diff_engine
@@ -160,11 +161,9 @@ def save_state(name, spec, checked_at):
 
 
 def fetch_spec(url, timeout=60):
-    import requests
-
-    resp = requests.get(url, timeout=timeout)
-    resp.raise_for_status()
-    return resp.json()
+    request = Request(url, headers={"User-Agent": "Tremor-API-Watch/0.1"})
+    with urlopen(request, timeout=timeout) as response:
+        return json.load(response)
 
 
 def save_run_record(name, record):

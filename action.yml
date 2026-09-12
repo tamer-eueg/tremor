@@ -44,10 +44,6 @@ runs:
       with:
         python-version: "3.12"
 
-    - name: Install Tremor dependency
-      shell: bash
-      run: python3 -m pip install --disable-pip-version-check -r "$GITHUB_ACTION_PATH/requirements.txt"
-
     - name: Check API contracts
       id: monitor
       shell: bash

@@ -9,7 +9,7 @@ starts silently getting wrong data. Tremor watches an API's OpenAPI spec over ti
 exactly what changed and whether it's breaking, and generates the code patch to fix it —
 before a human has to read a changelog.
 
-## Status: working proof of concept with a repeatable benchmark
+## Status: working pre-release with a repeatable benchmark
 
 Built and tested against two real, historical versions of a real public API's official spec
 (GitHub's own REST API, tags `v1.0.0` → `v2.1.0` — 428 → 561 endpoints). No synthetic data.
@@ -26,6 +26,8 @@ Built and tested against two real, historical versions of a real public API's of
 | Schedule (`.github/workflows/monitor.yaml`) | Live on GitHub Actions | The first manual production run completed successfully and committed its updated state/findings back to the repo — see the repository's Actions tab. |
 | Self-service installation (`action.yml`) | Working GitHub Action | A repository can install Tremor with one watchlist and one workflow; configuration is validated before network or file operations — see `INSTALLATION.md`. |
 | Review-only PR delivery | Working workflow template | Newly generated patches can be verified, applied in an ephemeral runner, and proposed on a unique branch; Tremor never approves or merges — see `examples/tremor-review-pr.workflow.yml`. |
+| Runtime dependencies | None | Monitoring and patch preparation use Python 3.12's standard library; GitHub-hosted runners need no third-party Python packages. |
+| Public release | Preparing 0.1.0 | Engineering and documentation gates are ready; license and public-launch approval remain owner decisions — see `RELEASE_CHECKLIST.md`. |
 | Billing | Not started | Needs a Stripe account when we get there |
 
 **103 distinct, verified breaking changes found across both layers**, between two real
@@ -97,11 +99,16 @@ tremor/
 │   └── benchmark.yaml       # quality gate on every push and pull request
 ├── benchmarks/
 │   └── run_benchmark.py     # labeled precision/recall + historical regression suite
+├── action.yml               # reusable GitHub Action entrypoint
+├── INSTALLATION.md          # basic and review-PR installation guide
+├── SECURITY.md              # private vulnerability-reporting policy
+├── CHANGELOG.md             # release history and 0.1.0 candidate notes
 ├── src/                     # the diffing engines + patch generator + monitor
 │   ├── diff_engine.py       # request-side: params, required fields, removed endpoints
 │   ├── response_diff.py     # response-side: removed/changed response fields
 │   ├── patch_generator.py   # phase 3/6: finds affected functions, patches them, emits a real .patch
-│   └── monitor.py           # phase 4/5: watch loop -- fetch, diff vs. last check, alert, auto-patch
+│   ├── monitor.py           # phase 4/5: watch loop -- fetch, diff vs. last check, alert, auto-patch
+│   └── apply_generated_patches.py # atomic, rollback-safe PR preparation
 ├── examples/
 │   ├── example_patch.py         # one hand-built before/after patch, worked example (phase 1)
 │   └── sample_integration.py    # stand-in customer file used to test patch_generator.py blind
@@ -167,22 +174,17 @@ against the raw spec to confirm the fix held. Full account in
   always flagged, not auto-rewritten, since the fix lives wherever the response is *read*,
   not at the call site itself — see `reports/PATCH_GENERATOR_RESULTS.md`.
 - The watch loop (`src/monitor.py`) is live on a working, zero-cost daily GitHub Actions
-  schedule. Its first manual run passed; scheduled operation still needs normal observation
-  over time rather than being treated as proven by one run.
+  schedule. Manual and scheduled runs have completed successfully; ongoing operation still
+  needs normal observation over time.
 - Only one API's spec (plus one sibling, for reconciling moved-not-removed endpoints) is on
   the watchlist right now, and the one watched file is a stand-in, since there's no real
   customer repo yet.
-- Generated patches land in `reports/monitor_runs/patches/`, not back into the watched file
-  or a pull request — deciding how to deliver a patch to a real repo needs a real repo to
-  design around.
-- No domain, no billing yet — deliberately deferred until there's something worth putting in
-  front of a real user. Both are identity/payment steps under EUEG, not engineering; hosting
-  itself is no longer on that list, since the GitHub Actions free tier covers it.
+- Generated patches can be proposed through the review-only PR workflow, but patch generation
+  still covers only the finding kinds stated above. Tremor never approves or merges.
+- A private product site exists; making it public, selecting the software license, registering
+  a custom domain, and adding billing are owner decisions. None block a free release except
+  the license and explicit public-launch approval.
 
-## Who's building this
+## Maintainer
 
-Built solo, by Claude, for EUEG OÜ. The scope agreed with Tamer (EUEG's founder, not a
-software engineer): 100% of the code and every engineering decision happen without his
-input; the only steps that need him are the ones that require an identity or a payment
-method — registering a domain, opening a hosting account, connecting Stripe — handed over
-as exact steps only when actually needed, not upfront.
+Tremor is an EUEG OÜ project.

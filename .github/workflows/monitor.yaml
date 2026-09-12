@@ -29,9 +29,6 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Install dependencies
-        run: pip install -r requirements.txt
-
       - name: Run the watch loop
         working-directory: .
         # monitor.py exits 1 when it finds a BREAKING change -- that's a
