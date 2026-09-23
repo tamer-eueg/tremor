@@ -1,0 +1,96 @@
+{
+  "name": "github",
+  "checked_at": "2026-09-23T10:58:39Z",
+  "status": "checked",
+  "compared_against": "2026-09-22T11:08:32Z",
+  "total_changes": 11,
+  "breaking_count": 0,
+  "non_breaking_count": 11,
+  "changes": [
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_moved",
+      "path": "/enterprises/{enterprise}/members/{username}/teams",
+      "method": null,
+      "detail": "Endpoint /enterprises/{enterprise}/members/{username}/teams no longer appears in this spec, but is present in the 'https://raw.githubusercontent.com/github/rest-api-description/main/descriptions/ghec/ghec.json' sibling spec -- looks like it moved, not a real removal."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_moved",
+      "path": "/enterprises/{enterprise}/teams",
+      "method": null,
+      "detail": "Endpoint /enterprises/{enterprise}/teams no longer appears in this spec, but is present in the 'https://raw.githubusercontent.com/github/rest-api-description/main/descriptions/ghec/ghec.json' sibling spec -- looks like it moved, not a real removal."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_moved",
+      "path": "/enterprises/{enterprise}/teams/{enterprise-team}/memberships",
+      "method": null,
+      "detail": "Endpoint /enterprises/{enterprise}/teams/{enterprise-team}/memberships no longer appears in this spec, but is present in the 'https://raw.githubusercontent.com/github/rest-api-description/main/descriptions/ghec/ghec.json' sibling spec -- looks like it moved, not a real removal."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_moved",
+      "path": "/enterprises/{enterprise}/teams/{enterprise-team}/memberships/add",
+      "method": null,
+      "detail": "Endpoint /enterprises/{enterprise}/teams/{enterprise-team}/memberships/add no longer appears in this spec, but is present in the 'https://raw.githubusercontent.com/github/rest-api-description/main/descriptions/ghec/ghec.json' sibling spec -- looks like it moved, not a real removal."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_moved",
+      "path": "/enterprises/{enterprise}/teams/{enterprise-team}/memberships/remove",
+      "method": null,
+      "detail": "Endpoint /enterprises/{enterprise}/teams/{enterprise-team}/memberships/remove no longer appears in this spec, but is present in the 'https://raw.githubusercontent.com/github/rest-api-description/main/descriptions/ghec/ghec.json' sibling spec -- looks like it moved, not a real removal."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_moved",
+      "path": "/enterprises/{enterprise}/teams/{enterprise-team}/memberships/{username}",
+      "method": null,
+      "detail": "Endpoint /enterprises/{enterprise}/teams/{enterprise-team}/memberships/{username} no longer appears in this spec, but is present in the 'https://raw.githubusercontent.com/github/rest-api-description/main/descriptions/ghec/ghec.json' sibling spec -- looks like it moved, not a real removal."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_moved",
+      "path": "/enterprises/{enterprise}/teams/{enterprise-team}/organizations",
+      "method": null,
+      "detail": "Endpoint /enterprises/{enterprise}/teams/{enterprise-team}/organizations no longer appears in this spec, but is present in the 'https://raw.githubusercontent.com/github/rest-api-description/main/descriptions/ghec/ghec.json' sibling spec -- looks like it moved, not a real removal."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_moved",
+      "path": "/enterprises/{enterprise}/teams/{enterprise-team}/organizations/add",
+      "method": null,
+      "detail": "Endpoint /enterprises/{enterprise}/teams/{enterprise-team}/organizations/add no longer appears in this spec, but is present in the 'https://raw.githubusercontent.com/github/rest-api-description/main/descriptions/ghec/ghec.json' sibling spec -- looks like it moved, not a real removal."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_moved",
+      "path": "/enterprises/{enterprise}/teams/{enterprise-team}/organizations/remove",
+      "method": null,
+      "detail": "Endpoint /enterprises/{enterprise}/teams/{enterprise-team}/organizations/remove no longer appears in this spec, but is present in the 'https://raw.githubusercontent.com/github/rest-api-description/main/descriptions/ghec/ghec.json' sibling spec -- looks like it moved, not a real removal."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_moved",
+      "path": "/enterprises/{enterprise}/teams/{enterprise-team}/organizations/{org}",
+      "method": null,
+      "detail": "Endpoint /enterprises/{enterprise}/teams/{enterprise-team}/organizations/{org} no longer appears in this spec, but is present in the 'https://raw.githubusercontent.com/github/rest-api-description/main/descriptions/ghec/ghec.json' sibling spec -- looks like it moved, not a real removal."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_moved",
+      "path": "/enterprises/{enterprise}/teams/{team_slug}",
+      "method": null,
+      "detail": "Endpoint /enterprises/{enterprise}/teams/{team_slug} no longer appears in this spec, but is present in the 'https://raw.githubusercontent.com/github/rest-api-description/main/descriptions/ghec/ghec.json' sibling spec -- looks like it moved, not a real removal."
+    }
+  ],
+  "patches": [
+    {
+      "file": "examples/sample_integration.py",
+      "sites_matched": 3,
+      "sites_affected": 0,
+      "status": "nothing_to_patch"
+    }
+  ]
+}
