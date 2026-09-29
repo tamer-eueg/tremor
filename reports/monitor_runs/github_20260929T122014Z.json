@@ -1,0 +1,54 @@
+{
+  "name": "github",
+  "checked_at": "2026-09-29T12:20:14Z",
+  "status": "checked",
+  "compared_against": "2026-09-28T13:11:41Z",
+  "total_changes": 5,
+  "breaking_count": 0,
+  "non_breaking_count": 5,
+  "changes": [
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/orgs/{org}/properties/installations",
+      "method": null,
+      "detail": "New endpoint /orgs/{org}/properties/installations was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/orgs/{org}/properties/installations/schema",
+      "method": null,
+      "detail": "New endpoint /orgs/{org}/properties/installations/schema was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/orgs/{org}/properties/installations/values",
+      "method": null,
+      "detail": "New endpoint /orgs/{org}/properties/installations/values was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/orgs/{org}/properties/installations/values/{property_name}",
+      "method": null,
+      "detail": "New endpoint /orgs/{org}/properties/installations/values/{property_name} was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/repos/{owner}/{repo}/actions/jobs/{job_id}/steps/{step_number}/logs",
+      "method": null,
+      "detail": "New endpoint /repos/{owner}/{repo}/actions/jobs/{job_id}/steps/{step_number}/logs was added."
+    }
+  ],
+  "patches": [
+    {
+      "file": "examples/sample_integration.py",
+      "sites_matched": 3,
+      "sites_affected": 0,
+      "status": "nothing_to_patch"
+    }
+  ]
+}
