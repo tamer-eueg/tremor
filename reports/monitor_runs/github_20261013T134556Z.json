@@ -1,0 +1,68 @@
+{
+  "name": "github",
+  "checked_at": "2026-10-13T13:45:56Z",
+  "status": "checked",
+  "compared_against": "2026-10-12T14:42:47Z",
+  "total_changes": 7,
+  "breaking_count": 0,
+  "non_breaking_count": 7,
+  "changes": [
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/agents/automations",
+      "method": null,
+      "detail": "New endpoint /agents/automations was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/agents/automations/available-tools",
+      "method": null,
+      "detail": "New endpoint /agents/automations/available-tools was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/agents/automations/available-triggers",
+      "method": null,
+      "detail": "New endpoint /agents/automations/available-triggers was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/agents/automations/{automation_id}",
+      "method": null,
+      "detail": "New endpoint /agents/automations/{automation_id} was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/agents/automations/{automation_id}/tasks",
+      "method": null,
+      "detail": "New endpoint /agents/automations/{automation_id}/tasks was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/agents/repos/{owner}/{repo}/automations",
+      "method": null,
+      "detail": "New endpoint /agents/repos/{owner}/{repo}/automations was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/agents/repos/{owner}/{repo}/automations/{automation_id}",
+      "method": null,
+      "detail": "New endpoint /agents/repos/{owner}/{repo}/automations/{automation_id} was added."
+    }
+  ],
+  "patches": [
+    {
+      "file": "examples/sample_integration.py",
+      "sites_matched": 3,
+      "sites_affected": 0,
+      "status": "nothing_to_patch"
+    }
+  ]
+}
