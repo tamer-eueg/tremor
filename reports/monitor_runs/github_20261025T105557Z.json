@@ -1,0 +1,18 @@
+{
+  "name": "github",
+  "checked_at": "2026-10-25T10:55:57Z",
+  "status": "checked",
+  "compared_against": "2026-10-24T10:28:51Z",
+  "total_changes": 0,
+  "breaking_count": 0,
+  "non_breaking_count": 0,
+  "changes": [],
+  "patches": [
+    {
+      "file": "examples/sample_integration.py",
+      "sites_matched": 3,
+      "sites_affected": 0,
+      "status": "nothing_to_patch"
+    }
+  ]
+}
