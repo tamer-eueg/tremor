@@ -1,0 +1,243 @@
+{
+  "name": "github",
+  "checked_at": "2026-10-28T12:18:36Z",
+  "status": "checked",
+  "compared_against": "2026-10-27T11:45:16Z",
+  "total_changes": 29,
+  "breaking_count": 19,
+  "non_breaking_count": 10,
+  "changes": [
+    {
+      "severity": "BREAKING",
+      "kind": "parameter_removed",
+      "path": "/agents/automations",
+      "method": "GET",
+      "param": "owner_type",
+      "in": "query",
+      "detail": "Parameter 'owner_type' (query) was removed from GET /agents/automations."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "new_optional_parameter",
+      "path": "/agents/automations",
+      "method": "GET",
+      "param": "type",
+      "in": "query",
+      "detail": "New optional parameter 'type' (query) added to GET /agents/automations."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "endpoint_removed",
+      "path": "/agents/automations/available-tools",
+      "method": null,
+      "detail": "Endpoint /agents/automations/available-tools no longer exists in the new spec."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "endpoint_removed",
+      "path": "/agents/automations/available-triggers",
+      "method": null,
+      "detail": "Endpoint /agents/automations/available-triggers no longer exists in the new spec."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "endpoint_removed",
+      "path": "/agents/automations/{automation_id}",
+      "method": null,
+      "detail": "Endpoint /agents/automations/{automation_id} no longer exists in the new spec."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "endpoint_removed",
+      "path": "/agents/automations/{automation_id}/tasks",
+      "method": null,
+      "detail": "Endpoint /agents/automations/{automation_id}/tasks no longer exists in the new spec."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "parameter_removed",
+      "path": "/agents/repos/{owner}/{repo}/automations",
+      "method": "GET",
+      "param": "owner_type",
+      "in": "query",
+      "detail": "Parameter 'owner_type' (query) was removed from GET /agents/repos/{owner}/{repo}/automations."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "new_optional_parameter",
+      "path": "/agents/repos/{owner}/{repo}/automations",
+      "method": "GET",
+      "param": "type",
+      "in": "query",
+      "detail": "New optional parameter 'type' (query) added to GET /agents/repos/{owner}/{repo}/automations."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/agents/repos/{owner}/{repo}/automations/available-tools",
+      "method": null,
+      "detail": "New endpoint /agents/repos/{owner}/{repo}/automations/available-tools was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/agents/repos/{owner}/{repo}/automations/available-triggers",
+      "method": null,
+      "detail": "New endpoint /agents/repos/{owner}/{repo}/automations/available-triggers was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/agents/repos/{owner}/{repo}/automations/{automation_id}/tasks",
+      "method": null,
+      "detail": "New endpoint /agents/repos/{owner}/{repo}/automations/{automation_id}/tasks was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/agents/repos/{owner}/{repo}/pulls/{pull_number}/agent-merge",
+      "method": null,
+      "detail": "New endpoint /agents/repos/{owner}/{repo}/pulls/{pull_number}/agent-merge was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/repos/{owner}/{repo}/issues/{issue_number}/artifacts",
+      "method": null,
+      "detail": "New endpoint /repos/{owner}/{repo}/issues/{issue_number}/artifacts was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/repos/{owner}/{repo}/issues/{issue_number}/artifacts/{artifact_number}",
+      "method": null,
+      "detail": "New endpoint /repos/{owner}/{repo}/issues/{issue_number}/artifacts/{artifact_number} was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/repos/{owner}/{repo}/security-advisories/{ghsa_id}/comments",
+      "method": null,
+      "detail": "New endpoint /repos/{owner}/{repo}/security-advisories/{ghsa_id}/comments was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/repos/{owner}/{repo}/security-advisories/{ghsa_id}/comments/{comment_id}",
+      "method": null,
+      "detail": "New endpoint /repos/{owner}/{repo}/security-advisories/{ghsa_id}/comments/{comment_id} was added."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "response_field_removed",
+      "path": "/agents/automations",
+      "method": "GET",
+      "field": "owner_type",
+      "detail": "GET /agents/automations: Response field 'owner_type' no longer appears in the response body."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "response_field_removed",
+      "path": "/agents/automations",
+      "method": "GET",
+      "field": "write_scope",
+      "detail": "GET /agents/automations: Response field 'write_scope' no longer appears in the response body."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "response_field_removed",
+      "path": "/agents/repos/{owner}/{repo}/automations",
+      "method": "GET",
+      "field": "automations.owner_type",
+      "detail": "GET /agents/repos/{owner}/{repo}/automations: Response field 'automations.owner_type' no longer appears in the response body."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "response_field_removed",
+      "path": "/agents/repos/{owner}/{repo}/automations",
+      "method": "GET",
+      "field": "automations.write_scope",
+      "detail": "GET /agents/repos/{owner}/{repo}/automations: Response field 'automations.write_scope' no longer appears in the response body."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "response_field_removed",
+      "path": "/agents/repos/{owner}/{repo}/automations",
+      "method": "POST",
+      "field": "owner_type",
+      "detail": "POST /agents/repos/{owner}/{repo}/automations: Response field 'owner_type' no longer appears in the response body."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "response_field_removed",
+      "path": "/agents/repos/{owner}/{repo}/automations",
+      "method": "POST",
+      "field": "write_scope",
+      "detail": "POST /agents/repos/{owner}/{repo}/automations: Response field 'write_scope' no longer appears in the response body."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "response_field_removed",
+      "path": "/agents/repos/{owner}/{repo}/automations",
+      "method": "POST",
+      "field": "allowed_custom_agents",
+      "detail": "POST /agents/repos/{owner}/{repo}/automations: Response field 'allowed_custom_agents' no longer appears in the response body."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "response_field_removed",
+      "path": "/agents/repos/{owner}/{repo}/automations/{automation_id}",
+      "method": "GET",
+      "field": "owner_type",
+      "detail": "GET /agents/repos/{owner}/{repo}/automations/{automation_id}: Response field 'owner_type' no longer appears in the response body."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "response_field_removed",
+      "path": "/agents/repos/{owner}/{repo}/automations/{automation_id}",
+      "method": "GET",
+      "field": "write_scope",
+      "detail": "GET /agents/repos/{owner}/{repo}/automations/{automation_id}: Response field 'write_scope' no longer appears in the response body."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "response_field_removed",
+      "path": "/agents/repos/{owner}/{repo}/automations/{automation_id}",
+      "method": "GET",
+      "field": "allowed_custom_agents",
+      "detail": "GET /agents/repos/{owner}/{repo}/automations/{automation_id}: Response field 'allowed_custom_agents' no longer appears in the response body."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "response_field_removed",
+      "path": "/agents/repos/{owner}/{repo}/automations/{automation_id}",
+      "method": "PATCH",
+      "field": "owner_type",
+      "detail": "PATCH /agents/repos/{owner}/{repo}/automations/{automation_id}: Response field 'owner_type' no longer appears in the response body."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "response_field_removed",
+      "path": "/agents/repos/{owner}/{repo}/automations/{automation_id}",
+      "method": "PATCH",
+      "field": "write_scope",
+      "detail": "PATCH /agents/repos/{owner}/{repo}/automations/{automation_id}: Response field 'write_scope' no longer appears in the response body."
+    },
+    {
+      "severity": "BREAKING",
+      "kind": "response_field_removed",
+      "path": "/agents/repos/{owner}/{repo}/automations/{automation_id}",
+      "method": "PATCH",
+      "field": "allowed_custom_agents",
+      "detail": "PATCH /agents/repos/{owner}/{repo}/automations/{automation_id}: Response field 'allowed_custom_agents' no longer appears in the response body."
+    }
+  ],
+  "patches": [
+    {
+      "file": "examples/sample_integration.py",
+      "sites_matched": 3,
+      "sites_affected": 0,
+      "status": "nothing_to_patch"
+    }
+  ]
+}
