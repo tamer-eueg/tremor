@@ -1,0 +1,40 @@
+{
+  "name": "github",
+  "checked_at": "2026-11-04T13:55:18Z",
+  "status": "checked",
+  "compared_against": "2026-11-03T13:46:56Z",
+  "total_changes": 3,
+  "breaking_count": 0,
+  "non_breaking_count": 3,
+  "changes": [
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/agents/repos/{owner}/{repo}/automations/{automation_id}/revisions",
+      "method": null,
+      "detail": "New endpoint /agents/repos/{owner}/{repo}/automations/{automation_id}/revisions was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/agents/repos/{owner}/{repo}/automations/{automation_id}/revisions/{revision_id}",
+      "method": null,
+      "detail": "New endpoint /agents/repos/{owner}/{repo}/automations/{automation_id}/revisions/{revision_id} was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/orgs/{org}/teams/{team_slug}/copilot/customizations",
+      "method": null,
+      "detail": "New endpoint /orgs/{org}/teams/{team_slug}/copilot/customizations was added."
+    }
+  ],
+  "patches": [
+    {
+      "file": "examples/sample_integration.py",
+      "sites_matched": 3,
+      "sites_affected": 0,
+      "status": "nothing_to_patch"
+    }
+  ]
+}
