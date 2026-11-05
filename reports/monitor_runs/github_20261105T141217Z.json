@@ -1,0 +1,37 @@
+{
+  "name": "github",
+  "checked_at": "2026-11-05T14:12:17Z",
+  "status": "checked",
+  "compared_against": "2026-11-04T13:55:18Z",
+  "total_changes": 2,
+  "breaking_count": 0,
+  "non_breaking_count": 2,
+  "changes": [
+    {
+      "severity": "NON-BREAKING",
+      "kind": "new_optional_parameter",
+      "path": "/notifications",
+      "method": "GET",
+      "param": "is_done",
+      "in": "query",
+      "detail": "New optional parameter 'is_done' (query) added to GET /notifications."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "new_optional_parameter",
+      "path": "/repos/{owner}/{repo}/notifications",
+      "method": "GET",
+      "param": "is_done",
+      "in": "query",
+      "detail": "New optional parameter 'is_done' (query) added to GET /repos/{owner}/{repo}/notifications."
+    }
+  ],
+  "patches": [
+    {
+      "file": "examples/sample_integration.py",
+      "sites_matched": 3,
+      "sites_affected": 0,
+      "status": "nothing_to_patch"
+    }
+  ]
+}
