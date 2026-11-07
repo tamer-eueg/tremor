@@ -1,0 +1,61 @@
+{
+  "name": "github",
+  "checked_at": "2026-11-07T12:37:44Z",
+  "status": "checked",
+  "compared_against": "2026-11-06T13:53:03Z",
+  "total_changes": 6,
+  "breaking_count": 0,
+  "non_breaking_count": 6,
+  "changes": [
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/enterprises/{enterprise}/copilot/policies/code-review",
+      "method": null,
+      "detail": "New endpoint /enterprises/{enterprise}/copilot/policies/code-review was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/orgs/{org}/copilot/code-review/runner",
+      "method": null,
+      "detail": "New endpoint /orgs/{org}/copilot/code-review/runner was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/orgs/{org}/copilot/code-review/settings",
+      "method": null,
+      "detail": "New endpoint /orgs/{org}/copilot/code-review/settings was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/orgs/{org}/copilot/policies/code-review",
+      "method": null,
+      "detail": "New endpoint /orgs/{org}/copilot/policies/code-review was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/repos/{owner}/{repo}/copilot/code-review/settings",
+      "method": null,
+      "detail": "New endpoint /repos/{owner}/{repo}/copilot/code-review/settings was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/repos/{owner}/{repo}/pulls/{pull_number}/copilot-code-review",
+      "method": null,
+      "detail": "New endpoint /repos/{owner}/{repo}/pulls/{pull_number}/copilot-code-review was added."
+    }
+  ],
+  "patches": [
+    {
+      "file": "examples/sample_integration.py",
+      "sites_matched": 3,
+      "sites_affected": 0,
+      "status": "nothing_to_patch"
+    }
+  ]
+}
