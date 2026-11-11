@@ -1,0 +1,47 @@
+{
+  "name": "github",
+  "checked_at": "2026-11-11T13:44:16Z",
+  "status": "checked",
+  "compared_against": "2026-11-10T14:29:39Z",
+  "total_changes": 4,
+  "breaking_count": 0,
+  "non_breaking_count": 4,
+  "changes": [
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/user/issue-fields",
+      "method": null,
+      "detail": "New endpoint /user/issue-fields was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/user/issue-fields/{issue_field_id}",
+      "method": null,
+      "detail": "New endpoint /user/issue-fields/{issue_field_id} was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/user/issue-types",
+      "method": null,
+      "detail": "New endpoint /user/issue-types was added."
+    },
+    {
+      "severity": "NON-BREAKING",
+      "kind": "endpoint_added",
+      "path": "/user/issue-types/{issue_type_id}",
+      "method": null,
+      "detail": "New endpoint /user/issue-types/{issue_type_id} was added."
+    }
+  ],
+  "patches": [
+    {
+      "file": "examples/sample_integration.py",
+      "sites_matched": 3,
+      "sites_affected": 0,
+      "status": "nothing_to_patch"
+    }
+  ]
+}
